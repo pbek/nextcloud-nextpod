@@ -9,6 +9,8 @@
  */
 return [
 	'routes' => [
+        ['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
+
 		['name' => 'episode_action#create', 'url' => '/episode_action/create', 'verb' => 'POST'],
 		['name' => 'episode_action#list', 'url' => '/episode_action', 'verb' => 'GET'],
 
