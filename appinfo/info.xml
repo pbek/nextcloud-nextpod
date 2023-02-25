@@ -29,4 +29,12 @@
         <personal>OCA\GPodderSync\Settings\GPodderSyncPersonal</personal>
         <personal-section>OCA\GPodderSync\Sections\GPodderSyncPersonal</personal-section>
     </settings>
+    <navigations>
+        <navigation>
+            <name>GPodder</name>
+            <route>gpoddersync.page.index</route>
+            <icon>app.svg</icon>
+            <order>77</order>
+        </navigation>
+    </navigations>
 </info>
