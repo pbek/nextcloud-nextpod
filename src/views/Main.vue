@@ -3,6 +3,7 @@
     <NcSettingsSection :title="t('gpoddersync', 'Last actions')"
       :description="t('gpoddersync', 'A list of last actions.')">
       <div v-if="actions.length > 0" class="actions">
+        Main!
         <div class="sorting-container">
           <label for="gpoddersync_action_filtering">Action:</label>
           <NcMultiselect id="gpoddersync_action_filtering"
@@ -97,7 +98,7 @@ const actionFilteringOptions = [
 ]
 
 export default {
-	name: 'PersonalSettingsPage',
+	name: 'Main',
 	components: {
     // AppNavigation,
     // NcAppContent,

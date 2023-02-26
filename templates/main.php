@@ -1,7 +1,5 @@
 <?php
-script('gpoddersync', 'gpoddersync-personalSettings');
+script('gpoddersync', 'gpoddersync-main');
 ?>
 
-<div id="app-content">
-    <div id="personal_settings"></div>
-</div>
+<div id="content"></div>
