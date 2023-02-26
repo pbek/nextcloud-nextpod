@@ -1,22 +1,22 @@
 <template>
-	<ListItem :title="isLoading ? action.episodeUrl : getEpisodeName()"
+	<NcListItem :title="isLoading ? action.episodeUrl : getEpisodeName()"
             :details="getDetails()">
     <template #icon>
       <!--
       <img v-if="getImageSrc() !== ''" :alt="getEpisodeName()" :src="getImageSrc()" />
-      <Avatar v-if="getImageSrc() === ''"
+      <NcAvatar v-if="getImageSrc() === ''"
               :size="44"
               :url="getImageSrc()"
               :display-name="getEpisodeName()" />
       -->
-      <Avatar :size="44"
+      <NcAvatar :size="44"
               :url="getImageSrc()"
               :display-name="getEpisodeName()" />
     </template>
     <template #subtitle>
       <span v-if="isLoading"><em>(Loading RSS data...)</em></span>
       <span v-else>{{ getPodcastName() }}</span>
-      <Modal
+      <NcModal
           v-if="modalPlayer"
           @close="closeModalPlayer"
           size="small"
@@ -30,40 +30,40 @@
             Your browser does not support the audio element.
           </audio>
         </div>
-      </Modal>
+      </NcModal>
     </template>
     <template #actions>
-      <ActionLink :href="action.podcastUrl"
+      <NcActionLink :href="action.podcastUrl"
                   target="_blank"
                   icon="icon-external">
         Open RSS feed
-      </ActionLink>
-      <ActionLink :href="action.episodeUrl"
+      </NcActionLink>
+      <NcActionLink :href="action.episodeUrl"
                   target="_blank"
                   icon="icon-external">
         Download episode media
-      </ActionLink>
-      <ActionButton @click="showModalPlayer"
+      </NcActionLink>
+      <NcActionButton @click="showModalPlayer"
                   target="_blank"
                   icon="icon-play">
         Play episode media
-      </ActionButton>
-      <ActionLink v-if="!isLoading"
+      </NcActionButton>
+      <NcActionLink v-if="!isLoading"
                   :href="getEpisodeLink()"
                   target="_blank"
                   icon="icon-external">
         Open episode link
-      </ActionLink>
+      </NcActionLink>
     </template>
-	</ListItem>
+	</NcListItem>
 </template>
 
 <script>
-import ActionLink from '@nextcloud/vue/dist/Components/ActionLink'
-import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
-import Avatar from '@nextcloud/vue/dist/Components/Avatar'
-import ListItem from '@nextcloud/vue/dist/Components/ListItem'
-import Modal from '@nextcloud/vue/dist/Components/Modal'
+import NcActionLink from '@nextcloud/vue/dist/Components/NcActionLink'
+import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton'
+import NcAvatar from '@nextcloud/vue/dist/Components/NcAvatar'
+import NcListItem from '@nextcloud/vue/dist/Components/NcListItem'
+import NcModal from '@nextcloud/vue/dist/Components/NcModal'
 
 import Rss from 'vue-material-design-icons/Rss.vue'
 
@@ -73,12 +73,12 @@ import axios from '@nextcloud/axios'
 export default {
 	name: 'ActionListItem',
 	components: {
-		ActionLink,
-    ActionButton,
-		Avatar,
-		ListItem,
+		NcActionLink,
+    NcActionButton,
+		NcAvatar,
+		NcListItem,
 		Rss,
-    Modal,
+    NcModal,
 	},
 	props: {
 		action: {

@@ -1,11 +1,11 @@
 <template>
-	<div class="gpoddersync_settings">
-    <SettingsSection :title="t('gpoddersync', 'Last actions')"
+  <div class="gpoddersync_settings">
+    <NcSettingsSection :title="t('gpoddersync', 'Last actions')"
       :description="t('gpoddersync', 'A list of last actions.')">
       <div v-if="actions.length > 0" class="actions">
         <div class="sorting-container">
           <label for="gpoddersync_action_filtering">Action:</label>
-          <Multiselect id="gpoddersync_action_filtering"
+          <NcMultiselect id="gpoddersync_action_filtering"
                        v-model="actionFilter"
                        :options="actionFilteringOptions"
                        track-by="label"
@@ -18,62 +18,65 @@
                                 :key="action.episode"
                                 :action="action" />
         </ul>
-        <Actions>
-          <ActionButton
+        <NcActions>
+          <NcActionButton
               :disabled="actions.length < maxActions"
               @click="loadMoreActions">
             <template #icon>
               <PageNext />
             </template>
             {{ t('gpoddersync', 'Load more') }}
-          </ActionButton>
-        </Actions>
+          </NcActionButton>
+        </NcActions>
       </div>
-    </SettingsSection>
-    <SettingsSection :title="t('gpoddersync', 'Synced subscriptions')"
-			:description="t('gpoddersync', 'Podcast subscriptions synchronized to this Nextcloud account so far.')">
-			<div v-if="subscriptions.length > 0">
-				<div class="sorting-container">
-					<label for="gpoddersync_sorting">Sort by:</label>
-					<Multiselect id="gpoddersync_sorting"
-						v-model="sortBy"
-						:options="sortingOptions"
-						track-by="label"
-						label="label"
-						:allow-empty="false"
-						@change="updateSorting" />
-				</div>
-				<ul>
-					<SubscriptionListItem v-for="sub in subscriptions"
-						:key="sub.url"
-						:sub="sub" />
-				</ul>
-			</div>
-			<div v-if="subscriptions.length === 0 && !isLoading">
-				<EmptyContent>
-					No subscriptions
-					<template #icon>
-						<Podcast />
-					</template>
-					<template #desc>
-						Start syncing podcasts from your favorite podcast client, such as
-						<a class="link" href="https://antennapod.org/" target="_blank">Antennapod</a>,
-						and then refresh this page to see them pop up here.
-					</template>
-				</EmptyContent>
-			</div>
-		</SettingsSection>
-	</div>
+    </NcSettingsSection>
+    <NcSettingsSection :title="t('gpoddersync', 'Synced subscriptions')"
+      :description="t('gpoddersync', 'Podcast subscriptions synchronized to this Nextcloud account so far.')">
+      <div v-if="subscriptions.length > 0">
+        <div class="sorting-container">
+          <label for="gpoddersync_sorting">Sort by:</label>
+          <NcMultiselect id="gpoddersync_sorting"
+            v-model="sortBy"
+            :options="sortingOptions"
+            track-by="label"
+            label="label"
+            :allow-empty="false"
+            @change="updateSorting" />
+        </div>
+        <ul>
+          <SubscriptionListItem v-for="sub in subscriptions"
+            :key="sub.url"
+            :sub="sub" />
+        </ul>
+      </div>
+      <div v-if="subscriptions.length === 0 && !isLoading">
+        <NcEmptyContent>
+          No subscriptions
+          <template #icon>
+            <Podcast />
+          </template>
+          <template #desc>
+            Start syncing podcasts from your favorite podcast client, such as
+            <a class="link" href="https://antennapod.org/" target="_blank">Antennapod</a>,
+            and then refresh this page to see them pop up here.
+          </template>
+        </NcEmptyContent>
+      </div>
+    </NcSettingsSection>
+  </div>
 </template>
 
 <script>
-import EmptyContent from '@nextcloud/vue/dist/Components/EmptyContent'
-import Multiselect from '@nextcloud/vue/dist/Components/Multiselect'
-import SettingsSection from '@nextcloud/vue/dist/Components/SettingsSection'
+// import AppNavigation from './AppNavigation.vue'
+// import NcContent from '@nextcloud/vue/dist/Components/NcContent'
+// import NcAppContent from '@nextcloud/vue/dist/Components/NcAppContent'
+import NcEmptyContent from '@nextcloud/vue/dist/Components/NcEmptyContent'
+import NcMultiselect from '@nextcloud/vue/dist/Components/NcMultiselect'
+import NcSettingsSection from '@nextcloud/vue/dist/Components/NcSettingsSection'
 import SubscriptionListItem from '../components/SubscriptionListItem.vue'
 import ActionListItem from '../components/ActionListItem.vue'
-import Actions from '@nextcloud/vue/dist/Components/Actions'
-import ActionButton from '@nextcloud/vue/dist/Components/ActionButton'
+import NcActions from '@nextcloud/vue/dist/Components/NcActions'
+import NcActionButton from '@nextcloud/vue/dist/Components/NcActionButton'
 
 import Podcast from 'vue-material-design-icons/Podcast'
 import PageNext from 'vue-material-design-icons/PageNext.vue'
@@ -95,15 +98,18 @@ const actionFilteringOptions = [
 export default {
 	name: 'PersonalSettingsPage',
 	components: {
-		EmptyContent,
-		Multiselect,
+    // AppNavigation,
+    // NcAppContent,
+		// NcContent,
+		NcEmptyContent,
+		NcMultiselect,
 		Podcast,
     PageNext,
-		SettingsSection,
+		NcSettingsSection,
 		SubscriptionListItem,
     ActionListItem,
-    ActionButton,
-    Actions,
+    NcActionButton,
+    NcActions,
 	},
 	data() {
 		return {

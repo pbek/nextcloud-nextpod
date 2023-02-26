@@ -1,8 +1,8 @@
 <template>
-	<ListItem :title="getTitle()"
+	<NcListItem :title="getTitle()"
 		:details="getDetails()">
 		<template #icon>
-			<Avatar :size="44"
+			<NcAvatar :size="44"
 				:url="getImageSrc()"
 				:display-name="getAvatarName()" />
 		</template>
@@ -11,26 +11,26 @@
 			<span v-else>{{ getSubtitle() }}</span>
 		</template>
 		<template #actions>
-			<ActionLink :href="getHomepageLink()"
+			<NcActionLink :href="getHomepageLink()"
 				target="_blank"
 				icon="icon-external">
 				Podcast's homepage
-			</ActionLink>
-			<ActionLink :href="getRssLink()"
+			</NcActionLink>
+			<NcActionLink :href="getRssLink()"
 				target="_blank">
 				<template #icon>
 					<Rss />
 				</template>
 				RSS feed
-			</ActionLink>
+			</NcActionLink>
 		</template>
-	</ListItem>
+	</NcListItem>
 </template>
 
 <script>
-import ActionLink from '@nextcloud/vue/dist/Components/ActionLink'
-import Avatar from '@nextcloud/vue/dist/Components/Avatar'
-import ListItem from '@nextcloud/vue/dist/Components/ListItem'
+import NcActionLink from '@nextcloud/vue/dist/Components/NcActionLink'
+import NcAvatar from '@nextcloud/vue/dist/Components/NcAvatar'
+import NcListItem from '@nextcloud/vue/dist/Components/NcListItem'
 
 import Rss from 'vue-material-design-icons/Rss.vue'
 
@@ -40,9 +40,9 @@ import axios from '@nextcloud/axios'
 export default {
 	name: 'SubscriptionListItem',
 	components: {
-		ActionLink,
-		Avatar,
-		ListItem,
+		NcActionLink,
+		NcAvatar,
+		NcListItem,
 		Rss,
 	},
 	props: {
