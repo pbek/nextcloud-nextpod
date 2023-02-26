@@ -4,10 +4,16 @@
 	"license": "AGPLv3",
 	"authors": [
 		{
-			"name": "thrillfall"
+			"name": "thrillfall",
+			"email": "thrillfall@disroot.org"
 		},
 		{
-			"name": "Patrizio Bekerle"
+			"name": "JohnUfUs",
+			"email": "jonofus@flueren.eu"
+		},
+		{
+			"name": "Patrizio Bekerle",
+			"email": "patrizio@bekerle.com"
 		}
 	],
 	"require-dev": {

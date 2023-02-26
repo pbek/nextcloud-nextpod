@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.7.3 - 2023-02-24
+### Fixed
+- If EpisodeAction is updated with new episode url and there is a conflicting EpisodeAction with that same episode url the later will be deleted 
+
+
+## 3.7.2 - 2023-02-24
+### Fixed
+- EpisodeActions are explicitly searched in database by guid. Episode url is used as fallback. Combined search produces multiple results thus broke synchronization 
+
 ## 3.7.1 - 2022-11-11
 ### Fixed
 - Fix error where app couldn't be installed with some databases

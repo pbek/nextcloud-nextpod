@@ -28,17 +28,34 @@ class EpisodeActionRepository {
 		return $episodeActions;
 	}
 
-	public function findByEpisodeIdentifier(string $identifier, string $userId): ?EpisodeAction {
-		$episodeActionEntity = $this->episodeActionMapper->findByEpisodeIdentifier($identifier, $userId);
+    public function findByEpisodeUrl(string $episodeUrl, string $userId): ?EpisodeAction {
+        $episodeActionEntity = $this->episodeActionMapper->findByEpisodeUrl($episodeUrl, $userId);
 
-		if ($episodeActionEntity === null) {
-			return null;
-		}
+        if ($episodeActionEntity === null) {
+            return null;
+        }
 
-		return $this->mapEntityToEpisodeAction(
-			$episodeActionEntity
-		);
-	}
+        return $this->mapEntityToEpisodeAction(
+            $episodeActionEntity
+        );
+    }
+
+    public function findByGuid(string $guid, string $userId): ?EpisodeAction {
+        $episodeActionEntity = $this->episodeActionMapper->findByGuid($guid, $userId);
+
+        if ($episodeActionEntity === null) {
+            return null;
+        }
+
+        return $this->mapEntityToEpisodeAction(
+            $episodeActionEntity
+        );
+    }
+
+    public function deleteEpisodeActionByEpisodeUrl(string $episodeUrl, string $userId) : void {
+        $episodeAction = $this->episodeActionMapper->findByEpisodeUrl($episodeUrl, $userId);
+        $this->episodeActionMapper->delete($episodeAction);
+    }
 
 	private function mapEntityToEpisodeAction(EpisodeActionEntity $episodeActionEntity): EpisodeAction
 	{
