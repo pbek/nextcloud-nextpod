@@ -123,7 +123,7 @@ class EpisodeActionReader {
             return null;
         }
 
-        $episodeAction = $this->episodeActionRepository->findByEpisodeIdentifier($episodeUrl, $userId);
+        $episodeAction = $this->episodeActionRepository->findByEpisodeUrl($episodeUrl, $userId);
 
         $resp = $this->fetchUrl($episodeAction->getPodcast());
         $data = EpisodeActionExtraData::parseRssXml($resp->getBody(), $episodeUrl);
@@ -132,7 +132,7 @@ class EpisodeActionReader {
     }
 
     private function userHasAction(string $url, string $userId): bool {
-        $episodeAction = $this->episodeActionRepository->findByEpisodeIdentifier($url, $userId);
+        $episodeAction = $this->episodeActionRepository->findByEpisodeUrl($url, $userId);
         return $episodeAction !== null;
     }
 
