@@ -27,11 +27,11 @@
     </div>
     <div v-if="subscriptions.length === 0 && !isLoading">
       <NcEmptyContent>
-        No subscriptions
         <template #icon>
           <Podcast />
         </template>
-        <template #desc>
+        <template #title>
+          <h1>No subscriptions</h1>
           Start syncing podcasts from your favorite podcast client, such as
           <a class="link" href="https://antennapod.org/" target="_blank">Antennapod</a>,
           and then refresh this page to see them pop up here.
@@ -115,6 +115,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.empty-content h1 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
 div.podcasts {
   padding: 20px var(--nextpod-navigation-height) 0 var(--nextpod-navigation-height);
 }
