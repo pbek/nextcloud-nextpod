@@ -11,6 +11,8 @@ return [
 	'routes' => [
         ['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
         ['name' => 'page#mail', 'url' => '/mail', 'verb' => 'GET'],
+        ['name' => 'page#index', 'url' => '/podcasts', 'verb' => 'GET', 'postfix' => 'podcasts'],
+        ['name' => 'page#index', 'url' => '/actions', 'verb' => 'GET', 'postfix' => 'actions'],
 
 		['name' => 'episode_action#create', 'url' => '/episode_action/create', 'verb' => 'POST'],
 		['name' => 'episode_action#list', 'url' => '/episode_action', 'verb' => 'GET'],
