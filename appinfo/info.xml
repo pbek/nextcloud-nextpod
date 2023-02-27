@@ -25,10 +25,6 @@
             <step>OCA\GPodderSync\Migration\TimestampMigration</step>
         </post-migration>
     </repair-steps>
-    <settings>
-        <personal>OCA\GPodderSync\Settings\GPodderSyncPersonal</personal>
-        <personal-section>OCA\GPodderSync\Sections\GPodderSyncPersonal</personal-section>
-    </settings>
     <navigations>
         <navigation>
             <name>GPodder</name>
