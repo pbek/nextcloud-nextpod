@@ -4,3 +4,4 @@ node_modules/
 js/
 /mydb.db*
 docker/nextcloud/certificates/*
+/*.gz
