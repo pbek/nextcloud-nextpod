@@ -36,6 +36,19 @@
         </NcActionButton>
       </NcActions>
     </div>
+    <div v-if="actions.length === 0 && !isLoading">
+      <NcEmptyContent>
+        <template #icon>
+          <Podcast />
+        </template>
+        <template #title>
+          <h1>No episode actions</h1>
+          Start syncing podcasts from your favorite podcast client, such as
+          <a class="link" href="https://antennapod.org/" target="_blank">Antennapod</a>,
+          and then refresh this page to see them pop up here.
+        </template>
+      </NcEmptyContent>
+    </div>
   </div>
 </template>
 
@@ -118,6 +131,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.empty-content h1 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
 div.actions {
   padding: 20px var(--nextpod-navigation-height) 0 var(--nextpod-navigation-height);
 }
