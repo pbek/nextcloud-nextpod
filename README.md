@@ -9,6 +9,16 @@ functionality, which would be out of scope for a sync server.
 
 This Nextcloud app that replicates basic gpodder.net api to sync podcast consumer apps (podcatchers) like AntennaPod.
 
+## Screenhots
+
+### Episode List
+
+![episodes](./screenshots/episodes.png)
+
+### Podcast Subscriptions
+
+![podcasts](./screenshots/podcasts.png)
+
 ## Clients supporting sync
 
 | client | support status |
