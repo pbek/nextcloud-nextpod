@@ -54,7 +54,6 @@ import PageNext from 'vue-material-design-icons/PageNext.vue'
 import { generateUrl } from '@nextcloud/router'
 import axios from '@nextcloud/axios'
 import { showError } from '@nextcloud/dialogs'
-import { emit } from '@nextcloud/event-bus'
 import HeaderNavigation from "./HeaderNavigation.vue";
 
 const actionFilteringOptions = [

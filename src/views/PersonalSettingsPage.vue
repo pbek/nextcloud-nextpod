@@ -84,7 +84,6 @@ import PageNext from 'vue-material-design-icons/PageNext.vue'
 import { generateUrl } from '@nextcloud/router'
 import axios from '@nextcloud/axios'
 import { showError } from '@nextcloud/dialogs'
-import { emit } from '@nextcloud/event-bus'
 
 const sortingOptions = [
 	{ label: 'Listened time (desc)', compare: (a, b) => a?.listenedSeconds < b?.listenedSeconds },
@@ -126,10 +125,6 @@ export default {
 		}
 	},
 	async mounted() {
-    emit('toggle-navigation', {
-      open: true,
-    })
-
 		try {
 			const resp = await axios.get(generateUrl('/apps/gpoddersync/personal_settings/metrics'))
       if (!Array.isArray(resp.data.actions)) {

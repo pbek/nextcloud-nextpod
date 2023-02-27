@@ -68,11 +68,6 @@ import SubscriptionListItem from "./components/SubscriptionListItem.vue";
 import ActionListItem from "./components/ActionListItem.vue";
 import NcActions from "@nextcloud/vue/dist/Components/NcActions";
 
-import { generateUrl } from '@nextcloud/router'
-import axios from '@nextcloud/axios'
-import { showError } from '@nextcloud/dialogs'
-import { emit } from '@nextcloud/event-bus'
-
 export default {
 	name: 'App',
 	components: {
