@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace OCA\GPodderSync\Core\SubscriptionChange;
+namespace OCA\NextPod\Core\SubscriptionChange;
 
 class SubscriptionChange {
 	private string $url;

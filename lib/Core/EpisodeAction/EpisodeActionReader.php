@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace OCA\GPodderSync\Core\EpisodeAction;
+namespace OCA\NextPod\Core\EpisodeAction;
 
 use InvalidArgumentException;
-use OCA\GPodderSync\Core\EpisodeAction\EpisodeActionData;
-use OCA\GPodderSync\Db\EpisodeAction\EpisodeActionRepository;
+use OCA\NextPod\Core\EpisodeAction\EpisodeActionData;
+use OCA\NextPod\Db\EpisodeAction\EpisodeActionRepository;
 use OCP\Http\Client\IClient;
 use OCP\Http\Client\IClientService;
 use OCP\Http\Client\IResponse;
@@ -24,7 +24,7 @@ class EpisodeActionReader {
 		ICacheFactory $cacheFactory
     ) {
         if ($cacheFactory->isLocalCacheAvailable()) {
-            $this->cache = $cacheFactory->createLocal('GPodderSync-Actions');
+            $this->cache = $cacheFactory->createLocal('NextPod-Actions');
         }
         $this->httpClient = $httpClientService->newClient();
         $this->episodeActionRepository = $episodeActionRepository;

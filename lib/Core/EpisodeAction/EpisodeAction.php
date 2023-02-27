@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace OCA\GPodderSync\Core\EpisodeAction;
+namespace OCA\NextPod\Core\EpisodeAction;
 
 class EpisodeAction {
 	private string $podcast;

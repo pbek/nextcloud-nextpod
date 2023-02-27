@@ -1,5 +1,5 @@
 <?php
-namespace OCA\GPodderSync\Controller;
+namespace OCA\NextPod\Controller;
 
 use OCP\AppFramework\Http\ContentSecurityPolicy;
 use OCP\AppFramework\Controller;
@@ -16,7 +16,7 @@ class PageController extends Controller {
      * @NoCSRFRequired
      */
     public function index(): TemplateResponse {
-        $response = new TemplateResponse('gpoddersync', 'main', []);
+        $response = new TemplateResponse('nextpod', 'main', []);
 
         // Set CSP to allow images and media from anywhere
         $csp = new ContentSecurityPolicy();

@@ -1,22 +1,22 @@
 <template>
-	<div class="gpoddersync-navigation" role="toolbar">
+	<div class="nextpod-navigation" role="toolbar">
 		<!-- Main Navigation title -->
-		<div class="gpoddersync-navigation__title">
-			<h2 class="gpoddersync-navigation__title__main" @click="refresh">
+		<div class="nextpod-navigation__title">
+			<h2 class="nextpod-navigation__title__main" @click="refresh">
 				{{ name }}
 			</h2>
-			<div class="gpoddersync-navigation__title__sub" />
+			<div class="nextpod-navigation__title__sub" />
 			<slot name="subtitle" />
 		</div>
 
 		<!-- Main slot -->
-		<div v-if="$slots.default" class="gpoddersync-navigation__content">
+		<div v-if="$slots.default" class="nextpod-navigation__content">
 			<slot />
 		</div>
 
-		<NcLoadingIcon v-show="loading" class="gpoddersync-navigation__loader" />
+		<NcLoadingIcon v-show="loading" class="nextpod-navigation__loader" />
 
-		<div class="gpoddersync-navigation__content-right">
+		<div class="nextpod-navigation__content-right">
 			<slot name="right" />
 		</div>
 	</div>
@@ -50,7 +50,7 @@ export default {
 		},
 		rootTitle: {
 			type: String,
-			default: t('gpoddersyn', 'Podcasts'),
+			default: t('nextpodsyn', 'Podcasts'),
 		},
 		// The route params
 		params: {
@@ -83,31 +83,31 @@ export default {
 
 <style lang="scss">
 :root {
-	--gpoddersync-navigation-height: 64px;
+	--nextpod-navigation-height: 64px;
 	// header height - button size
-	--gpoddersync-navigation-spacing: calc((var(--gpoddersync-navigation-height) - 44px) / 2);
+	--nextpod-navigation-spacing: calc((var(--nextpod-navigation-height) - 44px) / 2);
 }
 
 // Properly position the navigation toggle button
 button.app-navigation-toggle {
 	// App-navigation have a 4px margin top
 	top: 0 !important;
-	right: calc(var(--gpoddersync-navigation-height) * -1) !important;
-	margin: var(--gpoddersync-navigation-spacing) !important;
+	right: calc(var(--nextpod-navigation-height) * -1) !important;
+	margin: var(--nextpod-navigation-spacing) !important;
 }
 
 </style>
 
 <style lang="scss" scoped>
-.gpoddersync-navigation {
+.nextpod-navigation {
 	position: sticky;
 	z-index: 20;
 	top: 0;
 	display: flex;
 	align-items: center;
 	width: 100%;
-	min-height: var(--gpoddersync-navigation-height);
-	padding: 0 var(--gpoddersync-navigation-height);
+	min-height: var(--nextpod-navigation-height);
+	padding: 0 var(--nextpod-navigation-height);
 	background: var(--color-main-background);
   margin-top: 10px;
 
@@ -115,12 +115,12 @@ button.app-navigation-toggle {
 		// Above the navigation menu
 		position: absolute !important;
 		left: 0;
-		margin: var(--gpoddersync-navigation-spacing) !important;
+		margin: var(--nextpod-navigation-spacing) !important;
 	}
 
 	&__title {
 		//max-width: 50%;
-		margin-right: calc(2 * var(--gpoddersync-navigation-spacing));
+		margin-right: calc(2 * var(--nextpod-navigation-spacing));
 		display: flex;
 		flex-direction: column;
 

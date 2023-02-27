@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace OCA\GPodderSync\Controller;
+namespace OCA\NextPod\Controller;
 
 use DateTime;
-use OCA\GPodderSync\Core\SubscriptionChange\SubscriptionChangeSaver;
-use OCA\GPodderSync\Db\SubscriptionChange\SubscriptionChangeEntity;
-use OCA\GPodderSync\Db\SubscriptionChange\SubscriptionChangeRepository;
+use OCA\NextPod\Core\SubscriptionChange\SubscriptionChangeSaver;
+use OCA\NextPod\Db\SubscriptionChange\SubscriptionChangeEntity;
+use OCA\NextPod\Db\SubscriptionChange\SubscriptionChangeRepository;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;

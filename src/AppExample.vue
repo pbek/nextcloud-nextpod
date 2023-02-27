@@ -1,13 +1,13 @@
 <template>
-	<NcContent :class="{'icon-loading': loading}" app-name="gpoddersync">
+	<NcContent :class="{'icon-loading': loading}" app-name="nextpod">
 		<NcAppNavigation>
 			<NcAppNavigationNew v-if="!loading"
-				:text="t('gpoddersync', 'New XXXXXX')"
+				:text="t('nextpod', 'New XXXXXX')"
 				:disabled="false"
-				button-id="new-gpoddersync-button"
+				button-id="new-nextpod-button"
 				button-class="icon-add"
 				@click="newButtonAction" />
-			<template id="app-gpoddersync-navigation" #list>
+			<template id="app-nextpod-navigation" #list>
 				<NcAppNavigationItem icon="icon-user" title="Episodes">
 					<NcCounterBubble slot="counter">
 						99+
@@ -135,8 +135,8 @@
 				<NcActionLink icon="icon-external" title="Link" href="https://nextcloud.com" />
 			</template>
 
-			<NcAppSidebarTab id="gpoddersync" name="gpoddersync" icon="icon-gpoddersync">
-				this is the gpoddersync tab
+			<NcAppSidebarTab id="nextpod" name="nextpod" icon="icon-nextpod">
+				this is the nextpod tab
 			</NcAppSidebarTab>
 			<NcAppSidebarTab id="activity" name="Activity" icon="icon-activity">
 				this is the activity tab

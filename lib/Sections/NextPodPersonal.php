@@ -1,11 +1,11 @@
 <?php
-namespace OCA\GPodderSync\Sections;
+namespace OCA\NextPod\Sections;
 
 use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\Settings\IIconSection;
 
-class GPodderSyncPersonal implements IIconSection {
+class NextPodPersonal implements IIconSection {
     private IL10N $l;
     private IURLGenerator $urlGenerator;
 
@@ -19,11 +19,11 @@ class GPodderSyncPersonal implements IIconSection {
     }
 
     public function getID(): string {
-        return 'gpoddersync';
+        return 'nextpod';
     }
 
     public function getName(): string {
-        return $this->l->t('GPodder Sync');
+        return $this->l->t('NextPod');
     }
 
     public function getPriority(): int {

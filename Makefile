@@ -1,6 +1,6 @@
 # Makefile for building the project
 
-app_name=gpoddersync
+app_name=nextpod
 
 project_dir=$(CURDIR)/../$(app_name)
 build_dir=$(CURDIR)/build/artifacts

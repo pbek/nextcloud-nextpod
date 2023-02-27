@@ -1,6 +1,6 @@
 <?php
 
-namespace OCA\GPodderSync\Tests\Integration\Controller;
+namespace OCA\NextPod\Tests\Integration\Controller;
 
 use OCP\AppFramework\App;
 use Test\TestCase;
@@ -17,13 +17,13 @@ class AppTest extends TestCase {
 
     public function setUp(): void {
         parent::setUp();
-        $app = new App('gpoddersync');
+        $app = new App('nextpod');
         $this->container = $app->getContainer();
     }
 
     public function testAppInstalled() {
         $appManager = $this->container->query('OCP\App\IAppManager');
-        $this->assertTrue($appManager->isInstalled('gpoddersync'));
+        $this->assertTrue($appManager->isInstalled('nextpod'));
     }
 
 }

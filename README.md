@@ -1,28 +1,41 @@
-# nextcloud-gpodder
-Nextcloud app that replicates basic gpodder.net api to sync podcast consumer apps (podcatchers) like AntennaPod.
+# NextPod Nextcloud App
 
-### Clients supporting sync
+[GitHub](https://github.com/pbek/nextcloud-nextpod) |
+[Nextcloud App Store](https://apps.nextcloud.com/apps/nextpod)
+
+Initially implemented by [thrillfall](https://github.com/thrillfall) as [GPodderSync](https://github.com/thrillfall/nextcloud-gpodder),
+then forked on [NextPod](https://github.com/pbek/nextcloud-nextpod) to add a web interface, which would be out of scope
+for a sync server.
+
+This Nextcloud app that replicates basic gpodder.net api to sync podcast consumer apps (podcatchers) like AntennaPod.
+
+## Clients supporting sync
+
 | client | support status |
 | :- | :- |
 | [AntennaPod](https://antennapod.org) | Initial purpose for this project, as a synchronization endpoint for this client.<br> Support is available [as of version 2.5.1](https://github.com/AntennaPod/AntennaPod/pull/5243/). |
 | [KDE Kasts](https://apps.kde.org/de/kasts/) | Supported since version 21.12 |
 | [Garmin Podcasts](https://lucasasselli.github.io/garmin-podcasts/) | Only for [compatible Garmin watches](https://apps.garmin.com/en-US/apps/b5b85600-0625-43b6-89e9-1245bd44532c), supported since version 3.3.4 |
 
-### Installation
-Either from the official Nextcloud app store ([link to app page](https://apps.nextcloud.com/apps/gpoddersync)) or by downloading the [latest release](https://github.com/thrillfall/nextcloud-gpodder/releases/latest) and extracting it into your Nextcloud apps/ directory.
+## Installation
+
+Either from the official Nextcloud app store ([link to app page](https://apps.nextcloud.com/apps/nextpod)) or by downloading the [latest release](https://github.com/pbek/nextcloud-nextpod/releases/latest) and extracting it into your Nextcloud apps/ directory.
 
 ## API
+
 ### subscription
-* **get subscription changes**: `GET /index.php/apps/gpoddersync/subscriptions`
+
+* **get subscription changes**: `GET /index.php/apps/nextpod/subscriptions`
 	* *(optional)* GET parameter `since` (UNIX time)
-* **upload subscription changes** : `POST /index.php/apps/gpoddersync/subscription_change/create`
+* **upload subscription changes** : `POST /index.php/apps/nextpod/subscription_change/create`
   * returns JSON with current timestamp
 
 The API replicates this: https://gpoddernet.readthedocs.io/en/latest/api/reference/subscriptions.html
 
 #### Example requests:
+
 ```json
-GET /index.php/apps/gpoddersync/subscriptions?since=1633240761
+GET /index.php/apps/nextpod/subscriptions?since=1633240761
 
 {
   "add": [
@@ -36,7 +49,7 @@ GET /index.php/apps/gpoddersync/subscriptions?since=1633240761
 }
 ```
 ```json
-POST /index.php/apps/gpoddersync/subscription_change/create
+POST /index.php/apps/nextpod/subscription_change/create
 
 {
   "add": [
@@ -50,21 +63,21 @@ POST /index.php/apps/gpoddersync/subscription_change/create
 ```
 
 ### episode action
-* **get episode actions**: `GET /index.php/apps/gpoddersync/episode_action`
+* **get episode actions**: `GET /index.php/apps/nextpod/episode_action`
 	* *(optional)* GET parameter `since` (UNIX time)
 	* fields: *podcast*, *episode*, *guid*, *action*, *timestamp*, *position*, *started*, *total*
-* **create episode actions**: `POST /index.php/apps/gpoddersync/episode_action/create`
+* **create episode actions**: `POST /index.php/apps/nextpod/episode_action/create`
   * fields: *podcast*, *episode*, *guid*, *action*, *timestamp*, *position*, *started*, *total*
   * *position*, *started* and *total* are optional, default value is -1
   * *guid* is also optional, but should be sent if available
   * identification is done by *guid*, or *episode* if *guid* is missing
   * returns JSON with current timestamp
 
-The API replicates this: https://gpoddernet.readthedocs.io/en/latest/api/reference/events.html  
+The API replicates this: https://nextpodnet.readthedocs.io/en/latest/api/reference/events.html  
 
 #### Example requests:
 ```json
-GET /index.php/apps/gpoddersync/episode_action?since=1633240761
+GET /index.php/apps/nextpod/episode_action?since=1633240761
 
 {
     "actions": [
@@ -93,7 +106,7 @@ GET /index.php/apps/gpoddersync/episode_action?since=1633240761
 }
 ```
 ```json
-POST /index.php/apps/gpoddersync/episode_action/create
+POST /index.php/apps/nextpod/episode_action/create
 
 [
   {
@@ -119,6 +132,7 @@ POST /index.php/apps/gpoddersync/episode_action/create
 ## Development
 
 ### Testing
+- 
 - mount project into apps-extra of nextcloud environment (https://github.com/juliushaertl/nextcloud-docker-dev) 
-- `docker-compose exec nextcloud occ app:enable gpoddersync` enable app so we have database tables
-- `docker-compose exec nextcloud phpunit9 -c apps-extra/nextcloud-gpodder/tests/phpunit.xml`
+- `docker-compose exec nextcloud occ app:enable nextpod` enable app so we have database tables
+- `docker-compose exec nextcloud phpunit9 -c apps-extra/nextcloud-nextpod/tests/phpunit.xml`

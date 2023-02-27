@@ -1,8 +1,12 @@
 {
-	"name": "thrillfall/gpoddersync",
+	"name": "pbek/nextpod",
 	"type": "project",
 	"license": "AGPLv3",
 	"authors": [
+		{
+			"name": "Patrizio Bekerle",
+			"email": "patrizio@bekerle.com"
+		},
 		{
 			"name": "thrillfall",
 			"email": "thrillfall@disroot.org"
@@ -10,10 +14,6 @@
 		{
 			"name": "JohnUfUs",
 			"email": "jonofus@flueren.eu"
-		},
-		{
-			"name": "Patrizio Bekerle",
-			"email": "patrizio@bekerle.com"
 		}
 	],
 	"require-dev": {

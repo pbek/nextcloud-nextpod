@@ -4,12 +4,12 @@ declare(strict_types=1);
 namespace tests\Integration\Controller;
 
 use OC\Security\SecureRandom;
-use OCA\GPodderSync\Controller\SubscriptionChangeController;
-use OCA\GPodderSync\Core\SubscriptionChange\SubscriptionChangeSaver;
-use OCA\GPodderSync\Db\SubscriptionChange\SubscriptionChangeRepository;
-use OCA\GPodderSync\Db\SubscriptionChange\SubscriptionChangeEntity;
-use OCA\GPodderSync\Db\SubscriptionChange\SubscriptionChangeWriter;
-use OCA\GPodderSync\Db\SubscriptionChange\SubscriptionChangeMapper;
+use OCA\NextPod\Controller\SubscriptionChangeController;
+use OCA\NextPod\Core\SubscriptionChange\SubscriptionChangeSaver;
+use OCA\NextPod\Db\SubscriptionChange\SubscriptionChangeRepository;
+use OCA\NextPod\Db\SubscriptionChange\SubscriptionChangeEntity;
+use OCA\NextPod\Db\SubscriptionChange\SubscriptionChangeWriter;
+use OCA\NextPod\Db\SubscriptionChange\SubscriptionChangeMapper;
 use OCP\AppFramework\App;
 use OCP\AppFramework\IAppContainer;
 use OCP\IConfig;
@@ -31,7 +31,7 @@ class SubscriptionChangeControllerTest extends TestCase
 
 	public function setUp(): void {
 		parent::setUp();
-		$app = new App('gpoddersync');
+		$app = new App('nextpod');
 		$this->container = $app->getContainer();
 		$this->db = \OC::$server->getDatabaseConnection();
 	}
@@ -48,7 +48,7 @@ class SubscriptionChangeControllerTest extends TestCase
     {
         $userId = uniqid("test_user");
         $subscriptionChangeController = new SubscriptionChangeController(
-            "gpoddersync",
+            "nextpod",
             $this->createMock(IRequest::class),
 			$userId,
             $this->container->get(SubscriptionChangeSaver::class),
@@ -91,7 +91,7 @@ class SubscriptionChangeControllerTest extends TestCase
     {
         $userId = uniqid("test_user");
         $subscriptionChangeController = new SubscriptionChangeController(
-            "gpoddersync",
+            "nextpod",
             $this->createMock(IRequest::class),
 			$userId,
             $this->container->get(SubscriptionChangeSaver::class),
@@ -134,7 +134,7 @@ class SubscriptionChangeControllerTest extends TestCase
 		$userId = uniqid('test_user');
 
 		$subscriptionChangeController = new SubscriptionChangeController(
-            "gpoddersync",
+            "nextpod",
             $this->createMock(IRequest::class),
 			$userId,
             $this->container->get(SubscriptionChangeSaver::class),

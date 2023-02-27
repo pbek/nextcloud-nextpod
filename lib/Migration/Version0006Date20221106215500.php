@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace OCA\GPodderSync\Migration;
+namespace OCA\NextPod\Migration;
 
 use Closure;
 use Doctrine\DBAL\Types\Types;
@@ -13,9 +13,9 @@ class Version0006Date20221106215500 extends \OCP\Migration\SimpleMigrationStep {
                 /** @var ISchemaWrapper $schema */
                 $schema = $schemaClosure();
 
-                $table = $schema->getTable('gpodder_subscriptions');
+                $table = $schema->getTable('nextpod_subscriptions');
 
-                // hotfix due to errors with too long key lengths (https://github.com/thrillfall/nextcloud-gpodder/issues/103)
+                // hotfix due to errors with too long key lengths (https://github.com/pbek/nextcloud-nextpod/issues/103)
                 $table->dropIndex('subscriptions_url_user');
                 $table->addUniqueIndex(['url', "user_id"], 'subscriptions_url_user', [ 
                         'lengths' => [ 500, 200 ]

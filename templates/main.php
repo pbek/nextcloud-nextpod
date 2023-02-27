@@ -1,5 +1,5 @@
 <?php
-script('gpoddersync', 'gpoddersync-main');
+script('nextpod', 'nextpod-main');
 ?>
 
 <div id="content"></div>

@@ -95,7 +95,7 @@ export default {
 	},
 	async mounted() {
 		try {
-			const resp = await axios.get(generateUrl('/apps/gpoddersync/personal_settings/action_extra_data?episodeUrl={url}', {
+			const resp = await axios.get(generateUrl('/apps/nextpod/personal_settings/action_extra_data?episodeUrl={url}', {
 				url: this.action.episodeUrl,
 			}))
 			this.actionExtraData = resp.data?.data

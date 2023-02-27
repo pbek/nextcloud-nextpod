@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace OCA\GPodderSync\Tests\Unit\Core\EpisodeAction;
+namespace OCA\NextPod\Tests\Unit\Core\EpisodeAction;
 
-use OCA\GPodderSync\Core\EpisodeAction\EpisodeActionReader;
-use OCA\GPodderSync\Db\EpisodeAction\EpisodeActionMapper;
-use OCA\GPodderSync\Db\EpisodeAction\EpisodeActionRepository;
+use OCA\NextPod\Core\EpisodeAction\EpisodeActionReader;
+use OCA\NextPod\Db\EpisodeAction\EpisodeActionMapper;
+use OCA\NextPod\Db\EpisodeAction\EpisodeActionRepository;
 use OCP\Http\Client\IClientService;
 use OCP\ICacheFactory;
 use Test\TestCase;

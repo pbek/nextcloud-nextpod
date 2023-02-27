@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace OCA\GPodderSync\Db\EpisodeAction;
+namespace OCA\NextPod\Db\EpisodeAction;
 
 use DateTime;
-use OCA\GPodderSync\Core\EpisodeAction\EpisodeAction;
+use OCA\NextPod\Core\EpisodeAction\EpisodeAction;
 
 class EpisodeActionRepository {
 

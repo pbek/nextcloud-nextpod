@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace OCA\GPodderSync\Core\PodcastData;
+namespace OCA\NextPod\Core\PodcastData;
 
 use Exception;
-use OCA\GPodderSync\Db\SubscriptionChange\SubscriptionChangeRepository;
+use OCA\NextPod\Db\SubscriptionChange\SubscriptionChangeRepository;
 use OCP\Http\Client\IClient;
 use OCP\Http\Client\IClientService;
 use OCP\Http\Client\IResponse;
@@ -22,7 +22,7 @@ class PodcastDataReader {
 		SubscriptionChangeRepository $subscriptionChangeRepository
 	) {
 		if ($cacheFactory->isLocalCacheAvailable()) {
-			$this->cache = $cacheFactory->createLocal('GPodderSync-Podcasts');
+			$this->cache = $cacheFactory->createLocal('NextPod-Podcasts');
 		}
 		$this->httpClient = $httpClientService->newClient();
 		$this->subscriptionChangeRepository = $subscriptionChangeRepository;

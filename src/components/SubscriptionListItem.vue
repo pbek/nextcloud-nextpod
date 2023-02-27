@@ -59,7 +59,7 @@ export default {
 	},
 	async mounted() {
 		try {
-			const resp = await axios.get(generateUrl('/apps/gpoddersync/personal_settings/podcast_data?url={url}', {
+			const resp = await axios.get(generateUrl('/apps/nextpod/personal_settings/podcast_data?url={url}', {
 				url: this.sub.url,
 			}))
 			this.podcastData = resp.data?.data

@@ -2,16 +2,16 @@
   <div>
     <HeaderNavigation key="navigation"
                       :loading="isLoading"
-                      :title="t('gpoddersync', 'Subscriptions')"
+                      :title="t('nextpod', 'Subscriptions')"
                       @refresh="loadData">
       <template #subtitle>
-        {{ t('gpoddersync', 'Podcast subscriptions synchronized to this Nextcloud account so far.')}}
+        {{ t('nextpod', 'Podcast subscriptions synchronized to this Nextcloud account so far.')}}
       </template>
     </HeaderNavigation>
     <div v-if="subscriptions.length > 0" class="podcasts">
       <div class="sorting-container">
-        <label for="gpoddersync_sorting">Sort by:</label>
-        <NcMultiselect id="gpoddersync_sorting"
+        <label for="nextpod_sorting">Sort by:</label>
+        <NcMultiselect id="nextpod_sorting"
                        v-model="sortBy"
                        :options="sortingOptions"
                        track-by="label"
@@ -92,7 +92,7 @@ export default {
     async loadData() {
       this.isLoading = true
       try {
-        const resp = await axios.get(generateUrl('/apps/gpoddersync/personal_settings/metrics'))
+        const resp = await axios.get(generateUrl('/apps/nextpod/personal_settings/metrics'))
         if (!Array.isArray(resp.data.subscriptions)) {
           throw new Error('expected subscriptions array in metrics response')
         }
@@ -102,7 +102,7 @@ export default {
         this.subscriptions.sort(this.sortBy.compare)
       } catch (e) {
         console.error(e)
-        showError(t('gpoddersync', 'Could not fetch podcast synchronization stats'))
+        showError(t('nextpod', 'Could not fetch podcast synchronization stats'))
       } finally {
         this.isLoading = false
       }
@@ -116,7 +116,7 @@ export default {
 
 <style lang="scss" scoped>
 div.podcasts {
-  padding: 20px var(--gpoddersync-navigation-height) 0 var(--gpoddersync-navigation-height);
+  padding: 20px var(--nextpod-navigation-height) 0 var(--nextpod-navigation-height);
 }
 
 a.link {

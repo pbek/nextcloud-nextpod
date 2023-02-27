@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace OCA\GPodderSync\Tests\Unit\Core\EpisodeAction;
+namespace OCA\NextPod\Tests\Unit\Core\EpisodeAction;
 
-use OCA\GPodderSync\Core\EpisodeAction\EpisodeAction;
+use OCA\NextPod\Core\EpisodeAction\EpisodeAction;
 use Test\TestCase;
 
 class EpisodeActionTest extends TestCase {

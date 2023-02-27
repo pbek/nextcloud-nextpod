@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace OCA\GPodderSync\Db\SubscriptionChange;
+namespace OCA\NextPod\Db\SubscriptionChange;
 
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
@@ -10,7 +10,7 @@ use OCP\IDBConnection;
 
 class SubscriptionChangeMapper extends \OCP\AppFramework\Db\QBMapper {
 	public function __construct(IDBConnection $db) {
-		parent::__construct($db, 'gpodder_subscriptions', SubscriptionChangeEntity::class);
+		parent::__construct($db, 'nextpod_subscriptions', SubscriptionChangeEntity::class);
 	}
 
 	public function findAll(string $userId): array {

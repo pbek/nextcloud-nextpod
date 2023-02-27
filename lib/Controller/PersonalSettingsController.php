@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace OCA\GPodderSync\Controller;
+namespace OCA\NextPod\Controller;
 
-use OCA\GPodderSync\Core\EpisodeAction\EpisodeActionReader;
-use OCA\GPodderSync\Core\PodcastData\PodcastDataReader;
-use OCA\GPodderSync\Core\PodcastData\PodcastMetricsReader;
+use OCA\NextPod\Core\EpisodeAction\EpisodeActionReader;
+use OCA\NextPod\Core\PodcastData\PodcastDataReader;
+use OCA\NextPod\Core\PodcastData\PodcastMetricsReader;
 
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http;

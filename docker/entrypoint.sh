@@ -188,11 +188,11 @@ if expr "$1" : "apache" 1>/dev/null || [ "$1" = "php-fpm" ] || [ "${NEXTCLOUD_UP
         fi
     fi
 
-    # if we get an error "ln: /var/www/html/apps/gpoddersync: cannot overwrite directory" we need to remove that directory in the container
-    run_as 'rm -Rf /var/www/html/apps/gpoddersync'
+    # if we get an error "ln: /var/www/html/apps/nextpod: cannot overwrite directory" we need to remove that directory in the container
+    run_as 'rm -Rf /var/www/html/apps/nextpod'
 
-    run_as 'ln -sfT /var/www/html/custom_apps/gpoddersync /var/www/html/apps/gpoddersync'
-    run_as "php /var/www/html/occ app:enable gpoddersync"
+    run_as 'ln -sfT /var/www/html/custom_apps/nextpod /var/www/html/apps/nextpod'
+    run_as "php /var/www/html/occ app:enable nextpod"
 fi
 
 exec "$@"

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace OCA\GPodderSync\Migration;
+namespace OCA\NextPod\Migration;
 
 use OCP\IDBConnection;
 use OCP\Migration\IOutput;
@@ -29,14 +29,14 @@ class TimestampMigration implements \OCP\Migration\IRepairStep
      */
     public function run(IOutput $output)
     {
-		$queryTimestamps = 'SELECT id, timestamp FROM `*PREFIX*gpodder_episode_action` WHERE timestamp_epoch = 0';
+		$queryTimestamps = 'SELECT id, timestamp FROM `*PREFIX*nextpod_episode_action` WHERE timestamp_epoch = 0';
 		$timestamps = $this->db->executeQuery($queryTimestamps)->fetchAll();
 
 		$result = 0;
 
 		foreach ($timestamps as $timestamp) {
 			$timestampEpoch = (new DateTime($timestamp["timestamp"]))->format("U");
-			$sql = 'UPDATE `*PREFIX*gpodder_episode_action` '
+			$sql = 'UPDATE `*PREFIX*nextpod_episode_action` '
 				. 'SET `timestamp_epoch` = ' . $timestampEpoch . ' '
 				. 'WHERE `id` = ' . $timestamp["id"];
 

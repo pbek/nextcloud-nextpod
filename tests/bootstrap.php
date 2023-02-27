@@ -10,7 +10,7 @@ require_once __DIR__ . '/Helper/Writer/TestWriter.php';
 // Fix for "Autoload path not allowed: .../tests/lib/testcase.php"
 OC::$loader->addValidRoot(OC::$SERVERROOT . '/tests');
 
-// Fix for "Autoload path not allowed: .../gpoddersync/tests/testcase.php"
-OC_App::loadApp('nextcloud-gpodder');
+// Fix for "Autoload path not allowed: .../nextpod/tests/testcase.php"
+OC_App::loadApp('nextcloud-nextpod');
 
 OC_Hook::clear();

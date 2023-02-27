@@ -1,20 +1,20 @@
 <?xml version="1.0"?>
 <info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
-    <id>gpoddersync</id>
-    <name>GPodder Sync</name>
+    <id>nextpod</id>
+    <name>NextPod</name>
     <summary>replicate basic GPodder.net API</summary>
     <description><![CDATA[Expose GPodder API to sync podcast consumer apps like AntennaPod]]></description>
-    <version>3.7.3</version>
+    <version>1.0.0</version>
     <licence>agpl</licence>
-    <author mail="thrillfall@disroot.org">Thrillfall</author>
-    <namespace>GPodderSync</namespace>
+    <author mail="patrizio@bekerle.com">Patrizio Bekerle</author>
+    <namespace>NextPod</namespace>
     <category>integration</category>
     <category>multimedia</category>
-    <website>https://github.com/thrillfall/nextcloud-gpodder</website>
-    <bugs>https://github.com/thrillfall/nextcloud-gpodder/issues</bugs>
+    <website>https://github.com/pbek/nextcloud-nextpod</website>
+    <bugs>https://github.com/pbek/nextcloud-nextpod/issues</bugs>
     <documentation>
-        <developer>https://github.com/thrillfall/nextcloud-gpodder/blob/main/README.md#api</developer>
+        <developer>https://github.com/pbek/nextcloud-nextpod/blob/main/README.md#api</developer>
     </documentation>
     <dependencies>
         <php min-version="7.4"/>
@@ -22,13 +22,13 @@
     </dependencies>
     <repair-steps>
         <post-migration>
-            <step>OCA\GPodderSync\Migration\TimestampMigration</step>
+            <step>OCA\NextPod\Migration\TimestampMigration</step>
         </post-migration>
     </repair-steps>
     <navigations>
         <navigation>
-            <name>GPodder</name>
-            <route>gpoddersync.page.index</route>
+            <name>NextPod</name>
+            <route>nextpod.page.index</route>
             <icon>app.svg</icon>
             <order>77</order>
         </navigation>

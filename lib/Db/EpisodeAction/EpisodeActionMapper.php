@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace OCA\GPodderSync\Db\EpisodeAction;
+namespace OCA\NextPod\Db\EpisodeAction;
 
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
@@ -14,7 +14,7 @@ class EpisodeActionMapper extends QBMapper
 {
 	public function __construct(IDBConnection $db)
 	{
-		parent::__construct($db, 'gpodder_episode_action', EpisodeActionEntity::class);
+		parent::__construct($db, 'nextpod_episode_action', EpisodeActionEntity::class);
 	}
 
 	/**

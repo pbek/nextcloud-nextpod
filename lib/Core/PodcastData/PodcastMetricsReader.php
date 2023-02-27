@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace OCA\GPodderSync\Core\PodcastData;
+namespace OCA\NextPod\Core\PodcastData;
 
 use DateTime;
 
-use OCA\GPodderSync\Db\EpisodeAction\EpisodeActionRepository;
-use OCA\GPodderSync\Db\SubscriptionChange\SubscriptionChangeEntity;
-use OCA\GPodderSync\Db\SubscriptionChange\SubscriptionChangeRepository;
+use OCA\NextPod\Db\EpisodeAction\EpisodeActionRepository;
+use OCA\NextPod\Db\SubscriptionChange\SubscriptionChangeEntity;
+use OCA\NextPod\Db\SubscriptionChange\SubscriptionChangeRepository;
 
 use Psr\Log\LoggerInterface;
 

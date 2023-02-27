@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace OCA\GPodderSync\Migration;
+namespace OCA\NextPod\Migration;
 
 use Closure;
 use Doctrine\DBAL\Types\Types;
@@ -14,7 +14,7 @@ class Version0005Date20211004110900 extends SimpleMigrationStep {
 		/** @var ISchemaWrapper $schema */
 		$schema = $schemaClosure();
 
-		$table = $schema->getTable('gpodder_episode_action');
+		$table = $schema->getTable('nextpod_episode_action');
 		$table->changeColumn('timestamp', ['notnull' => false]);
 		$table->addColumn('timestamp_epoch', Types::INTEGER, [
 			'notnull' => false,

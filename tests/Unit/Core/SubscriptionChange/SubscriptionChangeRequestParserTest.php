@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace OCA\GPodderSync\Tests\Unit\Core\SubscriptionChange;
+namespace OCA\NextPod\Tests\Unit\Core\SubscriptionChange;
 
-use OCA\GPodderSync\Core\SubscriptionChange\SubscriptionChangeRequestParser;
-use OCA\GPodderSync\Core\SubscriptionChange\SubscriptionChangesReader;
+use OCA\NextPod\Core\SubscriptionChange\SubscriptionChangeRequestParser;
+use OCA\NextPod\Core\SubscriptionChange\SubscriptionChangesReader;
 use Test\TestCase;
 
 class SubscriptionChangeRequestParserTest extends TestCase {

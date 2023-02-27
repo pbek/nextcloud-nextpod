@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace tests\Integration;
 
-use OCA\GPodderSync\Core\EpisodeAction\EpisodeActionSaver;
+use OCA\NextPod\Core\EpisodeAction\EpisodeActionSaver;
 use OCP\AppFramework\App;
 use OCP\AppFramework\IAppContainer;
 use Test\TestCase;
@@ -19,7 +19,7 @@ class EpisodeActionSaverGuidMigrationTest extends TestCase
 
 	public function setUp(): void {
 		parent::setUp();
-		$app = new App('gpoddersync');
+		$app = new App('nextpod');
 		$this->container = $app->getContainer();
 	}
 

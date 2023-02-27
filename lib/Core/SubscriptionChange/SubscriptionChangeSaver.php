@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace OCA\GPodderSync\Core\SubscriptionChange;
+namespace OCA\NextPod\Core\SubscriptionChange;
 
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
-use OCA\GPodderSync\Db\SubscriptionChange\SubscriptionChangeEntity;
-use OCA\GPodderSync\Db\SubscriptionChange\SubscriptionChangeRepository;
-use OCA\GPodderSync\Db\SubscriptionChange\SubscriptionChangeWriter;
+use OCA\NextPod\Db\SubscriptionChange\SubscriptionChangeEntity;
+use OCA\NextPod\Db\SubscriptionChange\SubscriptionChangeRepository;
+use OCA\NextPod\Db\SubscriptionChange\SubscriptionChangeWriter;
 use OCP\DB\Exception;
 
 class SubscriptionChangeSaver

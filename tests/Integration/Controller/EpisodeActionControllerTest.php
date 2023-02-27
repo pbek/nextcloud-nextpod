@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace tests\Integration\Controller;
 
-use OCA\GPodderSync\Controller\EpisodeActionController;
-use OCA\GPodderSync\Core\EpisodeAction\EpisodeActionSaver;
-use OCA\GPodderSync\Db\EpisodeAction\EpisodeActionEntity;
-use OCA\GPodderSync\Db\EpisodeAction\EpisodeActionMapper;
-use OCA\GPodderSync\Db\EpisodeAction\EpisodeActionRepository;
-use OCA\GPodderSync\Db\EpisodeAction\EpisodeActionWriter;
+use OCA\NextPod\Controller\EpisodeActionController;
+use OCA\NextPod\Core\EpisodeAction\EpisodeActionSaver;
+use OCA\NextPod\Db\EpisodeAction\EpisodeActionEntity;
+use OCA\NextPod\Db\EpisodeAction\EpisodeActionMapper;
+use OCA\NextPod\Db\EpisodeAction\EpisodeActionRepository;
+use OCA\NextPod\Db\EpisodeAction\EpisodeActionWriter;
 use OCP\AppFramework\App;
 use OCP\AppFramework\IAppContainer;
 use OCP\IRequest;
@@ -28,7 +28,7 @@ class EpisodeActionControllerTest extends TestCase
 
 	public function setUp(): void {
 		parent::setUp();
-		$app = new App('gpoddersync');
+		$app = new App('nextpod');
 		$this->container = $app->getContainer();
 		$this->db = \OC::$server->getDatabaseConnection();
 	}
@@ -46,7 +46,7 @@ class EpisodeActionControllerTest extends TestCase
 	{
 		$userId = uniqid("test_user");
 		$episodeActionController = new EpisodeActionController(
-			"gpoddersync",
+			"nextpod",
 			$this->createMock(IRequest::class),
 			$userId,
 			$this->container->get(EpisodeActionRepository::class),
@@ -89,7 +89,7 @@ class EpisodeActionControllerTest extends TestCase
 	{
 		$userId = uniqid("test_user");
 		$episodeActionController = new EpisodeActionController(
-			"gpoddersync",
+			"nextpod",
 			$this->createMock(IRequest::class),
 			$userId,
 			$this->container->get(EpisodeActionRepository::class),
@@ -147,7 +147,7 @@ class EpisodeActionControllerTest extends TestCase
 				->method('getParams')
 				->will($this->returnValue($payload));
 		$episodeActionController = new EpisodeActionController(
-			"gpoddersync",
+			"nextpod",
 			$request,
 			$userId,
 			$this->container->get(EpisodeActionRepository::class),

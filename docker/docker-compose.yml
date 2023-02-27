@@ -12,8 +12,8 @@ services:
       - NEXTCLOUD_TRUSTED_DOMAINS=localhost 127.0.0.1
     volumes:
       - nextcloud:/var/www/html
-      - ..:/var/www/html/custom_apps/gpoddersync
-      - ./gpoddersync.config.php:/var/www/html/config/gpoddersync.config.php
+      - ..:/var/www/html/custom_apps/nextpod
+      - ./nextpod.config.php:/var/www/html/config/nextpod.config.php
 
 volumes:
   nextcloud:

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace OCA\GPodderSync\Migration;
+namespace OCA\NextPod\Migration;
 
 use Closure;
 use Doctrine\DBAL\Types\Type;
@@ -14,8 +14,8 @@ class Version0001Date20210520063113 extends \OCP\Migration\SimpleMigrationStep {
 		/** @var ISchemaWrapper $schema */
 		$schema = $schemaClosure();
 
-		if (!$schema->hasTable('gpodder_episode_action')) {
-			$table = $schema->createTable('gpodder_episode_action');
+		if (!$schema->hasTable('nextpod_episode_action')) {
+			$table = $schema->createTable('nextpod_episode_action');
 			$table->addColumn('id', 'integer', [
 				'autoincrement' => true,
 				'notnull' => true,
@@ -51,7 +51,7 @@ class Version0001Date20210520063113 extends \OCP\Migration\SimpleMigrationStep {
 			]);
 
 			$table->setPrimaryKey(['id']);
-			$table->addUniqueIndex(['episode', 'user_id'], 'gpodder_episode_user_id');
+			$table->addUniqueIndex(['episode', 'user_id'], 'nextpod_episode_user_id');
 		}
 		return $schema;
 	}

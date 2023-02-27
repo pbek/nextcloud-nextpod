@@ -4,7 +4,7 @@ on:
   pull_request:
 
 env:
-  APP_NAME: gpoddersync
+  APP_NAME: nextpod
 
 jobs:
   js:

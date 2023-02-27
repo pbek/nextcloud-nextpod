@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace OCA\GPodderSync\Controller;
+namespace OCA\NextPod\Controller;
 
-use OCA\GPodderSync\Core\EpisodeAction\EpisodeActionSaver;
-use OCA\GPodderSync\Db\EpisodeAction\EpisodeActionRepository;
+use OCA\NextPod\Core\EpisodeAction\EpisodeActionSaver;
+use OCA\NextPod\Db\EpisodeAction\EpisodeActionRepository;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;

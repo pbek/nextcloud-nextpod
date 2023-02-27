@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace tests\Integration;
 
-use OCA\GPodderSync\Db\EpisodeAction\EpisodeActionEntity;
-use OCA\GPodderSync\Db\EpisodeAction\EpisodeActionRepository;
-use OCA\GPodderSync\Db\EpisodeAction\EpisodeActionWriter;
+use OCA\NextPod\Db\EpisodeAction\EpisodeActionEntity;
+use OCA\NextPod\Db\EpisodeAction\EpisodeActionRepository;
+use OCA\NextPod\Db\EpisodeAction\EpisodeActionWriter;
 use OCP\AppFramework\App;
 use OCP\AppFramework\IAppContainer;
 use Test\TestCase;
@@ -28,7 +28,7 @@ class EpisodeActionGuidMigrationTest extends TestCase
 
 	public function setUp(): void {
 		parent::setUp();
-		$app = new App('nextcloud-gpodder');
+		$app = new App('nextcloud-nextpod');
 		$this->container = $app->getContainer();
 		$this->episodeActionWriter = $this->container->get(EpisodeActionWriter::class);
 		$this->episodeActionRepository = $this->container->get(EpisodeActionRepository::class);

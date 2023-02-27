@@ -2,17 +2,17 @@
   <div>
     <HeaderNavigation key="navigation"
                       :loading="isLoading"
-                      :title="t('gpoddersync', 'Episode actions')"
+                      :title="t('nextpod', 'Episode actions')"
                       @refresh="loadData">
       <template #subtitle>
-        {{ t('gpoddersync', 'Last episode actions synchronized to this Nextcloud account so far.')}}
+        {{ t('nextpod', 'Last episode actions synchronized to this Nextcloud account so far.')}}
       </template>
     </HeaderNavigation>
 
     <div v-if="actions.length > 0" class="actions">
       <div class="sorting-container">
-        <label for="gpoddersync_action_filtering">Action:</label>
-        <NcMultiselect id="gpoddersync_action_filtering"
+        <label for="nextpod_action_filtering">Action:</label>
+        <NcMultiselect id="nextpod_action_filtering"
                        v-model="actionFilter"
                        :options="actionFilteringOptions"
                        track-by="label"
@@ -32,7 +32,7 @@
           <template #icon>
             <PageNext />
           </template>
-          {{ t('gpoddersync', 'Load more') }}
+          {{ t('nextpod', 'Load more') }}
         </NcActionButton>
       </NcActions>
     </div>
@@ -92,7 +92,7 @@ export default {
     async loadData() {
       this.isLoading = true
       try {
-        const resp = await axios.get(generateUrl('/apps/gpoddersync/personal_settings/metrics'))
+        const resp = await axios.get(generateUrl('/apps/nextpod/personal_settings/metrics'))
         if (!Array.isArray(resp.data.actions)) {
           throw new Error('expected actions array in metrics response')
         }
@@ -102,7 +102,7 @@ export default {
         this.updateActionFiltering(this.actionFilter);
       } catch (e) {
         console.error(e)
-        showError(t('gpoddersync', 'Could not fetch podcast synchronization stats'))
+        showError(t('nextpod', 'Could not fetch podcast synchronization stats'))
       } finally {
         this.isLoading = false
       }
@@ -119,7 +119,7 @@ export default {
 
 <style lang="scss" scoped>
 div.actions {
-  padding: 20px var(--gpoddersync-navigation-height) 0 var(--gpoddersync-navigation-height);
+  padding: 20px var(--nextpod-navigation-height) 0 var(--nextpod-navigation-height);
 }
 
 a.link {

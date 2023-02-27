@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace OCA\GPodderSync\Tests\Unit\Core\PodcastData;
+namespace OCA\NextPod\Tests\Unit\Core\PodcastData;
 
-use OCA\GPodderSync\Core\PodcastData\PodcastData;
+use OCA\NextPod\Core\PodcastData\PodcastData;
 use Test\TestCase;
 
 class EpisodeActionTest extends TestCase {
@@ -49,7 +49,7 @@ class EpisodeActionTest extends TestCase {
 				<itunes:summary>Some long description</itunes:summary>
 				<itunes:explicit>no</itunes:explicit>
 				<itunes:image href="https://example.com/image.jpg"/>
-				<itunes:keywords>nextcloud, gpodder</itunes:keywords>
+				<itunes:keywords>nextcloud, nextpod</itunes:keywords>
 				<itunes:owner>
 					<itunes:name>Owner of the podcast</itunes:name>
 					<itunes:email>editors@example.com</itunes:email>

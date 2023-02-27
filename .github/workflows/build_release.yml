@@ -5,7 +5,7 @@ on:
     types: [published]
 
 env:
-  APP_NAME: gpoddersync
+  APP_NAME: nextpod
 
 jobs:
   build_and_publish:

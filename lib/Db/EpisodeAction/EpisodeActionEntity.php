@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace OCA\GPodderSync\Db\EpisodeAction;
+namespace OCA\NextPod\Db\EpisodeAction;
 
 use JsonSerializable;
 use OCP\AppFramework\Db\Entity;

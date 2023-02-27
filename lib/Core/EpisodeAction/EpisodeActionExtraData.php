@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace OCA\GPodderSync\Core\EpisodeAction;
+namespace OCA\NextPod\Core\EpisodeAction;
 
 use DateTime;
 use Exception;
 use JsonSerializable;
-use OCA\GPodderSync\Core\PodcastData\PodcastData;
+use OCA\NextPod\Core\PodcastData\PodcastData;
 use SimpleXMLElement;
 
 class EpisodeActionExtraData implements JsonSerializable {

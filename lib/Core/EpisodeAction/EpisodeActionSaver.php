@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace OCA\GPodderSync\Core\EpisodeAction;
+namespace OCA\NextPod\Core\EpisodeAction;
 
 use DateTime;
-use OCA\GPodderSync\Db\EpisodeAction\EpisodeActionEntity;
-use OCA\GPodderSync\Db\EpisodeAction\EpisodeActionRepository;
-use OCA\GPodderSync\Db\EpisodeAction\EpisodeActionWriter;
+use OCA\NextPod\Db\EpisodeAction\EpisodeActionEntity;
+use OCA\NextPod\Db\EpisodeAction\EpisodeActionRepository;
+use OCA\NextPod\Db\EpisodeAction\EpisodeActionWriter;
 use OCP\DB\Exception;
 
 class EpisodeActionSaver

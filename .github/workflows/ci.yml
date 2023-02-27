@@ -8,7 +8,7 @@ on:
       - 'ci-*'
 
 env:
-  APP_NAME: gpoddersync
+  APP_NAME: nextpod
 
 jobs:
   php:

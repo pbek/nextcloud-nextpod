@@ -1,7 +1,7 @@
 <template>
-	<NcContent :class="{'icon-loading': loading}" app-name="gpoddersync">
+	<NcContent :class="{'icon-loading': loading}" app-name="nextpod">
 		<NcAppNavigation>
-			<template id="app-gpoddersync-navigation" #list>
+			<template id="app-nextpod-navigation" #list>
 <!--				<NcAppNavigationItem to="/actions" :to="{name: 'episodes'}" title="Episodes">-->
 				<NcAppNavigationItem to="/actions" title="Episodes">
           <template #icon>

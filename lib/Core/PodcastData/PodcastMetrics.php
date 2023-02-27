@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace OCA\GPodderSync\Core\PodcastData;
+namespace OCA\NextPod\Core\PodcastData;
 
 use JsonSerializable;
 

@@ -1,16 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace OCA\GPodderSync\Settings;
+namespace OCA\NextPod\Settings;
 
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\AppFramework\Http\ContentSecurityPolicy;
 use OCP\Settings\ISettings;
 
-class GPodderSyncPersonal implements ISettings {
+class NextPodPersonal implements ISettings {
 
 	public function getForm(): TemplateResponse {
-        $response = new TemplateResponse('gpoddersync', 'settings/personal', []);
+        $response = new TemplateResponse('nextpod', 'settings/personal', []);
 
         // Try to set CSP to allow images and media from anywhere
         $csp = new ContentSecurityPolicy();
@@ -23,7 +23,7 @@ class GPodderSyncPersonal implements ISettings {
 	}
 
 	public function getSection(): string {
-		return 'gpoddersync';
+		return 'nextpod';
 	}
 
 	public function getPriority(): int {

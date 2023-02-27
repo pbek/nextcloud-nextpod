@@ -6,10 +6,10 @@ namespace tests\Integration\Migration;
 use Doctrine\DBAL\Platforms\PostgreSQL100Platform;
 use OC\AllConfig;
 use OC\Migration\SimpleOutput;
-use OCA\GPodderSync\Db\EpisodeAction\EpisodeActionEntity;
-use OCA\GPodderSync\Db\EpisodeAction\EpisodeActionMapper;
-use OCA\GPodderSync\Db\EpisodeAction\EpisodeActionWriter;
-use OCA\GPodderSync\Migration\TimestampMigration;
+use OCA\NextPod\Db\EpisodeAction\EpisodeActionEntity;
+use OCA\NextPod\Db\EpisodeAction\EpisodeActionMapper;
+use OCA\NextPod\Db\EpisodeAction\EpisodeActionWriter;
+use OCA\NextPod\Migration\TimestampMigration;
 use OCP\AppFramework\App;
 use OCP\IConfig;
 use OCP\IDBConnection;
@@ -33,7 +33,7 @@ class TimestampMigrationTest extends TestCase
 
 	public function setUp(): void {
 		parent::setUp();
-		$app = new App('gpoddersync');
+		$app = new App('nextpod');
 		$container = $app->getContainer();
 		$this->episodeActionWriter = $container->get(EpisodeActionWriter::class);
 		$this->episodeActionMapper = $container->get(EpisodeActionMapper::class);

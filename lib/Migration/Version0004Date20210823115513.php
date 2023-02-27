@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace OCA\GPodderSync\Migration;
+namespace OCA\NextPod\Migration;
 
 use Closure;
 use Doctrine\DBAL\Types\Types;
@@ -13,13 +13,13 @@ class Version0004Date20210823115513 extends \OCP\Migration\SimpleMigrationStep {
 		/** @var ISchemaWrapper $schema */
 		$schema = $schemaClosure();
 
-		$table = $schema->getTable('gpodder_episode_action');
+		$table = $schema->getTable('nextpod_episode_action');
 		$table->addColumn('guid', Types::STRING, [
 			'length' => 500,
 			'notnull' => false
 		]);
 
-		$table->addUniqueIndex(['guid', 'user_id'], 'gpodder_guid_user_id');
+		$table->addUniqueIndex(['guid', 'user_id'], 'nextpod_guid_user_id');
 
 		return $schema;
 	}

@@ -1,6 +1,6 @@
 {
-	"name": "gpoddersync",
-	"description": "Expose GPodder API to sync podcast consumer apps like AntennaPod",
+	"name": "nextpod",
+	"description": "Expose GPodder API to sync podcast consumer apps like AntennaPod and shows episodes and podcasts in a web interface",
 	"version": "1.0.0",
 	"author": "Thrillfall <thrillfall@disroot.org>",
 	"contributors": [
@@ -8,13 +8,13 @@
 		"Patrizio Bekerle <patrizio@bekerle.com>"
 	],
 	"bugs": {
-		"url": "https://github.com/thrillfall/nextcloud-gpodder/issues"
+		"url": "https://github.com/pbek/nextcloud-nextpod/issues"
 	},
 	"repository": {
-		"url": "https://github.com/thrillfall/nextcloud-gpodder",
+		"url": "https://github.com/pbek/nextcloud-nextpod",
 		"type": "git"
 	},
-	"homepage": "https://github.com/thrillfall/nextcloud-gpodder",
+	"homepage": "https://github.com/pbek/nextcloud-nextpod",
 	"private": true,
 	"scripts": {
 		"build": "webpack --node-env production --progress",
