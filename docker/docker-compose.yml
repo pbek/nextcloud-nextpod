@@ -14,6 +14,8 @@ services:
       - nextcloud:/var/www/html
       - ..:/var/www/html/custom_apps/nextpod
       - ./nextpod.config.php:/var/www/html/config/nextpod.config.php
+      - ./nextcloud/certificates:/var/www/.nextcloud/certificates
+      - ./nextcloud/sign-app.sh:/var/www/sign-app.sh
 
 volumes:
   nextcloud:

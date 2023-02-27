@@ -3,3 +3,4 @@ tests/.phpunit.result.cache
 node_modules/
 js/
 /mydb.db*
+docker/nextcloud/certificates/*
