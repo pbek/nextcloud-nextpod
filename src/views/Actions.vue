@@ -2,10 +2,10 @@
   <div>
     <HeaderNavigation key="navigation"
                       :loading="isLoading"
-                      :title="t('gpoddersync', 'Last actions')"
+                      :title="t('gpoddersync', 'Episode actions')"
                       @refresh="loadData">
       <template #subtitle>
-        {{ t('gpoddersync', 'A list of last actions.')}}
+        {{ t('gpoddersync', 'Last episode actions synchronized to this Nextcloud account so far.')}}
       </template>
     </HeaderNavigation>
 

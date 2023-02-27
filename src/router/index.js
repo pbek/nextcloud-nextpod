@@ -18,39 +18,18 @@ const router = new Router({
 	routes: [
 		{
 			path: '/',
-			component: Podcasts,
-			name: 'podcasts',
-			props: route => ({
-				rootTitle: t('gpoddersync', 'All your media'),
-			}),
-			meta: {
-				rootTitle: () => {
-					return t('gpoddersync', 'All your media')
-				},
-			},
+			component: Actions,
+			name: 'actions'
 		},
 		{
 			path: '/podcasts',
 			component: Podcasts,
 			name: 'podcasts',
-			props: route => ({
-				rootTitle: t('gpoddersync', 'Podcasts'),
-			}),
-			meta: {
-				rootTitle: () => {
-					return t('gpoddersync', 'Videos')
-				},
-			},
 		},
 		{
 			path: '/actions',
 			component: Actions,
 			name: 'actions',
-			meta: {
-				rootTitle: () => {
-					return t('gpoddersync', 'Actions')
-				},
-			},
 		},
 	],
 })

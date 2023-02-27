@@ -2,7 +2,7 @@
   <div>
     <HeaderNavigation key="navigation"
                       :loading="isLoading"
-                      :title="t('gpoddersync', 'Synced subscriptions')"
+                      :title="t('gpoddersync', 'Subscriptions')"
                       @refresh="loadData">
       <template #subtitle>
         {{ t('gpoddersync', 'Podcast subscriptions synchronized to this Nextcloud account so far.')}}
