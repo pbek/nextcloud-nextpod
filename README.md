@@ -4,8 +4,8 @@
 [Nextcloud App Store](https://apps.nextcloud.com/apps/nextpod)
 
 Initially implemented by [thrillfall](https://github.com/thrillfall) as [GPodderSync](https://github.com/thrillfall/nextcloud-gpodder),
-then forked on [NextPod](https://github.com/pbek/nextcloud-nextpod) to add a web interface, which would be out of scope
-for a sync server.
+then forked as [NextPod](https://github.com/pbek/nextcloud-nextpod) to add a user interface and more podcast client
+functionality, which would be out of scope for a sync server.
 
 This Nextcloud app that replicates basic gpodder.net api to sync podcast consumer apps (podcatchers) like AntennaPod.
 
@@ -32,11 +32,11 @@ Either from the official Nextcloud app store ([link to app page](https://apps.ne
 
 The API replicates this: https://gpoddernet.readthedocs.io/en/latest/api/reference/subscriptions.html
 
-#### Example requests:
+#### Example requests
+
+- GET `/index.php/apps/nextpod/subscriptions?since=1633240761`
 
 ```json
-GET /index.php/apps/nextpod/subscriptions?since=1633240761
-
 {
   "add": [
     "https://example.com/feed.xml",
@@ -48,9 +48,10 @@ GET /index.php/apps/nextpod/subscriptions?since=1633240761
   "timestamp": 1663540502
 }
 ```
-```json
-POST /index.php/apps/nextpod/subscription_change/create
 
+- POST `/index.php/apps/nextpod/subscription_change/create`
+
+```json
 {
   "add": [
     "https://example.com/feed.xml",
@@ -63,6 +64,7 @@ POST /index.php/apps/nextpod/subscription_change/create
 ```
 
 ### episode action
+
 * **get episode actions**: `GET /index.php/apps/nextpod/episode_action`
 	* *(optional)* GET parameter `since` (UNIX time)
 	* fields: *podcast*, *episode*, *guid*, *action*, *timestamp*, *position*, *started*, *total*
@@ -75,10 +77,11 @@ POST /index.php/apps/nextpod/subscription_change/create
 
 The API replicates this: https://nextpodnet.readthedocs.io/en/latest/api/reference/events.html  
 
-#### Example requests:
-```json
-GET /index.php/apps/nextpod/episode_action?since=1633240761
+#### Example requests
 
+- GET `/index.php/apps/nextpod/episode_action?since=1633240761`
+
+```json
 {
     "actions": [
       {
@@ -105,9 +108,10 @@ GET /index.php/apps/nextpod/episode_action?since=1633240761
     "timestamp": 12345
 }
 ```
-```json
-POST /index.php/apps/nextpod/episode_action/create
 
+- POST `/index.php/apps/nextpod/episode_action/create`
+
+```json
 [
   {
    "podcast": "http://example.com/feed.rss",
@@ -132,7 +136,7 @@ POST /index.php/apps/nextpod/episode_action/create
 ## Development
 
 ### Testing
-- 
+
 - mount project into apps-extra of nextcloud environment (https://github.com/juliushaertl/nextcloud-docker-dev) 
 - `docker-compose exec nextcloud occ app:enable nextpod` enable app so we have database tables
 - `docker-compose exec nextcloud phpunit9 -c apps-extra/nextcloud-nextpod/tests/phpunit.xml`
