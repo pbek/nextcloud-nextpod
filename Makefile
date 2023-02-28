@@ -8,8 +8,6 @@ appstore_dir=$(build_dir)/appstore
 source_dir=$(build_dir)/source
 sign_dir=$(build_dir)/sign
 package_name=$(app_name)
-cert_dir=$(HOME)/.nextcloud/certificates
-version+=master
 
 build-release:
 	rm -rf js/*
@@ -57,8 +55,9 @@ clean-dev: clean
 	rm -rf node_modules
 
 create-tag:
-	git tag -a v$(version) -m "Tagging the $(version) release."
-	git push origin v$(version)
+	export version=$$(xmllint --xpath "string(/info/version)" appinfo/info.xml); \
+	git tag -a v$$version -m "Tagging the $$version release."; \
+	git push origin v$$version
 
 screenshots:
 	cd playwright && npx playwright test tests/screenshots.spec.ts --project=chromium --headed
