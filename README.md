@@ -4,6 +4,9 @@
 [Nextcloud App Store](https://apps.nextcloud.com/apps/nextpod) |
 [Changelog](https://github.com/pbek/nextcloud-nextpod/blob/main/CHANGELOG.md)
 
+[![PHPUnit](https://github.com/pbek/nextcloud-nextpod/actions/workflows/ci.yml/badge.svg)](https://github.com/pbek/nextcloud-nextpod/actions/workflows/ci.yml)
+[![NPM build](https://github.com/pbek/nextcloud-nextpod/actions/workflows/ci-js.yml/badge.svg)](https://github.com/pbek/nextcloud-nextpod/actions/workflows/ci-js.yml)
+
 This Nextcloud app lets you visualize your podcast subscriptions and episode downloads from
 [GPodderSync](https://apps.nextcloud.com/apps/gpoddersync) which acts as a basic gpodder.net
 api to sync podcast consumer apps (podcatchers) like AntennaPod.
