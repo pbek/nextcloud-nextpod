@@ -1,25 +1,26 @@
 # NextPod Nextcloud App
 
 [GitHub](https://github.com/pbek/nextcloud-nextpod) |
-[Nextcloud App Store](https://apps.nextcloud.com/apps/nextpod)
+[Nextcloud App Store](https://apps.nextcloud.com/apps/nextpod) |
+[Changelog](https://github.com/pbek/nextcloud-nextpod/blob/main/CHANGELOG.md)
 
-Initially implemented by [thrillfall](https://github.com/thrillfall) as [GPodderSync](https://github.com/thrillfall/nextcloud-gpodder),
-then forked as [NextPod](https://github.com/pbek/nextcloud-nextpod) to add a user interface and more podcast client
-functionality, which would be out of scope for a sync server.
+This Nextcloud app lets you visualize your podcast subscriptions and episode downloads from
+[GPodderSync](https://apps.nextcloud.com/apps/gpoddersync) which acts as a basic gpodder.net
+api to sync podcast consumer apps (podcatchers) like AntennaPod.
 
-This Nextcloud app that replicates basic gpodder.net api to sync podcast consumer apps (podcatchers) like AntennaPod.
+You need to have [GPodderSync](https://apps.nextcloud.com/apps/gpoddersync) installed to use this app!
 
 ## Screenshots
 
 ### Episode List
 
-![episodes](./screenshots/episodes.png)
+![episodes](./img/screenshots/episodes.png)
 
 ### Podcast Subscriptions
 
-![podcasts](./screenshots/podcasts.png)
+![podcasts](./img/screenshots/podcasts.png)
 
-## Clients supporting sync
+## Clients supporting sync of GPodderSync
 
 | client | support status |
 | :- | :- |
@@ -29,124 +30,10 @@ This Nextcloud app that replicates basic gpodder.net api to sync podcast consume
 
 ## Installation
 
-Either from the official Nextcloud app store ([link to app page](https://apps.nextcloud.com/apps/nextpod)) or by downloading the [latest release](https://github.com/pbek/nextcloud-nextpod/releases/latest) and extracting it into your Nextcloud apps/ directory.
-
-## API
-
-### subscription
-
-* **get subscription changes**: `GET /index.php/apps/nextpod/subscriptions`
-	* *(optional)* GET parameter `since` (UNIX time)
-* **upload subscription changes** : `POST /index.php/apps/nextpod/subscription_change/create`
-  * returns JSON with current timestamp
-
-The API replicates this: https://gpoddernet.readthedocs.io/en/latest/api/reference/subscriptions.html
-
-#### Example requests
-
-- GET `/index.php/apps/nextpod/subscriptions?since=1633240761`
-
-```json
-{
-  "add": [
-    "https://example.com/feed.xml",
-    "https://example.org/feed/"
-  ],
-  "remove": [
-    "https://example.net/feed.rss"
-  ],
-  "timestamp": 1663540502
-}
-```
-
-- POST `/index.php/apps/nextpod/subscription_change/create`
-
-```json
-{
-  "add": [
-    "https://example.com/feed.xml",
-    "https://example.org/feed/"
-  ],
-  "remove": [
-    "https://example.net/feed.rss"
-  ]
-}
-```
-
-### episode action
-
-* **get episode actions**: `GET /index.php/apps/nextpod/episode_action`
-	* *(optional)* GET parameter `since` (UNIX time)
-	* fields: *podcast*, *episode*, *guid*, *action*, *timestamp*, *position*, *started*, *total*
-* **create episode actions**: `POST /index.php/apps/nextpod/episode_action/create`
-  * fields: *podcast*, *episode*, *guid*, *action*, *timestamp*, *position*, *started*, *total*
-  * *position*, *started* and *total* are optional, default value is -1
-  * *guid* is also optional, but should be sent if available
-  * identification is done by *guid*, or *episode* if *guid* is missing
-  * returns JSON with current timestamp
-
-The API replicates this: https://nextpodnet.readthedocs.io/en/latest/api/reference/events.html  
-
-#### Example requests
-
-- GET `/index.php/apps/nextpod/episode_action?since=1633240761`
-
-```json
-{
-    "actions": [
-      {
-       "podcast": "http://example.com/feed.rss",
-       "episode": "http://example.com/files/s01e20.mp3",
-       "guid": "s01e20-example-org",
-       "action": "PLAY",
-       "timestamp": "2009-12-12T09:00:00",
-       "started": 15,
-       "position": 120,
-       "total":  500
-      },
-      {
-       "podcast": "http://example.com/feed.rss",
-       "episode": "http://example.com/files/s01e20.mp3",
-       "guid": "s01e20-example-org",
-       "action": "DOWNLOAD",
-       "timestamp": "2009-12-12T09:00:00",
-       "started": -1,
-       "position": -1,
-       "total":  -1
-      },
-    ],
-    "timestamp": 12345
-}
-```
-
-- POST `/index.php/apps/nextpod/episode_action/create`
-
-```json
-[
-  {
-   "podcast": "http://example.com/feed.rss",
-   "episode": "http://example.com/files/s01e20.mp3",
-   "guid": "s01e20-example-org",
-   "action": "play",
-   "timestamp": "2009-12-12T09:00:00",
-   "started": 15,
-   "position": 120,
-   "total":  500
-  },
-  {
-   "podcast": "http://example.org/podcast.php",
-   "episode": "http://ftp.example.org/foo.ogg",
-   "guid": "foo-bar-123",
-   "action": "DOWNLOAD",
-   "timestamp": "2009-12-12T09:05:21",
-  }
-]
-```
+Either from the official Nextcloud app store ([link to app page](https://apps.nextcloud.com/apps/nextpod)) or by
+downloading the [latest release](https://github.com/pbek/nextcloud-nextpod/releases/latest) and extracting it into
+your Nextcloud `apps/` directory.
 
 ## Development
 
-### Testing
-
-- mount project into apps-extra of nextcloud environment (https://github.com/juliushaertl/nextcloud-docker-dev) 
-- `docker-compose exec nextcloud occ app:enable nextpod` enable app so we have database tables
-- `docker-compose exec nextcloud phpunit9 -c apps-extra/nextcloud-nextpod/tests/phpunit.xml`
+See [docker/README.md](./docker/README.md) for development instructions.

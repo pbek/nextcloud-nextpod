@@ -1,11 +1,11 @@
 {
 	"name": "nextpod",
-	"description": "Expose GPodder API to sync podcast consumer apps like AntennaPod and shows episodes and podcasts in a web interface",
+	"description": "Visualization of podcast subscriptions and episode downloads from GPodderSync",
 	"version": "1.0.0",
-	"author": "Thrillfall <thrillfall@disroot.org>",
+	"author": "Patrizio Bekerle <patrizio@bekerle.com>",
 	"contributors": [
-		"Kalle Fagerberg <kalle.f8@proton.me>",
-		"Patrizio Bekerle <patrizio@bekerle.com>"
+		"Thrillfall <thrillfall@disroot.org>",
+		"Kalle Fagerberg <kalle.f8@proton.me>"
 	],
 	"bugs": {
 		"url": "https://github.com/pbek/nextcloud-nextpod/issues"

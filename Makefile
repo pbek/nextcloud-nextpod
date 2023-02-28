@@ -11,6 +11,12 @@ package_name=$(app_name)
 cert_dir=$(HOME)/.nextcloud/certificates
 version+=master
 
+build-release:
+	rm -rf js/*
+	composer install --no-dev
+	npm install
+	npm run build
+
 all: dev-setup build-js-production
 
 dev-setup: clean-dev npm-init
@@ -54,52 +60,5 @@ create-tag:
 	git tag -a v$(version) -m "Tagging the $(version) release."
 	git push origin v$(version)
 
-appstore:
-	rm -rf $(build_dir)
-	mkdir -p $(sign_dir)
-	rsync -a \
-	--exclude=babel.config.js \
-	--exclude=/build \
-	--exclude=composer.json \
-	--exclude=composer.lock \
-	--exclude=docker \
-	--exclude=docs \
-	--exclude=.drone.yml \
-	--exclude=.eslintignore \
-	--exclude=.eslintrc.js \
-	--exclude=.git \
-	--exclude=.gitattributes \
-	--exclude=.github \
-	--exclude=.gitignore \
-	--exclude=jest.config.js \
-	--exclude=.l10nignore \
-	--exclude=mkdocs.yml \
-	--exclude=Makefile \
-	--exclude=node_modules \
-	--exclude=package.json \
-	--exclude=package-lock.json \
-	--exclude=.php_cs.dist \
-	--exclude=.php_cs.cache \
-	--exclude=README.md \
-	--exclude=src \
-	--exclude=.stylelintignore \
-	--exclude=stylelint.config.js \
-	--exclude=.tx \
-	--exclude=tests \
-	--exclude=vendor \
-	--exclude=releases \
-	--exclude=webpack.*.js \
-	$(project_dir)/  $(sign_dir)/$(app_name)
-	@if [ -f $(cert_dir)/$(app_name).key ]; then \
-		echo "Signing app files…"; \
-		php ../../occ integrity:sign-app \
-			--privateKey=$(cert_dir)/$(app_name).key\
-			--certificate=$(cert_dir)/$(app_name).crt\
-			--path=$(sign_dir)/$(app_name); \
-	fi
-	tar -czf $(build_dir)/$(app_name).tar.gz \
-		-C $(sign_dir) $(app_name)
-	@if [ -f $(cert_dir)/$(app_name).key ]; then \
-		echo "Signing package…"; \
-		openssl dgst -sha512 -sign $(cert_dir)/$(app_name).key $(build_dir)/$(app_name).tar.gz | openssl base64; \
-	fi
+screenshots:
+	cd playwright && npx playwright test tests/screenshots.spec.ts --project=chromium --headed
