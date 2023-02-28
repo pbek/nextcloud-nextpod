@@ -1,8 +1,9 @@
 name: Build and publish app release
 
 on:
-  release:
-    types: [published]
+#  release:
+#    types: [published]
+  workflow_dispatch:
 
 env:
   APP_NAME: nextpod
