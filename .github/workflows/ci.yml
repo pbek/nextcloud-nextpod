@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - main
-      - 'ci-*'
+  workflow_dispatch:
 
 env:
   APP_NAME: nextpod
