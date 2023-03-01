@@ -58,18 +58,21 @@ export default {
 		}
 	},
 	async mounted() {
-		try {
-			const resp = await axios.get(generateUrl('/apps/nextpod/personal_settings/podcast_data?url={url}', {
-				url: this.sub.url,
-			}))
-			this.podcastData = resp.data?.data
-		} catch (e) {
-			console.error(e)
-		} finally {
-			this.isLoading = false
-		}
+    await this.loadPodcastData();
 	},
 	methods: {
+		async loadPodcastData() {
+      try {
+        const resp = await axios.get(generateUrl('/apps/nextpod/personal_settings/podcast_data?url={url}', {
+          url: this.sub.url,
+        }))
+        this.podcastData = resp.data?.data
+      } catch (e) {
+        console.error(e)
+      } finally {
+        this.isLoading = false
+      }
+		},
 		getTitle() {
 			return this.podcastData?.title ?? this.sub.url ?? ''
 		},
@@ -102,6 +105,11 @@ export default {
 			return this.sub.url ?? ''
 		},
 	},
+  watch: {
+    'sub.url'(val) {
+      this.loadPodcastData();
+    }
+  }
 }
 </script>
 

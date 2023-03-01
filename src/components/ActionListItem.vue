@@ -94,19 +94,22 @@ export default {
 		}
 	},
 	async mounted() {
-		try {
-			const resp = await axios.get(generateUrl('/apps/nextpod/personal_settings/action_extra_data?episodeUrl={url}', {
-				url: this.action.episodeUrl,
-			}))
-			this.actionExtraData = resp.data?.data
-		} catch (e) {
-			console.error(e)
-		} finally {
-			this.isLoading = false
-		}
-    this.isLoading = false
+    await this.loadActionExtraData();
 	},
 	methods: {
+		async loadActionExtraData() {
+      try {
+        const resp = await axios.get(generateUrl('/apps/nextpod/personal_settings/action_extra_data?episodeUrl={url}', {
+          url: this.action.episodeUrl,
+        }))
+        this.actionExtraData = resp.data?.data
+      } catch (e) {
+        console.error(e)
+      } finally {
+        this.isLoading = false
+      }
+      this.isLoading = false
+		},
 		getEpisode() {
 			return this.action.episodeUrl ?? 'episodeUrl'
 		},
@@ -151,6 +154,11 @@ export default {
       this.modalPlayer = false
     }
   },
+  watch: {
+    'action.episodeUrl'(val) {
+      this.loadActionExtraData();
+    }
+  }
 }
 </script>
 
