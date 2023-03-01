@@ -1,4 +1,4 @@
-name: ?? Create empty release
+name: "?? Create empty release"
 
 on:
   push:
