@@ -1,4 +1,4 @@
-name: "? PHPUnit"
+name: '🚃 PHPUnit'
 
 on:
   pull_request:

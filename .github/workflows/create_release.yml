@@ -1,4 +1,4 @@
-name: "?? Create empty release"
+name: '🗃️ Create empty release'
 
 on:
   push:
@@ -13,7 +13,7 @@ env:
 
 jobs:
   create_release:
-    name: '??? Prepare release'
+    name: '🗃️️ Prepare release'
     permissions:
       contents: write  # for actions/create-release to create a release
     runs-on: ubuntu-latest
