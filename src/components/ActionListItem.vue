@@ -1,5 +1,6 @@
 <template>
 	<NcListItem :title="isLoading ? action.episodeUrl : getEpisodeName()"
+              @click="showModalEpisodeDescription"
             :details="getDetails()">
     <template #icon>
       <!--
@@ -19,7 +20,7 @@
       <NcModal
           v-if="modalPlayer"
           @close="closeModalPlayer"
-          size="small"
+          size="normal"
           title="Play media"
           :outTransition="true">
         <div class="modal__content">
@@ -29,6 +30,18 @@
             <source :src="action.episodeUrl">
             Your browser does not support the audio element.
           </audio>
+        </div>
+      </NcModal>
+      <NcModal
+          v-if="modalEpisodeDescription"
+          @close="closeModalEpisodeDescription"
+          size="large"
+          title="Episode description"
+          :outTransition="true">
+        <div class="modal__content">
+          <h2 v-if="isLoading">Loading episode description"</h2>
+          <h2 v-else>Episode description</h2>
+          <div v-html="getEpisodeDescription()"></div>
         </div>
       </NcModal>
     </template>
@@ -91,6 +104,7 @@ export default {
 			actionExtraData: null,
 			isLoading: true,
       modalPlayer: false,
+      modalEpisodeDescription: false,
 		}
 	},
 	async mounted() {
@@ -147,11 +161,20 @@ export default {
     getEpisodeLink() {
       return this.actionExtraData?.episodeLink ?? ''
     },
+    getEpisodeDescription() {
+      return this.actionExtraData?.episodeDescription ?? '';
+    },
     showModalPlayer() {
       this.modalPlayer = true
     },
     closeModalPlayer() {
       this.modalPlayer = false
+    },
+    showModalEpisodeDescription() {
+      this.modalEpisodeDescription = true
+    },
+    closeModalEpisodeDescription() {
+      this.modalEpisodeDescription = false
     }
   },
   watch: {

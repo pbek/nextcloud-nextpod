@@ -1,6 +1,7 @@
 # Changelog
 
 ## 0.2.0
+- You can now click an episode to show the description of the episode
 - The episode image detection was now made more fault-tolerant to always be able to show an episode image
 
 ## 0.1.1
