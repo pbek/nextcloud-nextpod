@@ -15,6 +15,7 @@ class EpisodeActionExtraData implements JsonSerializable {
 	private ?string $episodeName;
 	private ?string $episodeLink;
 	private ?string $episodeImage;
+	private ?string $episodeDescription;
     private int $fetchedAtUnix;
 
 	public function __construct(
@@ -23,6 +24,7 @@ class EpisodeActionExtraData implements JsonSerializable {
         ?string $episodeName,
         ?string $episodeLink,
         ?string $episodeImage,
+        ?string $episodeDescription,
         int $fetchedAtUnix
 	) {
 		$this->episodeUrl = $episodeUrl;
@@ -30,6 +32,7 @@ class EpisodeActionExtraData implements JsonSerializable {
 		$this->episodeName = $episodeName;
 		$this->episodeLink = $episodeLink;
 		$this->episodeImage = $episodeImage;
+		$this->episodeDescription = $episodeDescription;
 		$this->fetchedAtUnix = $fetchedAtUnix;
 	}
 
@@ -58,6 +61,7 @@ class EpisodeActionExtraData implements JsonSerializable {
 			'episodeName' => $this->episodeName,
 			'episodeLink' => $this->episodeLink,
 			'episodeImage' => $this->episodeImage,
+			'episodeDescription' => $this->episodeDescription,
 			'fetchedAtUnix' => $this->fetchedAtUnix,
 		];
 	}
@@ -79,6 +83,7 @@ class EpisodeActionExtraData implements JsonSerializable {
 			$data['episodeName'],
 			$data['episodeLink'],
 			$data['episodeImage'],
+			$data['episodeDescription'],
 			$data['fetchedAtUnix']
 		);
 	}
@@ -117,6 +122,7 @@ class EpisodeActionExtraData implements JsonSerializable {
         $episodeName = null;
         $episodeLink = null;
         $episodeImage = null;
+        $episodeDescription = null;
 
         // Find episode by url and add data for it
         foreach($channel->item as $item)
@@ -127,11 +133,52 @@ class EpisodeActionExtraData implements JsonSerializable {
                 continue;
             }
 
+            // Get episode name
             $episodeName = self::stringOrNull($item->title);
+
+            // Get episode link
             $episodeLink = self::stringOrNull($item->link);
-//            $episodeImage = (string) $item->children('itunes', true)->image['href'];
+
+            //
+            // Get episode image
+            //
+
             $episodeImageAttributes = (array) $item->children('http://www.itunes.com/dtds/podcast-1.0.dtd')->image->attributes();
-            $episodeImage = array_key_exists('href', $episodeImageAttributes) ? (string) $episodeImageAttributes['href'] : '';
+            $episodeImage = self::stringOrNull(array_key_exists('href', $episodeImageAttributes) ? (string) $episodeImageAttributes['href'] : '');
+
+            if (!$episodeImage) {
+                $episodeImage = self::stringOrNull((string) $item->children('itunes', true)->image['href']);
+            }
+
+            if (!$episodeImage) {
+                $episodeImage = self::stringOrNull($channel->image->url);
+            }
+
+            if (!$episodeImage) {
+                $episodeImage = self::stringOrNull((string) $channel->children('itunes', true)->image['href']);
+            }
+
+            if (!$episodeImage) {
+                $episodeImageAttributes = (array) $channel->children('http://www.itunes.com/dtds/podcast-1.0.dtd')->image->attributes();
+                $episodeImage = self::stringOrNull(array_key_exists('href', $episodeImageAttributes) ? (string) $episodeImageAttributes['href'] : '');
+            }
+
+            if (!$episodeImage) {
+                preg_match('/<itunes:image\s+href="([^"]+)"/', $xmlString, $matches);
+                $episodeImage = self::stringOrNull($matches[1]);
+            }
+
+            //
+            // Get episode description
+            //
+
+            $episodeDescription = self::stringOrNull($item->children('content', true)->encoded);
+
+            if (!$episodeDescription) {
+                $episodeDescription = self::stringOrNull($item->description);
+            }
+
+            break;
         }
 
         return new EpisodeActionExtraData(
@@ -140,6 +187,7 @@ class EpisodeActionExtraData implements JsonSerializable {
             $episodeName,
             $episodeLink,
             $episodeImage,
+            $episodeDescription,
             $fetchedAtUnix ?? (new DateTime())->getTimestamp()
         );
     }
