@@ -195,7 +195,12 @@ if expr "$1" : "apache" 1>/dev/null || [ "$1" = "php-fpm" ] || [ "${NEXTCLOUD_UP
     run_as "php /var/www/html/occ app:enable nextpod"
 fi
 
+# Install and enable gpoddersync
 run_as "php /var/www/html/occ app:install gpoddersync || true"
 run_as "php /var/www/html/occ app:enable gpoddersync || true"
+
+# Install and enable Nextcloud Notes
+run_as "php /var/www/html/occ app:install notes || true"
+run_as "php /var/www/html/occ app:enable notes || true"
 
 exec "$@"
