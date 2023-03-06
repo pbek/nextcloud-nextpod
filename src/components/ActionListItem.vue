@@ -57,7 +57,6 @@
         Download episode media
       </NcActionLink>
       <NcActionButton @click="showModalPlayer"
-                  target="_blank"
                   icon="icon-play">
         Play episode media
       </NcActionButton>
@@ -66,6 +65,11 @@
                   target="_blank"
                   icon="icon-external">
         Open episode link
+      </NcActionLink>
+      <NcActionLink v-if="!isLoading"
+                  @click="postNote"
+                  icon="icon-new-document">
+        Create note
       </NcActionLink>
     </template>
 	</NcListItem>
@@ -79,6 +83,7 @@ import NcListItem from '@nextcloud/vue/dist/Components/NcListItem'
 import NcModal from '@nextcloud/vue/dist/Components/NcModal'
 
 import Rss from 'vue-material-design-icons/Rss.vue'
+import TurndownService from 'turndown'
 
 import { generateUrl } from '@nextcloud/router'
 import axios from '@nextcloud/axios'
@@ -175,6 +180,21 @@ export default {
     },
     closeModalEpisodeDescription() {
       this.modalEpisodeDescription = false
+    },
+    async postNote() {
+      const turndownService = new TurndownService();
+      const descriptionMarkdown = turndownService.turndown(this.getEpisodeDescription());
+
+      const resp = await axios.post(generateUrl('/apps/notes/api/v1/notes'), {
+        title: this.getEpisodeName(),
+        content: this.getEpisodeName() + '\n========\n\n' + descriptionMarkdown,
+      })
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     }
   },
   watch: {
