@@ -19,7 +19,9 @@
 - Create a new release on [NextPod releases](https://github.com/pbek/nextcloud-nextpod/releases)
   with the version like `v0.1.0` as *Tag name* and *Release title* and the changelog text of the current
   release as *Release notes*
-    - You also need to upload `nextpod-nc.tar.gz` to the release and get its url
+    - Alternatively you can push to the `release` branch and the GitHub action will create
+      a draft release for you
+    - In any case you also need to upload `nextpod-nc.tar.gz` to the release and get its url
       like `https://github.com/pbek/nextcloud-nextpod/releases/download/v0.1.0/nextpod-nc.tar.gz`
 - Take the text from *Signature for your app archive*, which was printed by the sign-app command and
   release the app at [Upload app release](https://apps.nextcloud.com/developer/apps/releases/new)
