@@ -23,7 +23,8 @@
       <ul>
         <ActionListItem v-for="action in actions.slice(0, maxActions)"
                         :key="action.episode"
-                        :action="action" />
+                        :action="action"
+                        :hasNotesApp="hasNotesApp" />
       </ul>
       <NcActions>
         <NcActionButton
@@ -68,6 +69,7 @@ import { generateUrl } from '@nextcloud/router'
 import axios from '@nextcloud/axios'
 import { showError } from '@nextcloud/dialogs'
 import HeaderNavigation from "./HeaderNavigation.vue";
+import { loadState } from '@nextcloud/initial-state'
 
 const actionFilteringOptions = [
   { label: 'Play', action: 'PLAY' },
@@ -96,12 +98,17 @@ export default {
       isLoading: true,
       actionFilter: actionFilteringOptions[0],
       actionFilteringOptions,
+      hasNotesApp: false,
     }
   },
   async mounted() {
+    this.checkNotesApp();
     await this.loadData();
   },
   methods: {
+    checkNotesApp() {
+      this.hasNotesApp = loadState('nextpod', 'has-notes-app')
+    },
     async loadData() {
       this.isLoading = true
       try {

@@ -66,11 +66,11 @@
                   icon="icon-external">
         Open episode link
       </NcActionLink>
-      <NcActionLink v-if="!isLoading"
+      <NcActionButton v-if="!isLoading && hasNotesApp"
                   @click="postNote"
-                  icon="icon-new-document">
-        Create note
-      </NcActionLink>
+                  icon="icon-notes">
+        Create note of episode
+      </NcActionButton>
     </template>
 	</NcListItem>
 </template>
@@ -101,6 +101,10 @@ export default {
 	props: {
 		action: {
 			type: Object,
+			required: true,
+		},
+    hasNotesApp: {
+			type: Boolean,
 			required: true,
 		},
 	},
@@ -184,17 +188,30 @@ export default {
     async postNote() {
       const turndownService = new TurndownService();
       const descriptionMarkdown = turndownService.turndown(this.getEpisodeDescription());
+      const episodeName = this.getEpisodeName();
+      const headlineMarker = '='.repeat(episodeName.length);
+      const episodeLinkMarkdown = `[Episode](${this.getEpisodeLink()})`;
+      const podcastLinkMarkdown = `[Podcast RSS](${this.action.podcastUrl})`;
 
       const resp = await axios.post(generateUrl('/apps/notes/api/v1/notes'), {
-        title: this.getEpisodeName(),
-        content: this.getEpisodeName() + '\n========\n\n' + descriptionMarkdown,
+        title: episodeName,
+        content: `${headlineMarker}\n${episodeName}\n${headlineMarker}\n\n${episodeLinkMarkdown} | ${podcastLinkMarkdown}\n\n${descriptionMarkdown}`,
       })
-          .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+      .then(function (response) {
+        const noteId = response.data.id;
+
+        // Attempt to open new tab with note
+        window.open(generateUrl('/apps/notes/note/{id}', {
+          id: noteId,
+        }), '_blank').focus();
+
+        // window.location.href = generateUrl('/apps/notes/note/{id}', {
+        //   id: noteId,
+        // });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     }
   },
   watch: {

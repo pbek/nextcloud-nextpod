@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0
+- You now can create a note of an episode in [Nextcloud Notes](https://apps.nextcloud.com/apps/notes)
+  (for [#1](https://github.com/pbek/nextcloud-nextpod/issues/1)) 
+
 ## 0.2.0
 - You can now click an episode to show the description of the episode
 - The episode image detection was now made more fault-tolerant to always be able to show an episode image
