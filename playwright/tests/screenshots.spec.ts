@@ -21,7 +21,14 @@ test('Create screenshots', async ({ page }) => {
   // Wait until page renders
   await page.waitForTimeout(3000);
   // Playwright tests run on a default viewport size of 1280x720
-  // Try to aim for the 2nd element
+  // Try to aim for the 2nd element and open the description page
+  await page.mouse.click(1000, 288);
+  await page.waitForTimeout(2000);
+  await page.screenshot({ path: '../img/screenshots/episode-description.png', fullPage: true });
+
+  // Try to open the context menu
+  await page.mouse.click(1150, 288);
+  await page.waitForTimeout(500);
   await page.mouse.click(1150, 288);
   // Wait until the context menu opens
   await page.waitForTimeout(1000);
@@ -35,7 +42,7 @@ test('Create screenshots', async ({ page }) => {
   //
   await page.getByRole('link', { name: 'Podcasts' }).click();
   // Wait until page renders
-  await page.waitForTimeout(3000);
+  await page.waitForTimeout(10000);
   // Playwright tests run on a default viewport size of 1280x720
   // Try to aim for the 2nd element
   await page.mouse.click(1150, 288);

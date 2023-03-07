@@ -26,6 +26,7 @@ You need to have [GPodderSync](https://apps.nextcloud.com/apps/gpoddersync) inst
         <nextcloud min-version="24" max-version="25"/>
     </dependencies>
     <screenshot>https://raw.githubusercontent.com/pbek/nextcloud-nextpod/main/img/screenshots/episodes.png</screenshot>
+    <screenshot>https://raw.githubusercontent.com/pbek/nextcloud-nextpod/main/img/screenshots/episode-description.png</screenshot>
     <screenshot>https://raw.githubusercontent.com/pbek/nextcloud-nextpod/main/img/screenshots/podcasts.png</screenshot>
     <navigations>
         <navigation>

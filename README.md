@@ -19,6 +19,10 @@ You need to have [GPodderSync](https://apps.nextcloud.com/apps/gpoddersync) inst
 
 ![episodes](./img/screenshots/episodes.png)
 
+### Episode Description
+
+![episodes](./img/screenshots/episode-description.png)
+
 ### Podcast Subscriptions
 
 ![podcasts](./img/screenshots/podcasts.png)
