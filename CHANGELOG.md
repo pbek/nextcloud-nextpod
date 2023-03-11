@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.1
+- An issue with the note headline of created notes of an episode in
+  [Nextcloud Notes](https://apps.nextcloud.com/apps/notes) was fixed
+  (for [#1](https://github.com/pbek/nextcloud-nextpod/issues/1)) 
+
 ## 0.3.0
 - You now can create a note of an episode in [Nextcloud Notes](https://apps.nextcloud.com/apps/notes)
   (for [#1](https://github.com/pbek/nextcloud-nextpod/issues/1)) 

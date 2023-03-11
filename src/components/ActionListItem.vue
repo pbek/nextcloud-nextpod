@@ -195,7 +195,7 @@ export default {
 
       const resp = await axios.post(generateUrl('/apps/notes/api/v1/notes'), {
         title: episodeName,
-        content: `${headlineMarker}\n${episodeName}\n${headlineMarker}\n\n${episodeLinkMarkdown} | ${podcastLinkMarkdown}\n\n${descriptionMarkdown}`,
+        content: `${episodeName}\n${headlineMarker}\n\n${episodeLinkMarkdown} | ${podcastLinkMarkdown}\n\n${descriptionMarkdown}`,
       })
       .then(function (response) {
         const noteId = response.data.id;
