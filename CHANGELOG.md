@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.4.0
+- Episode and podcast lists are now reloaded automatically every 10 minutes
+
 ## 0.3.1
 - An issue with the note headline of created notes of an episode in
   [Nextcloud Notes](https://apps.nextcloud.com/apps/notes) was fixed

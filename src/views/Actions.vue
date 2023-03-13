@@ -99,11 +99,16 @@ export default {
       actionFilter: actionFilteringOptions[0],
       actionFilteringOptions,
       hasNotesApp: false,
+      refreshIntervalId: null,
     }
   },
   async mounted() {
     this.checkNotesApp();
     await this.loadData();
+    this.refreshIntervalId = setInterval(this.loadData, 60000);
+  },
+  async beforeUnmount () {
+    clearInterval(this.refreshIntervalId);
   },
   methods: {
     checkNotesApp() {

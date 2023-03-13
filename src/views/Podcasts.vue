@@ -83,10 +83,15 @@ export default {
       isLoading: true,
       sortBy: sortingOptions[0],
       sortingOptions,
+      refreshIntervalId: null,
     }
   },
   async mounted() {
     await this.loadData();
+    this.refreshIntervalId = setInterval(this.loadData, 60000);
+  },
+  async beforeUnmount () {
+    clearInterval(this.refreshIntervalId);
   },
   methods: {
     async loadData() {
