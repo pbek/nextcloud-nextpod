@@ -13,6 +13,16 @@ api to sync podcast consumer apps (podcatchers) like AntennaPod.
 
 You need to have [GPodderSync](https://apps.nextcloud.com/apps/gpoddersync) installed to use this app!
 
+## Features
+
+- List of all your podcast subscriptions
+- List of all your downloaded episodes
+- Click an episode to show the description of the episode
+- Create a note of an episode in [Nextcloud Notes](https://apps.nextcloud.com/apps/notes)
+- Play episodes in the browser
+- Download episodes
+- Open episode website
+
 ## Screenshots
 
 ### Episode List
