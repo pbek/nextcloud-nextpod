@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.4.1
+- Updated and tested app for Nextcloud 26
+
 ## 0.4.0
 - Episode and podcast lists are now reloaded automatically every 10 minutes
 

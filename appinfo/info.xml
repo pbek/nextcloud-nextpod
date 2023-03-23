@@ -9,7 +9,7 @@
 api to sync podcast consumer apps (podcatchers) like AntennaPod.
 
 You need to have [GPodderSync](https://apps.nextcloud.com/apps/gpoddersync) installed to use this app!]]></description>
-    <version>0.4.0</version>
+    <version>0.4.1</version>
     <licence>agpl</licence>
     <author mail="patrizio@bekerle.com" homepage="https://www.bekerle.com/">Patrizio Bekerle</author>
     <namespace>NextPod</namespace>
@@ -23,7 +23,7 @@ You need to have [GPodderSync](https://apps.nextcloud.com/apps/gpoddersync) inst
     </documentation>
     <dependencies>
         <php min-version="7.4"/>
-        <nextcloud min-version="24" max-version="25"/>
+        <nextcloud min-version="24" max-version="26"/>
     </dependencies>
     <screenshot>https://raw.githubusercontent.com/pbek/nextcloud-nextpod/main/img/screenshots/episodes.png</screenshot>
     <screenshot>https://raw.githubusercontent.com/pbek/nextcloud-nextpod/main/img/screenshots/episode-description.png</screenshot>
