@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.0
+- The episode player now automatically starts playing at the synced position
+  (for [#3](https://github.com/pbek/nextcloud-nextpod/issues/3))
+
 ## 0.4.1
 - Updated and tested app for Nextcloud 26
 

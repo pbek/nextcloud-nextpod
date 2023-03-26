@@ -26,7 +26,7 @@
         <div class="modal__content">
           <h2 v-if="isLoading">Playing episode"</h2>
           <h2 v-else>Playing "{{ getEpisodeName() }}"</h2>
-          <audio controls autoplay>
+          <audio controls autoplay ref="audio" @canplaythrough="playAudio" @timeupdate='onTimeUpdateListener'>
             <source :src="action.episodeUrl">
             Your browser does not support the audio element.
           </audio>
@@ -114,12 +114,32 @@ export default {
 			isLoading: true,
       modalPlayer: false,
       modalEpisodeDescription: false,
+      playTimeSet: false,
 		}
 	},
 	async mounted() {
     await this.loadActionExtraData();
 	},
 	methods: {
+    playAudio() {
+      // const audio = document.querySelector('audio');
+      const audio = this.$refs.audio;
+
+      if (!this.playTimeSet) {
+        if (this.action.position !== this.action.total && this.action.position !== -1) {
+          audio.currentTime = this.action.position;
+          this.playTimeSet = true;
+        }
+
+        audio.play();
+      }
+    },
+    onTimeUpdateListener() {
+      // console.log("this.$els.audio.currentTime", this.$els.audio.currentTime);
+      if (this.$refs.audio) {
+        // console.log("this.$refs.audio.currentTime", this.$refs.audio.currentTime);
+      }
+    },
 		async loadActionExtraData() {
       try {
         const resp = await axios.get(generateUrl('/apps/nextpod/personal_settings/action_extra_data?episodeUrl={url}', {
@@ -174,7 +194,8 @@ export default {
       return this.actionExtraData?.episodeDescription ?? '';
     },
     showModalPlayer() {
-      this.modalPlayer = true
+      this.playTimeSet = false;
+      this.modalPlayer = true;
     },
     closeModalPlayer() {
       this.modalPlayer = false
