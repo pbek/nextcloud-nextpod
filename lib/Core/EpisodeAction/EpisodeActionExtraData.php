@@ -129,7 +129,7 @@ class EpisodeActionExtraData implements JsonSerializable {
         {
             $url = (string)$item->enclosure['url'];
 
-            if ($url !== $episodeUrl) {
+            if (strpos($episodeUrl, $url) === false) {
                 continue;
             }
 
