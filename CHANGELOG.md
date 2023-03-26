@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.1
+- The episode extra data fetching for podcasts added in AntennaPod is now fixed
+  (for [#4](https://github.com/pbek/nextcloud-nextpod/issues/4))
+
 ## 0.5.0
 - The episode player now automatically starts playing at the synced position
   (for [#3](https://github.com/pbek/nextcloud-nextpod/issues/3))
