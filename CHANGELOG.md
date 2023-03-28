@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.6.0
+- The action menu order of episode items was changed to make more sense
+
 ## 0.5.1
 - The episode extra data fetching for podcasts added in AntennaPod is now fixed
   (for [#4](https://github.com/pbek/nextcloud-nextpod/issues/4))

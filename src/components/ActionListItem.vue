@@ -46,29 +46,19 @@
       </NcModal>
     </template>
     <template #actions>
-      <NcActionLink :href="action.podcastUrl"
-                  target="_blank"
-                  icon="icon-external">
-        Open RSS feed
-      </NcActionLink>
-      <NcActionLink :href="action.episodeUrl"
-                  target="_blank"
-                  icon="icon-external">
-        Download episode media
-      </NcActionLink>
-      <NcActionButton @click="showModalPlayer"
-                  icon="icon-play">
-        Play episode media
-      </NcActionButton>
       <NcActionLink v-if="!isLoading"
-                  :href="getEpisodeLink()"
-                  target="_blank"
-                  icon="icon-external">
+                    :href="getEpisodeLink()"
+                    target="_blank"
+                    icon="icon-external">
         Open episode link
       </NcActionLink>
+      <NcActionButton @click="showModalPlayer"
+                      icon="icon-play">
+        Play episode media
+      </NcActionButton>
       <NcActionButton v-if="!isLoading && hasNotesApp"
-                  @click="postNote"
-                  icon="icon-notes">
+                      @click="postNote"
+                      icon="icon-notes">
         Create note of episode
       </NcActionButton>
     </template>
