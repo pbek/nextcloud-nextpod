@@ -250,7 +250,7 @@ export default {
         // });
       })
       .catch(function (error) {
-        console.log(error);
+        console.error(error);
       });
     }
   },
