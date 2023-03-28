@@ -1,6 +1,8 @@
 # Changelog
 
 ## 0.6.0
+- The play status is now optionally stored while playing an episode
+  (for [#4](https://github.com/pbek/nextcloud-nextpod/issues/4))
 - The action menu order of episode items was changed to make more sense
 
 ## 0.5.1
