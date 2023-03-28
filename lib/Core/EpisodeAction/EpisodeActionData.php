@@ -8,6 +8,7 @@ use JsonSerializable;
 use SimpleXMLElement;
 
 class EpisodeActionData implements JsonSerializable {
+	private ?string $guid;
 	private ?string $podcastUrl;
 	private ?string $episodeUrl;
 	private ?string $action;
@@ -17,6 +18,7 @@ class EpisodeActionData implements JsonSerializable {
 	private int $timestampEpoch;
 
 	public function __construct(
+		?string $guid,
 		?string $podcastUrl,
 		?string $episodeUrl,
 		?string $action,
@@ -24,6 +26,7 @@ class EpisodeActionData implements JsonSerializable {
 		int $started = 0,
 		int $total = 0
 	) {
+		$this->guid = $guid;
 		$this->podcastUrl = $podcastUrl;
 		$this->episodeUrl = $episodeUrl;
 		$this->action = $action;
@@ -52,6 +55,7 @@ class EpisodeActionData implements JsonSerializable {
 	public function toArray(): array {
 		return
 		[
+			'guid' => $this->guid,
 			'podcastUrl' => $this->podcastUrl,
 			'episodeUrl' => $this->episodeUrl,
 			'action' => $this->action,
@@ -73,12 +77,12 @@ class EpisodeActionData implements JsonSerializable {
 	 */
 	public static function fromArray(array $data): EpisodeActionData {
 		return new EpisodeActionData(
+			$data['guid'],
 			$data['podcastUrl'],
 			$data['episodeUrl'],
 			$data['action'],
 			$data['position'],
 			$data['started'],
-			$data['episodeUrl'],
 			$data['total'],
 		);
 	}

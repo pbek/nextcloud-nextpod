@@ -30,6 +30,7 @@
             <source :src="action.episodeUrl">
             Your browser does not support the audio element.
           </audio>
+          <label><input type="checkbox" v-model="storePlayProgress" /> Store progress</label>
         </div>
       </NcModal>
       <NcModal
@@ -61,6 +62,16 @@
                       icon="icon-notes">
         Create note of episode
       </NcActionButton>
+      <NcActionLink :href="action.episodeUrl"
+                  target="_blank"
+                  icon="icon-external">
+        Download episode media
+      </NcActionLink>
+      <NcActionLink :href="action.podcastUrl"
+                    target="_blank"
+                    icon="icon-external">
+        Open RSS feed
+      </NcActionLink>
     </template>
 	</NcListItem>
 </template>
@@ -105,6 +116,7 @@ export default {
       modalPlayer: false,
       modalEpisodeDescription: false,
       playTimeSet: false,
+      storePlayProgress: false,
 		}
 	},
 	async mounted() {
@@ -124,13 +136,30 @@ export default {
         audio.play();
       }
     },
-    onTimeUpdateListener() {
-      // console.log("this.$els.audio.currentTime", this.$els.audio.currentTime);
-      if (this.$refs.audio) {
-        // console.log("this.$refs.audio.currentTime", this.$refs.audio.currentTime);
+    async onTimeUpdateListener() {
+      if (this.storePlayProgress && this.$refs.audio) {
+        console.log("action", this.action);
+        console.log("this.$refs.audio.currentTime", this.$refs.audio.currentTime);
+        const date = new Date();
+        const actionPayload = {
+              "podcast": this.action.podcastUrl,
+              "episode": this.action.episodeUrl,
+              "guid": this.action.guid,
+              "action": "PLAY",
+              "timestamp": date.toISOString(),
+              "started": this.action.started,
+              "position": this.$refs.audio.currentTime,
+              "total":  this.action.total
+            };
+
+        console.log("actionPayload", actionPayload);
+        const resp = await axios.post(generateUrl('/apps/gpoddersync/episode_action/create', [
+            actionPayload
+        ]))
       }
     },
 		async loadActionExtraData() {
+      console.log("this.action", this.action);
       try {
         const resp = await axios.get(generateUrl('/apps/nextpod/personal_settings/action_extra_data?episodeUrl={url}', {
           url: this.action.episodeUrl,

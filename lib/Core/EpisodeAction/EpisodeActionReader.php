@@ -97,6 +97,7 @@ class EpisodeActionReader {
 
         foreach ($episodeActions as $episodeAction) {
             $episodeActionData = new EpisodeActionData(
+                $episodeAction->getGuid(),
                 $episodeAction->getPodcast(),
                 $episodeAction->getEpisode(),
                 $episodeAction->getAction(),
