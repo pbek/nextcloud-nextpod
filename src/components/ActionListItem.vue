@@ -30,7 +30,10 @@
             <source :src="action.episodeUrl">
             Your browser does not support the audio element.
           </audio>
-          <label><input type="checkbox" v-model="storePlayProgress" /> Store progress</label>
+          <p>
+            <input id="store-play-progress" type="checkbox" class="checkbox" v-model="storePlayProgress" />
+            <label for="store-play-progress">Store progress while playing</label>
+          </p>
         </div>
       </NcModal>
       <NcModal
@@ -138,28 +141,39 @@ export default {
     },
     async onTimeUpdateListener() {
       if (this.storePlayProgress && this.$refs.audio) {
-        console.log("action", this.action);
-        console.log("this.$refs.audio.currentTime", this.$refs.audio.currentTime);
+        this.action.position = Math.round(this.$refs.audio.currentTime);
         const date = new Date();
         const actionPayload = {
               "podcast": this.action.podcastUrl,
               "episode": this.action.episodeUrl,
               "guid": this.action.guid,
               "action": "PLAY",
-              "timestamp": date.toISOString(),
+              "timestamp": this.getCurrentDateTime(),
+
               "started": this.action.started,
-              "position": this.$refs.audio.currentTime,
+              "position": this.action.position,
               "total":  this.action.total
             };
 
-        console.log("actionPayload", actionPayload);
-        const resp = await axios.post(generateUrl('/apps/gpoddersync/episode_action/create', [
+        const resp = await axios.post(generateUrl('/apps/gpoddersync/episode_action/create'), [
             actionPayload
-        ]))
+        ])
       }
     },
+    getCurrentDateTime() {
+      const now = new Date();
+
+      // We don't want date.toISOString(), because it returns the time with timezone
+      const year = now.getFullYear().toString().padStart(4, '0');
+      const month = (now.getMonth() + 1).toString().padStart(2, '0');
+      const day = now.getDate().toString().padStart(2, '0');
+      const hour = now.getHours().toString().padStart(2, '0');
+      const minute = now.getMinutes().toString().padStart(2, '0');
+      const second = now.getSeconds().toString().padStart(2, '0');
+
+      return `${year}-${month}-${day}T${hour}:${minute}:${second}`;
+    },
 		async loadActionExtraData() {
-      console.log("this.action", this.action);
       try {
         const resp = await axios.get(generateUrl('/apps/nextpod/personal_settings/action_extra_data?episodeUrl={url}', {
           url: this.action.episodeUrl,
