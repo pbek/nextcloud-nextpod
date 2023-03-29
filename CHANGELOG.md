@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.6.1
+- The styling of the episode description was improved
+
 ## 0.6.0
 - The play status is now optionally stored while playing an episode
   (for [#4](https://github.com/pbek/nextcloud-nextpod/issues/4))

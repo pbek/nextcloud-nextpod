@@ -42,7 +42,7 @@
           size="large"
           title="Episode description"
           :outTransition="true">
-        <div class="modal__content">
+        <div class="modal__content description-content">
           <h2 v-if="isLoading">Loading episode description"</h2>
           <h2 v-else>Episode description</h2>
           <div v-html="getEpisodeDescription()"></div>
@@ -280,5 +280,14 @@ export default {
 .modal__content {
   margin: 50px;
   text-align: center;
+
+  // Doesn't seem to work for images in the episode description
+  img {
+    max-width: 100%;
+  }
+}
+
+.description-content > div {
+  text-align: left;
 }
 </style>
