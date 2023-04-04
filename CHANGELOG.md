@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.2
+- The links in the description of the episode actions are now opened
+  in a new browser window/tab when clicked
+
 ## 0.6.1
 - The styling of the episode description was improved
 

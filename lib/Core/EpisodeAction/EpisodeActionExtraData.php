@@ -178,6 +178,9 @@ class EpisodeActionExtraData implements JsonSerializable {
                 $episodeDescription = self::stringOrNull($item->description);
             }
 
+            // Open links in new browser window/tab
+            $episodeDescription = str_replace('<a ', '<a target="_blank" ', $episodeDescription);
+
             break;
         }
 
