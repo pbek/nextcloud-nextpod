@@ -53,4 +53,4 @@ your Nextcloud `apps/` directory.
 
 ## Development
 
-See [docker/README.md](./docker/README.md) for development instructions.
+See [docker development](./docker/README.md) for development instructions.
