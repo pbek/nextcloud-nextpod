@@ -20,6 +20,7 @@ rsync -a --exclude .git* --exclude .gitlab-ci* --exclude .github --exclude scree
          --exclude=.php_cs.dist --exclude=.php_cs.cache --exclude=CHANGELOG.md --exclude=README.md \
          --exclude=src --exclude=.stylelintignore --exclude=stylelint.config.js --exclude=.tx \
          --exclude=releases --exclude=webpack.*.js --exclude=jsconfig.json \
+         --exclude=shell.nix --exclude=.envrc \
          ${APP_SOURCE}/ ${APP_DEST} && \
 su -m -c "./occ integrity:sign-app \
   --privateKey=${CERT_PATH}/${APP_NAME}.key \
