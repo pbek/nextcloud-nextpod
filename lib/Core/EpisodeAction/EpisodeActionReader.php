@@ -24,7 +24,7 @@ class EpisodeActionReader {
 		ICacheFactory $cacheFactory
     ) {
         if ($cacheFactory->isLocalCacheAvailable()) {
-            $this->cache = $cacheFactory->createLocal('NextPod-Actions-lKd83Bf');
+            $this->cache = $cacheFactory->createLocal('NextPod-Actions-Per7Cn');
         }
         $this->httpClient = $httpClientService->newClient();
         $this->episodeActionRepository = $episodeActionRepository;

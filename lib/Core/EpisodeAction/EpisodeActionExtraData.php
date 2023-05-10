@@ -123,14 +123,23 @@ class EpisodeActionExtraData implements JsonSerializable {
         $episodeLink = null;
         $episodeImage = null;
         $episodeDescription = null;
+        $episodeUrlPath = parse_url($episodeUrl, PHP_URL_PATH);
 
         // Find episode by url and add data for it
         foreach($channel->item as $item)
         {
             $url = (string)$item->enclosure['url'];
 
+            // First try to match the url directly
             if (strpos($episodeUrl, $url) === false) {
-                continue;
+                // Then try to match the path only
+                // The podcast http://feeds.feedburner.com/abcradio/10percenthappier has a "rss_browser" query parameter
+                // for every item that changed all the time, so we can't match the full url
+                $path = parse_url($url, PHP_URL_PATH);
+
+                if ($episodeUrlPath !== $path) {
+                    continue;
+                }
             }
 
             // Get episode name
@@ -179,7 +188,7 @@ class EpisodeActionExtraData implements JsonSerializable {
             }
 
             // Open links in new browser window/tab
-            $episodeDescription = str_replace('<a ', '<a target="_blank" ', $episodeDescription);
+            $episodeDescription = str_replace('<a ', '<a class="description-link" target="_blank" ', $episodeDescription);
 
             break;
         }

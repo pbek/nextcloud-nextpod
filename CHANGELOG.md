@@ -4,6 +4,9 @@
 - The styling of the episode description was improved
   - Images will now be scaled down to fit the screen width
   - The links in the description of the episode are now better visible
+- The parsing of the extra data of actions (like name and description)
+  is now more fault-tolerant to be able to show the data even if the
+  podcast changes its item URLs all the time (for [#7](https://github.com/pbek/nextcloud-nextpod/issues/7))
 
 ## 0.6.2
 - The links in the description of the episode actions are now opened
