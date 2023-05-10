@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.7.0
+- The styling of the episode description was improved
+  - Images will now be scaled down to fit the screen width
+  - The links in the description of the episode are now better visible
+
 ## 0.6.2
 - The links in the description of the episode actions are now opened
   in a new browser window/tab when clicked

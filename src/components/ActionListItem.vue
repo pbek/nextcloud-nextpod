@@ -291,3 +291,17 @@ export default {
   text-align: left;
 }
 </style>
+
+<!-- These styles didn't work "scoped" -->
+<style lang="scss">
+.description-content {
+  img {
+    max-width: 100%;
+  }
+
+  a.description-link {
+    text-decoration: underline;
+    color: var(--color-text-lighter);
+  }
+}
+</style>
