@@ -20,7 +20,12 @@ jobs:
       matrix:
         php-versions: ['7.4', '8.0']
         databases: ['sqlite']
-        server-versions: ['stable24', 'stable25', 'stable26', 'stable27']
+        server-versions: ['stable24', 'stable25']
+        include:
+          - php-versions: 8.0
+            nextcloud-versions: stable26
+          - php-versions: 8.0
+            nextcloud-versions: stable27
 
     name: php${{ matrix.php-versions }}-${{ matrix.databases }}-${{ matrix.server-versions }}
 
