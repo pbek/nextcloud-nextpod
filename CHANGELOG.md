@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.7.1
+- Updated and tested app for Nextcloud 27
+
 ## 0.7.0
 - The styling of the episode description was improved
   - Images will now be scaled down to fit the screen width
