@@ -3,7 +3,8 @@
 ## Installation / Running
 
 ```bash
-docker-compose up
+make build
+docker compose up
 ```
 
 Afterward you should be able to open <http://localhost:8081/index.php/apps/nextpod/actions> (admin/admin) to
@@ -24,6 +25,5 @@ There also is a [logging web interface](http://localhost:8081/index.php/settings
 In case something is broken try to reset the container:
 
 ```bash
-docker-compose build; docker-compose down; docker volume rm nextcloud-nextpod_nextcloud
+docker compose build; docker compose down; docker volume rm nextcloud-nextpod_nextcloud
 ```
-
