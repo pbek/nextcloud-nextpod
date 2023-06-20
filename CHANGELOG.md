@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.7.2
+- You can now select text in the episode description modal dialog
+
 ## 0.7.1
 - Updated and tested app for Nextcloud 27
 

@@ -295,6 +295,8 @@ export default {
 <!-- These styles didn't work "scoped" -->
 <style lang="scss">
 .description-content {
+  user-select: text;
+
   img {
     max-width: 100%;
   }
