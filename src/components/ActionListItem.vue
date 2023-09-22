@@ -43,8 +43,9 @@
           title="Episode description"
           :outTransition="true">
         <div class="modal__content description-content">
-          <h2 v-if="isLoading">Loading episode description"</h2>
-          <h2 v-else>Episode description</h2>
+          <h2 v-if="isLoading">Loading episode description</h2>
+          <h2 v-else v-html="getEpisodeName()">Episode description</h2>
+          <h3 v-html="getPodcastName()"></h3>
           <div v-html="getEpisodeDescription()"></div>
         </div>
       </NcModal>
@@ -296,6 +297,10 @@ export default {
 <style lang="scss">
 .description-content {
   user-select: text;
+
+  h2, h3, div > p {
+    cursor: text;
+  }
 
   img {
     max-width: 100%;

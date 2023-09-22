@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.3
+- The episode and podcast names are now shown in the episode description modal dialog
+  and the cursor was changed to `text` to indicate that the text is selectable
+
 ## 0.7.2
 - You can now select text in the episode description modal dialog
 
