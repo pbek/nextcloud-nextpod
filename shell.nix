@@ -1,11 +1,11 @@
 { pkgs ? import <nixpkgs> {} }:
   pkgs.mkShell {
-    # nativeBuildInputs is usually what you want -- tools you need to run
-    nativeBuildInputs = [
-      pkgs.gnumake
-      pkgs.nodejs
-      pkgs.php82
-      pkgs.php82Packages.composer
+    nativeBuildInputs = with pkgs; [
+      gnumake
+      nodejs
+      php82
+      php82Packages.composer
+      libxml2 # for xmllint
     ];
 }
 
