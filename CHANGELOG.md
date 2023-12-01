@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.4
+- Updated and tested app for Nextcloud 28
+- Updated dependencies
+
 ## 0.7.3
 - The episode and podcast names are now shown in the episode description modal dialog
   and the cursor was changed to `text` to indicate that the text is selectable
