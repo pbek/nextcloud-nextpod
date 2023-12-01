@@ -3,8 +3,8 @@
     nativeBuildInputs = with pkgs; [
       gnumake
       nodejs
-      php82
-      php82Packages.composer
+      php83
+      php83Packages.composer
       libxml2 # for xmllint
     ];
 }
