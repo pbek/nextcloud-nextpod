@@ -28,7 +28,7 @@ jobs:
           - php-versions: 8.0
             databases: sqlite
             server-versions: stable27
-          - php-versions: 8.1
+          - php-versions: 8.0
             databases: sqlite
             server-versions: stable28
 
