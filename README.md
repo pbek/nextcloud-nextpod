@@ -21,7 +21,7 @@ You need to have [GPodderSync](https://apps.nextcloud.com/apps/gpoddersync) inst
 - Create a note of an episode in [Nextcloud Notes](https://apps.nextcloud.com/apps/notes)
 - Play episodes in the browser
 - Download episodes
-- Open episode website
+- Open episode website and RSS feed
 
 ## Screenshots
 
