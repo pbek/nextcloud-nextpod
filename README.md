@@ -19,7 +19,7 @@ You need to have [GPodderSync](https://apps.nextcloud.com/apps/gpoddersync) inst
 - List of all your downloaded episodes
 - Click an episode to show the description of the episode
 - Create a note of an episode in [Nextcloud Notes](https://apps.nextcloud.com/apps/notes)
-- Play episodes in the browser
+- Play episodes in the browser (with or without syncing the progress with gpoddersync)
 - Download episodes
 - Open episode website and RSS feed
 
