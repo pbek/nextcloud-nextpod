@@ -20,6 +20,6 @@ jobs:
         with:
           path: ${{ env.APP_NAME }}
       - name: Install NPM packages
-        run: cd ${{ env.APP_NAME }} && make npm-init
+        run: cd ${{ env.APP_NAME }} && npm ci
       - name: Build JS
-        run: cd ${{ env.APP_NAME }} && make build-js-production
+        run: cd ${{ env.APP_NAME }} && npm run build

@@ -1,0 +1,77 @@
+# Use `just <recipe>` to run a recipe
+# https://just.systems/man/en/
+
+# By default, run the `--list` command
+default:
+    @just --list
+
+# Variables
+# Try to use "docker compose" and fall back to "docker-compose" if not available
+
+dockerComposeCommand := `docker compose > /dev/null && echo docker compose || echo docker-compose`
+containerName := "nextcloud-nextpod-app-1"
+volumeName := "nextcloud-nextpod_nextcloud"
+
+# Aliases
+
+alias remove-volumes := reset
+
+# Check the code, run tests and sign the app
+all: check-code test sign-app
+
+# Build the docker image
+build:
+    {{ dockerComposeCommand }} build
+
+# Show the directory listing of the database file in the container
+ls-db:
+    {{ dockerComposeCommand }} run --rm app su -c "ls -hal data/mydb.db*" www-data
+
+# Fetch the database from the container
+fetch-db:
+    {{ dockerComposeCommand }} run --rm app su -c "cp data/mydb.db apps/nextpod" www-data
+
+# Push the database to the container
+push-db:
+    {{ dockerComposeCommand }} run --rm app su -c "cp apps/nextpod/mydb.db* data" www-data
+
+# Open a shell in the container
+bash:
+    {{ dockerComposeCommand }} run --rm app su -c "bash" www-data
+
+# Open a shell in the container as root
+bash-root:
+    {{ dockerComposeCommand }} run --rm app bash
+
+# Run a sidecar container with more debugging tools
+slim-shell:
+    slim debug --target {{ containerName }}
+
+# Turn off maintenance mode
+maintenance-mode-off:
+    {{ dockerComposeCommand }} run --rm app su -c "./occ maintenance:mode --off" www-data
+
+# Run the app:check-code command
+check-code:
+    {{ dockerComposeCommand }} run --rm app su -c "./occ app:check-code nextpod" www-data
+
+# Run the app signing command for Nextcloud
+sign-app:
+    {{ dockerComposeCommand }} run --rm app ../sign-app.sh www-data
+
+# Run the app signing command for Owncloud
+sign-app-owncloud:
+    {{ dockerComposeCommand }} run --rm app ../sign-app-owncloud.sh
+
+# Run the tests
+test:
+    {{ dockerComposeCommand }} run --rm app su -c "cd apps/nextpod && just test" www-data
+
+# Show Nextcloud logs
+show-log:
+    {{ dockerComposeCommand }} run --rm app tail -f /var/www/html/data/nextcloud.log
+
+# Remove the docker volume
+reset:
+    docker compose down
+    docker volume rm {{ volumeName }}
