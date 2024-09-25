@@ -1,6 +1,7 @@
 # Changelog
 
 ## 0.7.6
+- Updated and tested app for Nextcloud 30 (for [#11](https://github.com/pbek/nextcloud-nextpod/issues/11))
 - Updated dependencies
 
 ## 0.7.5
