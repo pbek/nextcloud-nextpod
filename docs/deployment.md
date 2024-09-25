@@ -9,13 +9,13 @@
 ### Signing and releasing
 
 - Make sure the version in `appinfo/info.xml` and the `CHANGELOG.md` are updated
-- Build the app with `make build-release`
-- Sign the app with `cd docker && make sign-app`
+- Build the app with `just build-release`
+- Sign the app with `cd docker && just sign-app`
     - You should now have a `nextpod-nc.tar.gz` in your git directory
     - Check the content of the archive for unwanted files (you can exclude more files in
       `docker/nextcloud/sign-app.sh`)
 - Commit and push your changes to GitHub
-- Create a tag with `make create-tag`
+- Create a tag with `just create-tag`
 - Create a new release on [NextPod releases](https://github.com/pbek/nextcloud-nextpod/releases)
   with the version like `v0.1.0` as *Tag name* and *Release title* and the changelog text of the current
   release as *Release notes*
@@ -38,7 +38,7 @@
 ### Signing and releasing
 
 - Make sure the version in `appinfo/info.xml` and the `CHANGELOG.md` are updated
-- Sign the app with `cd docker && make sign-app-owncloud`
+- Sign the app with `cd docker && just sign-app-owncloud`
     - You should now have a `nextpod-oc.tar.gz` in your git directory
     - Check the content of the archive for unwanted files (you can exclude more files in
       `docker/owncloud/sign-app.sh`)
