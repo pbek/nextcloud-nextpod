@@ -23,17 +23,23 @@ jobs:
         server-versions: ['stable25']
         include:
           - php-versions: 8.2
-            nextcloud-versions: stable31
+            server-versions: stable31
+            databases: sqlite
           - php-versions: 8.2
-            nextcloud-versions: stable30
+            server-versions: stable30
+            databases: sqlite
           - php-versions: 8.2
-            nextcloud-versions: stable29
+            server-versions: stable29
+            databases: sqlite
           - php-versions: 8.2
-            nextcloud-versions: stable28
+            server-versions: stable28
+            databases: sqlite
           - php-versions: 8.1
-            nextcloud-versions: stable27
+            server-versions: stable27
+            databases: sqlite
           - php-versions: 8.1
-            nextcloud-versions: stable26
+            server-versions: stable26
+            databases: sqlite
 
     name: php${{ matrix.php-versions }}-${{ matrix.databases }}-${{ matrix.server-versions }}
 
