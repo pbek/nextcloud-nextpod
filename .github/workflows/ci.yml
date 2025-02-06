@@ -18,34 +18,15 @@ jobs:
       # do not stop on another job's failure
       fail-fast: false
       matrix:
-        php-versions: ['7.4', '8.0']
-        databases: ['sqlite']
-        server-versions: ['stable25']
-        include:
-          - php-versions: 8.0
-            server-versions: stable31
-            databases: sqlite
-          - php-versions: 8.0
-            server-versions: stable30
-            databases: sqlite
-          - php-versions: 8.0
-            server-versions: stable29
-            databases: sqlite
-          - php-versions: 8.0
-            server-versions: stable28
-            databases: sqlite
-          - php-versions: 8.0
-            server-versions: stable27
-            databases: sqlite
-          - php-versions: 8.0
-            server-versions: stable26
-            databases: sqlite
+        php-versions: ["8.1", "8.2"]
+        databases: ["sqlite"]
+        server-versions: ["stable27", "stable28", "stable29", "stable30", "stable31"]
 
     name: php${{ matrix.php-versions }}-${{ matrix.databases }}-${{ matrix.server-versions }}
 
     steps:
       - name: Checkout server
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: nextcloud/server
           ref: ${{ matrix.server-versions }}
@@ -58,7 +39,7 @@ jobs:
           git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
 
       - name: Checkout app
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           path: apps/${{ env.APP_NAME }}
 
@@ -66,7 +47,6 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          tools: phpunit:8.5.14
           extensions: mbstring, iconv, fileinfo, intl, sqlite, pdo_sqlite, gd, zip
           coverage: none
 
@@ -81,14 +61,12 @@ jobs:
           mkdir data
           ./occ maintenance:install --verbose --database=${{ matrix.databases }} --database-name=nextcloud --database-host=127.0.0.1 --database-port=$DB_PORT --database-user=root --database-pass=rootpassword --admin-user admin --admin-pass password
           php -f index.php
-          ./occ app:install gpoddersync
-          ./occ app:enable gpoddersync
           ./occ app:enable --force ${{ env.APP_NAME }}
           php -S localhost:8080 &
 
       - name: PHPUnit
         working-directory: apps/${{ env.APP_NAME }}
-        run: phpunit -c tests/phpunit.xml
+        run: ./vendor/bin/phpunit -c tests/phpunit.xml
 
   mysql:
     runs-on: ubuntu-latest
@@ -97,9 +75,9 @@ jobs:
       # do not stop on another job's failure
       fail-fast: false
       matrix:
-        php-versions: ['7.4', '8.0']
-        databases: ['mysql']
-        server-versions: ['stable24', 'stable25']
+        php-versions: ["8.1", "8.2"]
+        databases: ["mysql"]
+        server-versions: ["stable27", "stable28", "stable29", "stable30", "stable31"]
 
     name: php${{ matrix.php-versions }}-${{ matrix.databases }}-${{ matrix.server-versions }}
 
@@ -114,7 +92,7 @@ jobs:
 
     steps:
       - name: Checkout server
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: nextcloud/server
           ref: ${{ matrix.server-versions }}
@@ -127,7 +105,7 @@ jobs:
           git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
 
       - name: Checkout app
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           path: apps/${{ env.APP_NAME }}
 
@@ -135,7 +113,6 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          tools: phpunit:8.5.14
           extensions: mbstring, iconv, fileinfo, intl, mysql, pdo_mysql, gd, zip
           coverage: none
 
@@ -155,7 +132,7 @@ jobs:
 
       - name: PHPUnit
         working-directory: apps/${{ env.APP_NAME }}
-        run: phpunit -c tests/phpunit.xml
+        run: ./vendor/bin/phpunit -c tests/phpunit.xml
 
   pgsql:
     runs-on: ubuntu-latest
@@ -164,9 +141,9 @@ jobs:
       # do not stop on another job's failure
       fail-fast: false
       matrix:
-        php-versions: ['7.4', '8.0']
-        databases: ['pgsql']
-        server-versions: ['stable24', 'stable25']
+        php-versions: ["8.1", "8.2"]
+        databases: ["pgsql"]
+        server-versions: ["stable27", "stable28", "stable29", "stable30", "stable31"]
 
     name: php${{ matrix.php-versions }}-${{ matrix.databases }}-${{ matrix.server-versions }}
 
@@ -183,7 +160,7 @@ jobs:
 
     steps:
       - name: Checkout server
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: nextcloud/server
           ref: ${{ matrix.server-versions }}
@@ -196,7 +173,7 @@ jobs:
           git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
 
       - name: Checkout app
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           path: apps/${{ env.APP_NAME }}
 
@@ -204,7 +181,6 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          tools: phpunit:8.5.14
           extensions: mbstring, iconv, fileinfo, intl, pgsql, pdo_pgsql, gd, zip
           coverage: none
 
@@ -224,4 +200,4 @@ jobs:
 
       - name: PHPUnit
         working-directory: apps/${{ env.APP_NAME }}
-        run: phpunit -c tests/phpunit.xml
+        run: ./vendor/bin/phpunit -c tests/phpunit.xml
