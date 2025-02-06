@@ -1,8 +1,9 @@
 # Changelog
 
-## Next
+## 0.7.7
 - Removed opacity in app logo for better visibility in Nextcloud
   (for [#12](https://github.com/pbek/nextcloud-nextpod/issues/12))
+- Updated and tested app for Nextcloud 31 (for [#14](https://github.com/pbek/nextcloud-nextpod/issues/14))
 - Updated dependencies
 
 ## 0.7.6
