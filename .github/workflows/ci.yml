@@ -22,22 +22,22 @@ jobs:
         databases: ['sqlite']
         server-versions: ['stable25']
         include:
-          - php-versions: 8.2
+          - php-versions: 8.0
             server-versions: stable31
             databases: sqlite
-          - php-versions: 8.2
+          - php-versions: 8.0
             server-versions: stable30
             databases: sqlite
-          - php-versions: 8.2
+          - php-versions: 8.0
             server-versions: stable29
             databases: sqlite
-          - php-versions: 8.2
+          - php-versions: 8.0
             server-versions: stable28
             databases: sqlite
-          - php-versions: 8.1
+          - php-versions: 8.0
             server-versions: stable27
             databases: sqlite
-          - php-versions: 8.1
+          - php-versions: 8.0
             server-versions: stable26
             databases: sqlite
 
