@@ -76,6 +76,10 @@ reset:
     docker compose down
     docker volume rm {{ volumeName }}
 
-# Open the browser with the app
-open-browser:
+# Open a browser with the app
+open-browser-app:
     xdg-open http://localhost:8081
+
+# Open a browser with sqlite-web
+open-browser-sqlite:
+    xdg-open http://localhost:8082

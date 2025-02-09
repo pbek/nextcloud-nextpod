@@ -10,6 +10,8 @@ docker compose up
 Afterward you should be able to open <http://localhost:8081/index.php/apps/nextpod/actions> (admin/admin) to
 log in to your Nextcloud instance.
 
+Open <http://localhost:8082> to access the database with sqlite-web.
+
 ## Check nextcloud.log
 
 For debugging, you can show the `nextcloud.log`:
