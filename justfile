@@ -11,6 +11,10 @@ transferDir := `if [ -d "$HOME/NextcloudPrivate/Transfer" ]; then echo "$HOME/Ne
 version := `xmllint --xpath "string(/info/version)" appinfo/info.xml`
 projectName := 'nextcloud-nextpod'
 
+# Aliases
+
+alias fmt := format
+
 # Open a terminal with the project session
 [group('dev')]
 term-run:
@@ -55,12 +59,20 @@ build-release:
     npm install
     npm run build
 
-# Format all justfiles
+# Format all files
 [group('linter')]
-just-format:
-    #!/usr/bin/env bash
-    # Find all files named "justfile" recursively and run just --fmt --unstable on them
-    find . -type f -name "justfile" -print0 | while IFS= read -r -d '' file; do
-        echo "Formatting $file"
-        just --fmt --unstable -f "$file"
-    done
+format args='':
+    treefmt {{ args }}
+
+# Format all files using pre-commit
+[group('linter')]
+format-all args='':
+    composer install
+    pre-commit run --all-files {{ args }}
+
+# Add git commit hashes to the .git-blame-ignore-revs file
+[group('linter')]
+add-git-blame-ignore-revs:
+    git log --pretty=format:"%H" --grep="^lint" >> .git-blame-ignore-revs
+    sort .git-blame-ignore-revs | uniq > .git-blame-ignore-revs.tmp
+    mv .git-blame-ignore-revs.tmp .git-blame-ignore-revs
