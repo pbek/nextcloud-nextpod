@@ -20,7 +20,10 @@ rm -rf ${APP_DEST} &&
         --exclude=.php_cs.dist --exclude=.php_cs.cache --exclude=CHANGELOG.md --exclude=README.md \
         --exclude=src --exclude=.stylelintignore --exclude=stylelint.config.js --exclude=.tx \
         --exclude=releases --exclude=webpack.*.js --exclude=jsconfig.json \
-        --exclude=shell.nix --exclude=.envrc --exclude .direnv \
+        --exclude=.envrc --exclude .direnv \
+        --exclude devenv.* --exclude treefmt.toml --exclude term.kdl --exclude phpunit.* \
+        --exclude psalm.* --exclude phpstan.* --exclude justfile --exclude .devenv \
+        --exclude .devenv.* --exclude .pre-commit-config.* \
         ${APP_SOURCE}/ ${APP_DEST} &&
     su -m -c "./occ integrity:sign-app \
   --privateKey=${CERT_PATH}/${APP_NAME}.key \
