@@ -23,7 +23,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install libxml2-utils
-        run: sudo apt-get install libxml2-utils
+        run: |
+          sudo apt-get update
+          sudo apt-get install libxml2-utils
       - name: Set Env
         run: |
           export VERSION=$(xmllint --xpath "string(/info/version)" appinfo/info.xml)
