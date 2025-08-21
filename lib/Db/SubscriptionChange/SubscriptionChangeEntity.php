@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OCA\NextPod\Db\SubscriptionChange;
@@ -14,8 +15,8 @@ class SubscriptionChangeEntity extends Entity implements JsonSerializable {
 	protected $userId;
 
 	public function __construct() {
-		$this->addType('id','integer');
-		$this->addType('subscribed','boolean');
+		$this->addType('id', 'integer');
+		$this->addType('subscribed', 'boolean');
 	}
 
 	/**

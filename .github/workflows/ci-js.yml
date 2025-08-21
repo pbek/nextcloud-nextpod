@@ -1,4 +1,4 @@
-name: '🚗 NPM build'
+name: "🚗 NPM build"
 
 on:
   pull_request:

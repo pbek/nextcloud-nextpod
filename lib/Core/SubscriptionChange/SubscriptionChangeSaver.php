@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OCA\NextPod\Core\SubscriptionChange;
@@ -9,8 +10,7 @@ use OCA\NextPod\Db\SubscriptionChange\SubscriptionChangeRepository;
 use OCA\NextPod\Db\SubscriptionChange\SubscriptionChangeWriter;
 use OCP\DB\Exception;
 
-class SubscriptionChangeSaver
-{
+class SubscriptionChangeSaver {
 	private SubscriptionChangeRepository $subscriptionChangeRepository;
 	private SubscriptionChangeWriter $subscriptionChangeWriter;
 	private SubscriptionChangeRequestParser $subscriptionChangeRequestParser;
@@ -19,15 +19,13 @@ class SubscriptionChangeSaver
 		SubscriptionChangeRequestParser $subscriptionChangeRequestParser,
 		SubscriptionChangeRepository $subscriptionChangeRepository,
 		SubscriptionChangeWriter $subscriptionChangeWriter
-	)
-	{
+	) {
 		$this->subscriptionChangeRepository = $subscriptionChangeRepository;
 		$this->subscriptionChangeWriter = $subscriptionChangeWriter;
 		$this->subscriptionChangeRequestParser = $subscriptionChangeRequestParser;
 	}
 
-	public function saveSubscriptionChanges(array $urlsSubscribed, array $urlsUnsubscribed, string $userId): void
-	{
+	public function saveSubscriptionChanges(array $urlsSubscribed, array $urlsUnsubscribed, string $userId): void {
 		$subscriptionChanges = $this->subscriptionChangeRequestParser->createSubscriptionChangeList($urlsSubscribed, $urlsUnsubscribed);
 		foreach ($subscriptionChanges as $urlChangedSubscriptionStatus) {
 			$subscriptionChangeEntity = new SubscriptionChangeEntity();
@@ -54,8 +52,7 @@ class SubscriptionChangeSaver
 	 *
 	 * @return void
 	 */
-	private function updateSubscription(SubscriptionChangeEntity $subscriptionChangeEntity, string $userId): void
-	{
+	private function updateSubscription(SubscriptionChangeEntity $subscriptionChangeEntity, string $userId): void {
 		$idEpisodeActionEntityToUpdate = $this->subscriptionChangeRepository->findByUrl($subscriptionChangeEntity->getUrl(), $userId)->getId();
 		$subscriptionChangeEntity->setId($idEpisodeActionEntityToUpdate);
 		$this->subscriptionChangeWriter->update($subscriptionChangeEntity);

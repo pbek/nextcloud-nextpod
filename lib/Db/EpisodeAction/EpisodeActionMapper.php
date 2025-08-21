@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OCA\NextPod\Db\EpisodeAction;
@@ -10,18 +11,15 @@ use OCP\DB\Exception;
 use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
 
-class EpisodeActionMapper extends QBMapper
-{
-	public function __construct(IDBConnection $db)
-	{
+class EpisodeActionMapper extends QBMapper {
+	public function __construct(IDBConnection $db) {
 		parent::__construct($db, 'gpodder_episode_action', EpisodeActionEntity::class);
 	}
 
 	/**
 	 * @throws Exception
 	 */
-	public function findAll(int $sinceTimestamp, string $userId, $sort = '', $order = 'DESC'): array
-	{
+	public function findAll(int $sinceTimestamp, string $userId, $sort = '', $order = 'DESC'): array {
 		$qb = $this->db->getQueryBuilder();
 
 		$qb->select('*')
@@ -34,9 +32,9 @@ class EpisodeActionMapper extends QBMapper
 
 			);
 
-        if ($sort !== '') {
-            $qb->orderBy($sort, $order);
-        }
+		if ($sort !== '') {
+			$qb->orderBy($sort, $order);
+		}
 
 		return $this->findEntities($qb);
 
@@ -47,18 +45,17 @@ class EpisodeActionMapper extends QBMapper
 	 * @param string $userId
 	 * @return EpisodeActionEntity|null
 	 */
-	public function findByEpisodeUrl(string $episodeIdentifier, string $userId) : ?EpisodeActionEntity
-	{
+	public function findByEpisodeUrl(string $episodeIdentifier, string $userId) : ?EpisodeActionEntity {
 		$qb = $this->db->getQueryBuilder();
 
 		$qb->select('*')
 			->from($this->getTableName())
 			->where(
-                $qb->expr()->eq('episode', $qb->createNamedParameter($episodeIdentifier))
-            )
+				$qb->expr()->eq('episode', $qb->createNamedParameter($episodeIdentifier))
+			)
 			->andWhere(
-                $qb->expr()->eq('user_id', $qb->createNamedParameter($userId))
-            );
+				$qb->expr()->eq('user_id', $qb->createNamedParameter($userId))
+			);
 
 		try {
 			/** @var EpisodeActionEntity $episodeActionEntity */
@@ -68,26 +65,25 @@ class EpisodeActionMapper extends QBMapper
 		}
 	}
 
-    public function findByGuid(string $guid, string $userId) : ?EpisodeActionEntity
-    {
-        $qb = $this->db->getQueryBuilder();
+	public function findByGuid(string $guid, string $userId) : ?EpisodeActionEntity {
+		$qb = $this->db->getQueryBuilder();
 
-        $qb->select('*')
-            ->from($this->getTableName())
-            ->where(
-                $qb->expr()->eq('guid', $qb->createNamedParameter($guid))
-            )
-            ->andWhere(
-                $qb->expr()->eq('user_id', $qb->createNamedParameter($userId))
-            );
+		$qb->select('*')
+			->from($this->getTableName())
+			->where(
+				$qb->expr()->eq('guid', $qb->createNamedParameter($guid))
+			)
+			->andWhere(
+				$qb->expr()->eq('user_id', $qb->createNamedParameter($userId))
+			);
 
-        try {
-            /** @var EpisodeActionEntity $episodeActionEntity */
-            return $this->findEntity($qb);
-        } catch (DoesNotExistException|MultipleObjectsReturnedException|Exception $e) {
-            return null;
-        }
-    }
+		try {
+			/** @var EpisodeActionEntity $episodeActionEntity */
+			return $this->findEntity($qb);
+		} catch (DoesNotExistException|MultipleObjectsReturnedException|Exception $e) {
+			return null;
+		}
+	}
 
 
 }

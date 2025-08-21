@@ -1,11 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OCA\NextPod\Core\EpisodeAction;
 
-use DateTime;
 use JsonSerializable;
-use SimpleXMLElement;
 
 class EpisodeActionData implements JsonSerializable {
 	private ?string $guid;
@@ -87,44 +86,38 @@ class EpisodeActionData implements JsonSerializable {
 		);
 	}
 
-    /**
-     * @return string|null
-     */
-    public function getPodcastUrl(): ?string
-    {
-        return $this->podcastUrl;
-    }
+	/**
+	 * @return string|null
+	 */
+	public function getPodcastUrl(): ?string {
+		return $this->podcastUrl;
+	}
 
-    /**
-     * @return string|null
-     */
-    public function getAction(): ?string
-    {
-        return $this->action;
-    }
+	/**
+	 * @return string|null
+	 */
+	public function getAction(): ?string {
+		return $this->action;
+	}
 
-    /**
-     * @return int
-     */
-    public function getPosition(): int
-    {
-        return $this->position;
-    }
+	/**
+	 * @return int
+	 */
+	public function getPosition(): int {
+		return $this->position;
+	}
 
-    /**
-     * @return int
-     */
-    public function getStarted(): int
-    {
-        return $this->started;
-    }
+	/**
+	 * @return int
+	 */
+	public function getStarted(): int {
+		return $this->started;
+	}
 
-    /**
-     * @return int
-     */
-    public function getTotal(): int
-    {
-        return $this->total;
-    }
+	/**
+	 * @return int
+	 */
+	public function getTotal(): int {
+		return $this->total;
+	}
 }
-

@@ -1,8 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OCA\NextPod\Db\SubscriptionChange;
-
 
 class SubscriptionChangeWriter {
 
@@ -22,11 +22,11 @@ class SubscriptionChangeWriter {
 		}
 	}
 
-	public function create(SubscriptionChangeEntity $subscriptionChangeEntity): SubscriptionChangeEntity{
+	public function create(SubscriptionChangeEntity $subscriptionChangeEntity): SubscriptionChangeEntity {
 		return $this->subscriptionChangeMapper->insert($subscriptionChangeEntity);
 	}
 
-	public function update(SubscriptionChangeEntity $subscriptionChangeEntity): SubscriptionChangeEntity{
+	public function update(SubscriptionChangeEntity $subscriptionChangeEntity): SubscriptionChangeEntity {
 		return $this->subscriptionChangeMapper->update($subscriptionChangeEntity);
 	}
 }

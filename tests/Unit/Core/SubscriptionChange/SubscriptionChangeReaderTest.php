@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OCA\NextPod\Tests\Unit\Core\SubscriptionChange;
@@ -15,13 +16,13 @@ class SubscriptionChangeReaderTest extends TestCase {
 	}
 
 
-    public function testNonUrisAreOmmited(): void {
-        $subscriptionChange = SubscriptionChangesReader::mapToSubscriptionsChanges([
-                "https://feeds.megaphone.fm/HSW8286374095",
-                "antennapod_local:content://com.android.externalstorage.documents/tree/home:podcast"
-            ], true);
-        $this->assertCount(1, $subscriptionChange);
-        $this->assertSame("https://feeds.megaphone.fm/HSW8286374095", $subscriptionChange[0]->getUrl());
-    }
+	public function testNonUrisAreOmmited(): void {
+		$subscriptionChange = SubscriptionChangesReader::mapToSubscriptionsChanges([
+			"https://feeds.megaphone.fm/HSW8286374095",
+			"antennapod_local:content://com.android.externalstorage.documents/tree/home:podcast"
+		], true);
+		$this->assertCount(1, $subscriptionChange);
+		$this->assertSame("https://feeds.megaphone.fm/HSW8286374095", $subscriptionChange[0]->getUrl());
+	}
 
 }

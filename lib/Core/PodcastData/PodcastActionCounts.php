@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OCA\NextPod\Core\PodcastData;
@@ -17,11 +18,16 @@ class PodcastActionCounts implements JsonSerializable {
 	 */
 	public function incrementAction(string $action): void {
 		switch ($action) {
-			case 'delete': $this->delete++; break;
-			case 'download': $this->download++; break;
-			case 'flattr': $this->flattr++; break;
-			case 'new': $this->new++; break;
-			case 'play': $this->play++; break;
+			case 'delete': $this->delete++;
+				break;
+			case 'download': $this->download++;
+				break;
+			case 'flattr': $this->flattr++;
+				break;
+			case 'new': $this->new++;
+				break;
+			case 'play': $this->play++;
+				break;
 		}
 	}
 

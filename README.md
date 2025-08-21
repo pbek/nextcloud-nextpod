@@ -39,11 +39,11 @@ You need to have [GPodderSync](https://apps.nextcloud.com/apps/gpoddersync) inst
 
 ## Clients supporting sync of GPodderSync
 
-| client | support status |
-| :- | :- |
-| [AntennaPod](https://antennapod.org) | Initial purpose for this project, as a synchronization endpoint for this client.<br> Support is available [as of version 2.5.1](https://github.com/AntennaPod/AntennaPod/pull/5243/). |
-| [KDE Kasts](https://apps.kde.org/de/kasts/) | Supported since version 21.12 |
-| [Garmin Podcasts](https://lucasasselli.github.io/garmin-podcasts/) | Only for [compatible Garmin watches](https://apps.garmin.com/en-US/apps/b5b85600-0625-43b6-89e9-1245bd44532c), supported since version 3.3.4 |
+| client                                                             | support status                                                                                                                                                                        |
+| :----------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [AntennaPod](https://antennapod.org)                               | Initial purpose for this project, as a synchronization endpoint for this client.<br> Support is available [as of version 2.5.1](https://github.com/AntennaPod/AntennaPod/pull/5243/). |
+| [KDE Kasts](https://apps.kde.org/de/kasts/)                        | Supported since version 21.12                                                                                                                                                         |
+| [Garmin Podcasts](https://lucasasselli.github.io/garmin-podcasts/) | Only for [compatible Garmin watches](https://apps.garmin.com/en-US/apps/b5b85600-0625-43b6-89e9-1245bd44532c), supported since version 3.3.4                                          |
 
 ## Installation
 

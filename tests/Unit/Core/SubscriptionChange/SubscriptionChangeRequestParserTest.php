@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OCA\NextPod\Tests\Unit\Core\SubscriptionChange;
@@ -13,7 +14,7 @@ class SubscriptionChangeRequestParserTest extends TestCase {
 			new SubscriptionChangesReader(),
 		);
 
-		$subscriptionChanges = $subscriptionChangesParser->createSubscriptionChangeList(["https://feeds.simplecast.com/54nAGcIl", "https://feeds.simplecast.com/another"],["https://i.am-removed/GcIl"]);
+		$subscriptionChanges = $subscriptionChangesParser->createSubscriptionChangeList(["https://feeds.simplecast.com/54nAGcIl", "https://feeds.simplecast.com/another"], ["https://i.am-removed/GcIl"]);
 		$this->assertCount(3, $subscriptionChanges);
 		$this->assertSame("https://feeds.simplecast.com/54nAGcIl", $subscriptionChanges[0]->getUrl());
 		$this->assertSame("https://feeds.simplecast.com/another", $subscriptionChanges[1]->getUrl());

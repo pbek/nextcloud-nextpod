@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OCA\NextPod\Core\PodcastData;
@@ -8,8 +9,6 @@ use DateTime;
 use OCA\NextPod\Db\EpisodeAction\EpisodeActionRepository;
 use OCA\NextPod\Db\SubscriptionChange\SubscriptionChangeEntity;
 use OCA\NextPod\Db\SubscriptionChange\SubscriptionChangeRepository;
-
-use Psr\Log\LoggerInterface;
 
 class PodcastMetricsReader {
 

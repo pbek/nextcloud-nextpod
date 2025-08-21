@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OCA\NextPod\Core\EpisodeAction;
@@ -81,21 +82,18 @@ class EpisodeAction {
 	/**
 	 * @return int
 	 */
-	public function getTotal(): int
-	{
+	public function getTotal(): int {
 		return $this->total;
 	}
 
-	public function getGuid() : ?string
-	{
+	public function getGuid() : ?string {
 		return $this->guid;
 	}
 
 	/**
 	 * @return int
 	 */
-	public function getId(): int
-	{
+	public function getId(): int {
 		return $this->id;
 	}
 
