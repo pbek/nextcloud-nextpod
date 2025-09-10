@@ -19,8 +19,9 @@
   ];
 
   enterShell = ''
-    echo "🛠️ QOwnNotesAPI dev shell"
+    echo "🛠️ Nextpod dev shell"
     echo "🐘 PHP version: $(php --version | head -n 1)"
+    echo "📦 Node version: $(node --version | head -n 1)"
   '';
 
   # https://devenv.sh/git-hooks/
