@@ -44,7 +44,7 @@ You need to have [GPodderSync](https://apps.nextcloud.com/apps/gpoddersync) inst
 | [AntennaPod](https://antennapod.org)                               | Initial purpose for this project, as a synchronization endpoint for this client.<br> Support is available [as of version 2.5.1](https://github.com/AntennaPod/AntennaPod/pull/5243/). |
 | [KDE Kasts](https://apps.kde.org/de/kasts/)                        | Supported since version 21.12                                                                                                                                                         |
 | [Garmin Podcasts](https://lucasasselli.github.io/garmin-podcasts/) | Only for [compatible Garmin watches](https://apps.garmin.com/en-US/apps/b5b85600-0625-43b6-89e9-1245bd44532c), supported since version 3.3.4                                          |
-
+| [YourPods](https://asecretcompany.com/yourpods/)                   | Podcast client focused on iOS + ecosystem (AirPlay, CarPlay, WatchOS). The source (dart) can be complied for other platforms [YourPods-source](https://github.com/asecretcompany/yourpods-source)        |
 ## Installation
 
 Either from the official Nextcloud app store ([link to app page](https://apps.nextcloud.com/apps/nextpod)) or by
