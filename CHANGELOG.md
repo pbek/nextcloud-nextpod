@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.9
+
+- Updated and tested app for Nextcloud 33 (for [#19](https://github.com/pbek/nextcloud-nextpod/issues/19))
+
 ## 0.7.8
 
 - Updated and tested app for Nextcloud 32 (for [#16](https://github.com/pbek/nextcloud-nextpod/issues/16))
