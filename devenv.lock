@@ -3,10 +3,10 @@
     "devenv": {
       "locked": {
         "dir": "src/modules",
-        "lastModified": 1770114027,
+        "lastModified": 1770144824,
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "59bdb8c9c9d7fdcfbd15a7c4cfb14fb6c6d5d6ce",
+        "rev": "a5b7c6b19cac12be487701b203872ff68a224ff1",
         "type": "github"
       },
       "original": {
@@ -94,7 +94,23 @@
         "nixpkgs": "nixpkgs",
         "pre-commit-hooks": [
           "git-hooks"
-        ]
+        ],
+        "shared": "shared"
+      }
+    },
+    "shared": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1769424296,
+        "owner": "pbek",
+        "repo": "nix-shared",
+        "rev": "6af0fdb18fa4cda031ed691fa57eee5e0f265464",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pbek",
+        "repo": "nix-shared",
+        "type": "github"
       }
     }
   },

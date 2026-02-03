@@ -2,3 +2,11 @@
 inputs:
   nixpkgs:
     url: github:cachix/devenv-nixpkgs/rolling
+  shared:
+    url: github:pbek/nix-shared
+    flake: false
+
+imports:
+  - shared/common
+  - shared/javascript
+  - shared/php

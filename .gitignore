@@ -5,6 +5,7 @@ js/
 /mydb.db*
 docker/nextcloud/certificates/*
 /*.gz
+.shared
 
 # Devenv
 .devenv*
