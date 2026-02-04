@@ -6,6 +6,7 @@ js/
 docker/nextcloud/certificates/*
 /*.gz
 .shared
+.php-cs-fixer.cache
 
 # Devenv
 .devenv*

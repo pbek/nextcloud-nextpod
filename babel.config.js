@@ -1,3 +1,3 @@
-const babelConfig = require('@nextcloud/babel-config')
+const babelConfig = require("@nextcloud/babel-config");
 
-module.exports = babelConfig
+module.exports = babelConfig;
