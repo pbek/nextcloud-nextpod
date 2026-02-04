@@ -56,3 +56,10 @@ build-release:
     composer install --no-dev
     npm install
     npm run build
+
+# Run the code format checker in CI
+[group('ci')]
+ci-format-check:
+    composer install --no-interaction
+    npm ci
+    just format
