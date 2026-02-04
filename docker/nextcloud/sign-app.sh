@@ -16,7 +16,7 @@ rm -rf ${APP_DEST} &&
   rsync -a --exclude .git* --exclude .gitlab-ci* --exclude .github --exclude screenshot* \
     --exclude docs --exclude tests --exclude vendor --exclude package.* --exclude composer.json --exclude composer.lock \
     --exclude Makefile --exclude "*.db*" --exclude docker --exclude "*.phar" \
-    --exclude "*.gz" --exclude .idea --exclude .renovaterc.json --exclude .php-cs* \
+    --exclude "*.gz" --exclude .idea --exclude .renovaterc.json --exclude .php-cs* --exclude eslint.config.js \
     --exclude phpstan.* --exclude phpunit.* --exclude psalm.xml --exclude shell.nix \
     --exclude .envrc --exclude .direnv --exclude term.kdl --exclude .phpunit.result.cache \
     --exclude justfile --exclude treefmt.toml --exclude .devenv --exclude flake.* \
