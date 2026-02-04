@@ -10,6 +10,12 @@
     libxml2 # for xmllint
   ];
 
+  # https://devenv.sh/languages/
+  languages.javascript = {
+    # Too many Nextcloud libraries are still not compatible with Node.js 22
+    package = pkgs.nodejs_20;
+  };
+
   enterShell = ''
     echo "🛠️ Nextpod dev shell"
   '';

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.10
+
+- **Migrated UI to @nextcloud/vue v8** with updated component APIs (for [#20](https://github.com/pbek/nextcloud-nextpod/issues/20))
+  - **Breaking change**: Minimum supported Nextcloud version raised from 26 to 29
+  - Updated event handlers for Vue 3 compatibility
+  - Fixed episode dialog and player modal positioning issues
+  - Updated dependencies
+
 ## 0.7.9
 
 - Updated and tested app for Nextcloud 33 (for [#19](https://github.com/pbek/nextcloud-nextpod/issues/19))
