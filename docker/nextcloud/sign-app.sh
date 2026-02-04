@@ -1,6 +1,7 @@
 #!/bin/sh
 ########################################################################
-# Creates the signature.json for the Nextcloud application
+# Creates the signature.json and the release archive for the Nextcloud application
+# This script runs in a Nextcloud Docker container.
 ########################################################################
 
 APP_NAME=nextpod
@@ -10,26 +11,40 @@ CERT_PATH=/var/www/.nextcloud/certificates
 DEPLOYMENT_FILE=${APP_SOURCE}/${APP_NAME}-nc.tar.gz
 
 rm -rf ${APP_DEST} &&
-    mkdir ${APP_DEST} &&
-    rsync -a --exclude .git* --exclude .gitlab-ci* --exclude .github --exclude screenshot* --exclude docs \
-        --exclude tests --exclude playwright --exclude vendor --exclude package.* --exclude Makefile \
-        --exclude *.db* --exclude docker --exclude *.phar --exclude *.gz --exclude node_modules \
-        --exclude .idea --exclude package-lock.json --exclude package.json --exclude composer.* \
-        --exclude=babel.config.js --exclude=.drone.yml --exclude=.eslintignore --exclude=.eslintrc.js \
-        --exclude=.gitattributes --exclude=jest.config.js --exclude=.l10nignore --exclude=mkdocs.yml \
-        --exclude=.php_cs.dist --exclude=.php_cs.cache --exclude=CHANGELOG.md --exclude=README.md \
-        --exclude=src --exclude=.stylelintignore --exclude=stylelint.config.js --exclude=.tx \
-        --exclude=releases --exclude=webpack.*.js --exclude=jsconfig.json \
-        --exclude=.envrc --exclude .direnv \
-        --exclude devenv.* --exclude treefmt.toml --exclude term.kdl --exclude phpunit.* \
-        --exclude psalm.* --exclude phpstan.* --exclude justfile --exclude .devenv \
-        --exclude .devenv.* --exclude .pre-commit-config.* \
-        ${APP_SOURCE}/ ${APP_DEST} &&
-    su -m -c "./occ integrity:sign-app \
+  mkdir ${APP_DEST} &&
+  echo "📂 Deployment directory prepared." &&
+  rsync -a --exclude .git* --exclude .gitlab-ci* --exclude .github --exclude screenshot* \
+    --exclude docs --exclude tests --exclude vendor --exclude package.* --exclude composer.json --exclude composer.lock \
+    --exclude Makefile --exclude "*.db*" --exclude docker --exclude "*.phar" \
+    --exclude "*.gz" --exclude .idea --exclude .renovaterc.json --exclude .php-cs* \
+    --exclude phpstan.* --exclude phpunit.* --exclude psalm.xml --exclude shell.nix \
+    --exclude .envrc --exclude .direnv --exclude term.kdl --exclude .phpunit.result.cache \
+    --exclude justfile --exclude treefmt.toml --exclude .devenv --exclude flake.* \
+    --exclude .devenv.* --exclude devenv.* --exclude .pre-commit-config.* --exclude .shared \
+    --exclude AGENTS.md --exclude node_modules --exclude .eslintrc.js --exclude .npmrc \
+    --exclude .php_cs.dist --exclude babel.config.js --exclude jsconfig.json --exclude package-lock.json \
+    --exclude playwright --exclude stylelint.config.js --exclude webpack.config.js --exclude src \
+    ${APP_SOURCE}/ ${APP_DEST} &&
+  echo "✅ Files copied to deployment directory." &&
+  if [ "$(find ${APP_DEST} -type l | wc -l)" -gt 0 ]; then
+    echo "❌ Error: The following symlinks were found in the deployment directory:"
+    find ${APP_DEST} -type l
+    echo "Aborting."
+    exit 1
+  fi &&
+  find ${APP_DEST} -type d -empty -delete &&
+  echo "🗑️ Empty directories removed." &&
+  su -m -c "./occ integrity:sign-app \
   --privateKey=${CERT_PATH}/${APP_NAME}.key \
   --certificate=${CERT_PATH}/${APP_NAME}.crt --path=${APP_DEST}" www-data &&
-    cp ${APP_DEST}/appinfo/signature.json ${APP_SOURCE}/appinfo &&
-    tar cz ${APP_DEST}/.. >${DEPLOYMENT_FILE} &&
-    echo "\nSignature for your app archive:\n" &&
-    openssl dgst -sha512 -sign ${CERT_PATH}/${APP_NAME}.key ${DEPLOYMENT_FILE} | openssl base64 &&
-    echo
+  echo "🔐 App signed successfully." &&
+  cp ${APP_DEST}/appinfo/signature.json ${APP_SOURCE}/appinfo &&
+  printf "\n🔍 Reviewing files to be included in the archive:\n\n" &&
+  find ${APP_DEST} -type f | sort &&
+  printf "\n⏸️ Press Enter to continue with archiving.\n\n" &&
+  read -r _ &&
+  tar czf ${DEPLOYMENT_FILE} -C ${APP_DEST}/.. ${APP_NAME} &&
+  echo "📦 Archive created." &&
+  printf "\n🔐 Signature for your app archive:\n\n" &&
+  openssl dgst -sha512 -sign ${CERT_PATH}/${APP_NAME}.key ${DEPLOYMENT_FILE} | openssl base64 &&
+  echo
