@@ -87,3 +87,8 @@ open-browser-app:
 # Open a browser with sqlite-web
 open-browser-sqlite:
     xdg-open http://localhost:8082
+
+# Import gpodder seed data into the SQLite database
+import-gpodder-data:
+    @echo "Importing gpodder-data.sql into the SQLite database..."
+    {{ dockerComposeCommand }} run --rm app su -c "php custom_apps/nextpod/docker/import-sql.php data/mydb.db custom_apps/nextpod/docker/gpodder-data.sql" www-data
