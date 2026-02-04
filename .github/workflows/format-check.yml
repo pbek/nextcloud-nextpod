@@ -11,7 +11,7 @@ on:
 
 jobs:
   format-check:
-    name: 📄 Check code formatting with "just format-all"
+    name: 📄 Check code formatting
     runs-on: ubuntu-latest
     steps:
       - name: 🧰 Checkout code
@@ -27,4 +27,4 @@ jobs:
       - name: 🔧 Install devenv.sh
         run: nix profile install nixpkgs#devenv
       - name: 🌳 Format code
-        run: devenv shell "just format-all"
+        run: devenv test
