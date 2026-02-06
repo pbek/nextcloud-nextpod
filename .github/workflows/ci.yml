@@ -3,8 +3,8 @@ name: "🚃 PHPUnit"
 on:
   pull_request:
   push:
-    branches:
-      - main
+    branches-ignore:
+      - release
   workflow_dispatch:
 
 env:
