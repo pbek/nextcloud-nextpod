@@ -5,6 +5,7 @@ if (!defined('PHPUNIT_RUN')) {
 }
 
 require_once __DIR__ . '/../../../lib/base.php';
+require_once __DIR__ . '/../../../tests/lib/TestCase.php';
 require_once __DIR__ . '/Helper/DatabaseTransaction.php';
 require_once __DIR__ . '/Helper/Writer/TestWriter.php';
 
