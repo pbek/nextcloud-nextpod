@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.7.11
+
+- Updated and tested app for Nextcloud 34 (for [#22](https://github.com/pbek/nextcloud-nextpod/issues/22))
+- Updated dependencies
+
 ## 0.7.10
 
 - **Migrated UI to @nextcloud/vue v8** with updated component APIs (for [#20](https://github.com/pbek/nextcloud-nextpod/issues/20))
