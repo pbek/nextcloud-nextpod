@@ -45,6 +45,7 @@ You need to have [GPodderSync](https://apps.nextcloud.com/apps/gpoddersync) inst
 | [KDE Kasts](https://apps.kde.org/de/kasts/)                        | Supported since version 21.12                                                                                                                                                                                         |
 | [Garmin Podcasts](https://lucasasselli.github.io/garmin-podcasts/) | Only for [compatible Garmin watches](https://apps.garmin.com/en-US/apps/b5b85600-0625-43b6-89e9-1245bd44532c), supported since version 3.3.4                                                                          |
 | [YourPods](https://yourpods.app)                                   | Podcast client focused on iOS + ecosystem (AirPlay, CarPlay, WatchOS, and macOS). The source (Swift/SwiftUI) can be complied for other platforms [YourPods-source](https://github.com/asecretcompany/yourpods-source) |
+| [Skingomz](https://git.cythin.eu/Kourser/skingomz-app)             | Native podcast client for iPhone, iPad & macOS (SwiftUI)                                                                                                                                                              |
 
 ## Installation
 
