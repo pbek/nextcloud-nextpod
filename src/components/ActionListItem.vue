@@ -78,9 +78,14 @@
         <h2 v-if="isLoading">{{ t("nextpod", "Playing episode") }}</h2>
         <h2 v-else>
           {{
-            t("nextpod", 'Playing "{episode}"', {
-              episode: getEpisodeName(),
-            })
+            t(
+              "nextpod",
+              'Playing "{episode}"',
+              {
+                episode: getEpisodeName(),
+              },
+              { escape: false },
+            )
           }}
         </h2>
         <audio
@@ -91,9 +96,7 @@
           @timeupdate="onTimeUpdateListener"
         >
           <source :src="action.episodeUrl" />
-          {{
-            t("nextpod", "Your browser does not support the audio element.")
-          }}
+          {{ t("nextpod", "Your browser does not support the audio element.") }}
         </audio>
         <p>
           <input
