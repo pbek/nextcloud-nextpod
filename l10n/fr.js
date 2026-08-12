@@ -1,0 +1,54 @@
+OC.L10N.register(
+  "nextpod",
+  {
+    NextPod: "NextPod",
+    Episodes: "Épisodes",
+    Podcasts: "Podcasts",
+    "(Loading RSS data...)": "(Chargement des données RSS...)",
+    "Open episode link": "Ouvrir le lien de l’épisode",
+    "Play episode media": "Lire le média de l’épisode",
+    "Create note of episode": "Créer une note sur l’épisode",
+    "Download episode media": "Télécharger le média de l’épisode",
+    "Open RSS feed": "Ouvrir le flux RSS",
+    "Playing episode": "Lecture de l’épisode",
+    'Playing "{episode}"': "Lecture de « {episode} »",
+    "Your browser does not support the audio element.":
+      "Votre navigateur ne prend pas en charge l’élément audio.",
+    "Store progress while playing":
+      "Enregistrer la progression pendant la lecture",
+    "Loading episode description...":
+      "Chargement de la description de l’épisode...",
+    "{minutes}min {seconds}s": "{minutes}min {seconds}s",
+    "{hours}h {minutes}min": "{hours}h {minutes}min",
+    "(done, {duration})": "(terminé, {duration})",
+    "({percent}% of {duration} listened)":
+      "({percent}% écoutés sur {duration})",
+    Episode: "Épisode",
+    "Podcast RSS": "RSS du podcast",
+    "Podcast's homepage": "Site web du podcast",
+    "RSS feed": "Flux RSS",
+    "(no time listened)": "(aucune écoute)",
+    "({minutes}min {seconds}s listened)": "({minutes}min {seconds}s d’écoute)",
+    "({hours}h {minutes}min listened)": "({hours}h {minutes}min d’écoute)",
+    "Episode actions": "Actions sur les épisodes",
+    "Last episode actions synchronized to this Nextcloud account so far.":
+      "Dernières actions sur les épisodes synchronisées jusqu’à présent avec ce compte Nextcloud.",
+    "Action:": "Action :",
+    "Load more": "Charger plus",
+    "No episode actions": "Aucune action sur les épisodes",
+    "Start syncing podcasts from your favorite podcast client, such as {client}, and then refresh this page to see them pop up here.":
+      "Commencez à synchroniser les podcasts depuis votre client de podcasts préféré, tel que {client}, puis actualisez cette page pour les voir apparaître ici.",
+    Play: "Lire",
+    Download: "Télécharger",
+    "Could not fetch podcast synchronization stats":
+      "Impossible de récupérer les statistiques de synchronisation des podcasts",
+    Subscriptions: "Abonnements",
+    "Podcast subscriptions synchronized to this Nextcloud account so far.":
+      "Abonnements aux podcasts synchronisés jusqu’à présent avec ce compte Nextcloud.",
+    "Sort by:": "Trier par :",
+    "No subscriptions": "Aucun abonnement",
+    "Listened time (desc)": "Durée d’écoute (décroissante)",
+    "Listened time (asc)": "Durée d’écoute (croissante)",
+  },
+  "nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;",
+);
