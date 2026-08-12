@@ -17,7 +17,9 @@
     </HeaderNavigation>
     <div v-if="subscriptions.length > 0" class="podcasts">
       <div class="sorting-container">
-        <label for="nextpod_sorting">Sort by:</label>
+        <label for="nextpod_sorting">
+          {{ t("nextpod", "Sort by:") }}
+        </label>
         <NcMultiselect
           id="nextpod_sorting"
           v-model="sortBy"
@@ -42,11 +44,21 @@
           <Podcast />
         </template>
         <template #title>
-          <h1>No subscriptions</h1>
-          Start syncing podcasts from your favorite podcast client, such as
-          <a class="link" href="https://antennapod.org/" target="_blank"
-            >Antennapod</a
-          >, and then refresh this page to see them pop up here.
+          <h1>{{ t("nextpod", "No subscriptions") }}</h1>
+          {{
+            t(
+              "nextpod",
+              "Start syncing podcasts from your favorite podcast client, such as",
+            )
+          }}
+          <a class="link" href="https://antennapod.org/" target="_blank">
+            AntennaPod</a
+          >{{
+            t(
+              "nextpod",
+              ", and then refresh this page to see them pop up here.",
+            )
+          }}
         </template>
       </NcEmptyContent>
     </div>
@@ -68,20 +80,10 @@ import Podcast from "vue-material-design-icons/Podcast";
 import PageNext from "vue-material-design-icons/PageNext.vue";
 
 import { generateUrl } from "@nextcloud/router";
+import { translate as t } from "@nextcloud/l10n";
 import axios from "@nextcloud/axios";
 import { showError } from "@nextcloud/dialogs";
 import HeaderNavigation from "./HeaderNavigation.vue";
-
-const sortingOptions = [
-  {
-    label: "Listened time (desc)",
-    compare: (a, b) => a?.listenedSeconds < b?.listenedSeconds,
-  },
-  {
-    label: "Listened time (asc)",
-    compare: (a, b) => a?.listenedSeconds > b?.listenedSeconds,
-  },
-];
 
 export default {
   name: "Podcasts",
@@ -98,6 +100,17 @@ export default {
     NcActions,
   },
   data() {
+    const sortingOptions = [
+      {
+        label: t("nextpod", "Listened time (desc)"),
+        compare: (a, b) => a?.listenedSeconds < b?.listenedSeconds,
+      },
+      {
+        label: t("nextpod", "Listened time (asc)"),
+        compare: (a, b) => a?.listenedSeconds > b?.listenedSeconds,
+      },
+    ];
+
     return {
       subscriptions: [],
       isLoading: true,
