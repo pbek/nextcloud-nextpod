@@ -355,8 +355,8 @@ export default {
       );
       const episodeName = this.getEpisodeName();
       const headlineMarker = "=".repeat(episodeName.length);
-      const episodeLinkMarkdown = `[Episode](${this.getEpisodeLink()})`;
-      const podcastLinkMarkdown = `[Podcast RSS](${this.action.podcastUrl})`;
+      const episodeLinkMarkdown = `[${t("nextpod", "Episode")}](${this.getEpisodeLink()})`;
+      const podcastLinkMarkdown = `[${t("nextpod", "Podcast RSS")}](${this.action.podcastUrl})`;
 
       const resp = await axios
         .post(generateUrl("/apps/notes/api/v1/notes"), {

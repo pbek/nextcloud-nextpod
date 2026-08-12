@@ -58,20 +58,16 @@
         </template>
         <template #title>
           <h1>{{ t("nextpod", "No episode actions") }}</h1>
-          {{
-            t(
-              "nextpod",
-              "Start syncing podcasts from your favorite podcast client, such as",
-            )
-          }}
-          <a class="link" href="https://antennapod.org/" target="_blank">
-            AntennaPod</a
-          >{{
-            t(
-              "nextpod",
-              ", and then refresh this page to see them pop up here.",
-            )
-          }}
+          <NcRichText
+            :text="
+              t(
+                'nextpod',
+                'Start syncing podcasts from your favorite podcast client, such as {client}, and then refresh this page to see them pop up here.',
+                { client: '[AntennaPod](https://antennapod.org/)' },
+              )
+            "
+            :use-markdown="true"
+          />
         </template>
       </NcEmptyContent>
     </div>
@@ -85,6 +81,7 @@ import {
   NcSettingsSection,
   NcActions,
   NcActionButton,
+  NcRichText,
 } from "@nextcloud/vue";
 import SubscriptionListItem from "../components/SubscriptionListItem.vue";
 import ActionListItem from "../components/ActionListItem.vue";
@@ -112,6 +109,7 @@ export default {
     ActionListItem,
     NcActionButton,
     NcActions,
+    NcRichText,
   },
   data() {
     const actionFilteringOptions = [
@@ -187,10 +185,5 @@ export default {
 div.actions {
   padding: 20px var(--nextpod-navigation-height) 0
     var(--nextpod-navigation-height);
-}
-
-a.link {
-  text-decoration: underline;
-  color: var(--color-primary-element);
 }
 </style>
