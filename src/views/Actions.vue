@@ -18,7 +18,9 @@
 
     <div v-if="actions.length > 0" class="actions">
       <div class="sorting-container">
-        <label for="nextpod_action_filtering">Action:</label>
+        <label for="nextpod_action_filtering">
+          {{ t("nextpod", "Action:") }}
+        </label>
         <NcMultiselect
           id="nextpod_action_filtering"
           v-model="actionFilter"
@@ -55,11 +57,21 @@
           <Podcast />
         </template>
         <template #title>
-          <h1>No episode actions</h1>
-          Start syncing podcasts from your favorite podcast client, such as
-          <a class="link" href="https://antennapod.org/" target="_blank"
-            >Antennapod</a
-          >, and then refresh this page to see them pop up here.
+          <h1>{{ t("nextpod", "No episode actions") }}</h1>
+          {{
+            t(
+              "nextpod",
+              "Start syncing podcasts from your favorite podcast client, such as",
+            )
+          }}
+          <a class="link" href="https://antennapod.org/" target="_blank">
+            AntennaPod</a
+          >{{
+            t(
+              "nextpod",
+              ", and then refresh this page to see them pop up here.",
+            )
+          }}
         </template>
       </NcEmptyContent>
     </div>
@@ -81,15 +93,11 @@ import Podcast from "vue-material-design-icons/Podcast";
 import PageNext from "vue-material-design-icons/PageNext.vue";
 
 import { generateUrl } from "@nextcloud/router";
+import { translate as t } from "@nextcloud/l10n";
 import axios from "@nextcloud/axios";
 import { showError } from "@nextcloud/dialogs";
 import HeaderNavigation from "./HeaderNavigation.vue";
 import { loadState } from "@nextcloud/initial-state";
-
-const actionFilteringOptions = [
-  { label: "Play", action: "PLAY" },
-  { label: "Download", action: "DOWNLOAD" },
-];
 
 export default {
   name: "Actions",
@@ -106,6 +114,11 @@ export default {
     NcActions,
   },
   data() {
+    const actionFilteringOptions = [
+      { label: t("nextpod", "Play"), action: "PLAY" },
+      { label: t("nextpod", "Download"), action: "DOWNLOAD" },
+    ];
+
     return {
       allActions: [],
       actions: [],

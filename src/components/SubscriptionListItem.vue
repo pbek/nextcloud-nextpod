@@ -12,7 +12,9 @@
       />
     </template>
     <template #subname>
-      <span v-if="isLoading"><em>(Loading RSS data...)</em></span>
+      <span v-if="isLoading">
+        <em>{{ t("nextpod", "(Loading RSS data...)") }}</em>
+      </span>
       <span v-else>{{ getSubtitle() }}</span>
     </template>
     <template #actions>
@@ -24,13 +26,13 @@
         <template #icon>
           <OpenInNew :size="20" />
         </template>
-        Podcast's homepage
+        {{ t("nextpod", "Podcast's homepage") }}
       </NcActionLink>
       <NcActionLink :href="getRssLink()" target="_blank">
         <template #icon>
           <Rss :size="20" />
         </template>
-        RSS feed
+        {{ t("nextpod", "RSS feed") }}
       </NcActionLink>
     </template>
   </NcListItem>
@@ -43,6 +45,7 @@ import Rss from "vue-material-design-icons/Rss.vue";
 import OpenInNew from "vue-material-design-icons/OpenInNew.vue";
 
 import { generateUrl } from "@nextcloud/router";
+import { translate as t } from "@nextcloud/l10n";
 import axios from "@nextcloud/axios";
 
 export default {
@@ -92,16 +95,22 @@ export default {
     },
     getDetails() {
       if (this.sub.listenedSeconds <= 0) {
-        return "(no time listened)";
+        return t("nextpod", "(no time listened)");
       }
       const seconds = this.sub.listenedSeconds;
       const hours = Math.floor(seconds / 3600);
       const modMinutes = Math.floor(seconds / 60) % 60;
       if (hours === 0) {
         const modSeconds = seconds % 60;
-        return `(${modMinutes}min ${modSeconds}s listened)`;
+        return t("nextpod", "({minutes}min {seconds}s listened)", {
+          minutes: modMinutes,
+          seconds: modSeconds,
+        });
       }
-      return `(${hours}h ${modMinutes}min listened)`;
+      return t("nextpod", "({hours}h {minutes}min listened)", {
+        hours,
+        minutes: modMinutes,
+      });
     },
     getImageSrc() {
       return this.podcastData?.imageBlob ?? this.podcastData?.imageUrl ?? "";

@@ -22,7 +22,9 @@
           />
         </template>
         <template #subname>
-          <span v-if="isLoading"><em>(Loading RSS data...)</em></span>
+          <span v-if="isLoading">
+            <em>{{ t("nextpod", "(Loading RSS data...)") }}</em>
+          </span>
           <span v-else>{{ getPodcastName() }}</span>
         </template>
         <template #actions>
@@ -34,13 +36,13 @@
             <template #icon>
               <OpenInNew :size="20" />
             </template>
-            Open episode link
+            {{ t("nextpod", "Open episode link") }}
           </NcActionLink>
           <NcActionButton @click.stop="showModalPlayer">
             <template #icon>
               <Play :size="20" />
             </template>
-            Play episode media
+            {{ t("nextpod", "Play episode media") }}
           </NcActionButton>
           <NcActionButton
             v-if="!isLoading && hasNotesApp"
@@ -49,19 +51,19 @@
             <template #icon>
               <FileDocument :size="20" />
             </template>
-            Create note of episode
+            {{ t("nextpod", "Create note of episode") }}
           </NcActionButton>
           <NcActionLink :href="action.episodeUrl" target="_blank">
             <template #icon>
               <Download :size="20" />
             </template>
-            Download episode media
+            {{ t("nextpod", "Download episode media") }}
           </NcActionLink>
           <NcActionLink :href="action.podcastUrl" target="_blank">
             <template #icon>
               <Rss :size="20" />
             </template>
-            Open RSS feed
+            {{ t("nextpod", "Open RSS feed") }}
           </NcActionLink>
         </template>
       </NcListItem>
@@ -73,8 +75,19 @@
       :outTransition="true"
     >
       <div class="modal__content">
-        <h2 v-if="isLoading">Playing episode</h2>
-        <h2 v-else>Playing "{{ getEpisodeName() }}"</h2>
+        <h2 v-if="isLoading">{{ t("nextpod", "Playing episode") }}</h2>
+        <h2 v-else>
+          {{
+            t(
+              "nextpod",
+              'Playing "{episode}"',
+              {
+                episode: getEpisodeName(),
+              },
+              { escape: false },
+            )
+          }}
+        </h2>
         <audio
           controls
           autoplay
@@ -83,7 +96,7 @@
           @timeupdate="onTimeUpdateListener"
         >
           <source :src="action.episodeUrl" />
-          Your browser does not support the audio element.
+          {{ t("nextpod", "Your browser does not support the audio element.") }}
         </audio>
         <p>
           <input
@@ -92,7 +105,9 @@
             class="checkbox"
             v-model="storePlayProgress"
           />
-          <label for="store-play-progress">Store progress while playing</label>
+          <label for="store-play-progress">
+            {{ t("nextpod", "Store progress while playing") }}
+          </label>
         </p>
       </div>
     </NcModal>
@@ -103,8 +118,10 @@
       :outTransition="true"
     >
       <div class="modal__content description-content">
-        <h2 v-if="isLoading">Loading episode description...</h2>
-        <h2 v-else v-html="getEpisodeName()">Episode description</h2>
+        <h2 v-if="isLoading">
+          {{ t("nextpod", "Loading episode description...") }}
+        </h2>
+        <h2 v-else v-html="getEpisodeName()" />
         <h3 v-html="getPodcastName()"></h3>
         <div v-html="getEpisodeDescription()"></div>
       </div>
@@ -129,6 +146,7 @@ import Rss from "vue-material-design-icons/Rss.vue";
 import TurndownService from "turndown";
 
 import { generateUrl } from "@nextcloud/router";
+import { translate as t } from "@nextcloud/l10n";
 import axios from "@nextcloud/axios";
 
 export default {
@@ -265,9 +283,15 @@ export default {
       const modMinutes = Math.floor(seconds / 60) % 60;
       if (hours === 0) {
         const modSeconds = seconds % 60;
-        return `${modMinutes}min ${modSeconds}s`;
+        return t("nextpod", "{minutes}min {seconds}s", {
+          minutes: modMinutes,
+          seconds: modSeconds,
+        });
       }
-      return `${hours}h ${modMinutes}min`;
+      return t("nextpod", "{hours}h {minutes}min", {
+        hours,
+        minutes: modMinutes,
+      });
     },
     getDetails() {
       if (this.action.position === -1 || this.action.total === -1) {
@@ -275,14 +299,19 @@ export default {
       }
 
       if (this.action.position === this.action.total) {
-        return `(done, ${this.getTimeString(this.action.total)})`;
+        return t("nextpod", "(done, {duration})", {
+          duration: this.getTimeString(this.action.total),
+        });
       }
 
       const percent = Math.round(
         (this.action.position / this.action.total) * 100,
       );
 
-      return `(${percent}% of ${this.getTimeString(this.action.total)} listened)`;
+      return t("nextpod", "({percent}% of {duration} listened)", {
+        percent,
+        duration: this.getTimeString(this.action.total),
+      });
     },
     getImageSrc() {
       return this.actionExtraData?.episodeImage ?? "";

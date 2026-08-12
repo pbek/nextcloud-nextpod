@@ -24,6 +24,7 @@
 
 <script>
 import { NcButton, NcLoadingIcon } from "@nextcloud/vue";
+import { translate as t } from "@nextcloud/l10n";
 
 export default {
   name: "HeaderNavigation",
@@ -50,7 +51,7 @@ export default {
     },
     rootTitle: {
       type: String,
-      default: t("nextpodsyn", "Podcasts"),
+      default: t("nextpod", "Podcasts"),
     },
     // The route params
     params: {

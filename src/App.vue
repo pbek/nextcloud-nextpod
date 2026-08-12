@@ -3,7 +3,7 @@
     <NcAppNavigation>
       <template id="app-nextpod-navigation" #list>
         <!--				<NcAppNavigationItem to="/actions" :to="{name: 'episodes'}" title="Episodes">-->
-        <NcAppNavigationItem to="/actions" name="Episodes">
+        <NcAppNavigationItem to="/actions" :name="t('nextpod', 'Episodes')">
           <template #icon>
             <FileMusic :size="20" />
           </template>
@@ -14,7 +14,7 @@
           </template>
         </NcAppNavigationItem>
         <!--				<NcAppNavigationItem to="/podcasts" :to="{name: 'podcasts'}" title="Podcasts">-->
-        <NcAppNavigationItem to="/podcasts" name="Podcasts">
+        <NcAppNavigationItem to="/podcasts" :name="t('nextpod', 'Podcasts')">
           <template #icon>
             <Podcast :size="20" />
           </template>
