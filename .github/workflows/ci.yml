@@ -20,7 +20,15 @@ jobs:
       matrix:
         php-versions: ["8.2", "8.3", "8.4"]
         databases: ["sqlite"]
-        server-versions: ["stable29", "stable30", "stable31", "stable32"]
+        server-versions:
+          [
+            "stable29",
+            "stable30",
+            "stable31",
+            "stable32",
+            "stable33",
+            "stable34",
+          ]
         exclude:
           # PHP 8.4 is not compatible with Nextcloud 29 and 30
           - php-versions: "8.4"
@@ -83,7 +91,15 @@ jobs:
       matrix:
         php-versions: ["8.2", "8.3", "8.4"]
         databases: ["mysql"]
-        server-versions: ["stable29", "stable30", "stable31", "stable32"]
+        server-versions:
+          [
+            "stable29",
+            "stable30",
+            "stable31",
+            "stable32",
+            "stable33",
+            "stable34",
+          ]
         exclude:
           # PHP 8.4 is not compatible with Nextcloud 29 and 30
           - php-versions: "8.4"
@@ -155,7 +171,15 @@ jobs:
       matrix:
         php-versions: ["8.2", "8.3", "8.4"]
         databases: ["pgsql"]
-        server-versions: ["stable29", "stable30", "stable31", "stable32"]
+        server-versions:
+          [
+            "stable29",
+            "stable30",
+            "stable31",
+            "stable32",
+            "stable33",
+            "stable34",
+          ]
         exclude:
           # PHP 8.4 is not compatible with Nextcloud 29 and 30
           - php-versions: "8.4"
