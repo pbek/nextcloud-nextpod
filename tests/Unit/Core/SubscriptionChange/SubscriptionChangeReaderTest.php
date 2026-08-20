@@ -13,6 +13,8 @@ class SubscriptionChangeReaderTest extends TestCase {
 		$this->assertCount(2, $subscriptionChange);
 		$this->assertSame("https://feeds.megaphone.fm/HSW8286374095", $subscriptionChange[0]->getUrl());
 		$this->assertSame("https://feeds.megaphone.fm/another", $subscriptionChange[1]->getUrl());
+		$this->assertTrue($subscriptionChange[0]->isSubscribed());
+		$this->assertTrue($subscriptionChange[1]->isSubscribed());
 	}
 
 
@@ -23,6 +25,19 @@ class SubscriptionChangeReaderTest extends TestCase {
 		], true);
 		$this->assertCount(1, $subscriptionChange);
 		$this->assertSame("https://feeds.megaphone.fm/HSW8286374095", $subscriptionChange[0]->getUrl());
+	}
+
+	public function testMapUrlsToUnsubscribedChanges(): void {
+		$subscriptionChanges = SubscriptionChangesReader::mapToSubscriptionsChanges([
+			"https://feeds.example.com/podcast.xml",
+		], false);
+
+		$this->assertCount(1, $subscriptionChanges);
+		$this->assertFalse($subscriptionChanges[0]->isSubscribed());
+	}
+
+	public function testEmptyUrlListReturnsNoChanges(): void {
+		$this->assertSame([], SubscriptionChangesReader::mapToSubscriptionsChanges([], true));
 	}
 
 }

@@ -171,7 +171,7 @@ class EpisodeActionExtraData implements JsonSerializable {
 
 			if (!$episodeImage) {
 				preg_match('/<itunes:image\s+href="([^"]+)"/', $xmlString, $matches);
-				$episodeImage = self::stringOrNull($matches[1]);
+				$episodeImage = self::stringOrNull($matches[1] ?? '');
 			}
 
 			//

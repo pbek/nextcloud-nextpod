@@ -7,7 +7,7 @@ namespace OCA\NextPod\Tests\Unit\Core\PodcastData;
 use OCA\NextPod\Core\PodcastData\PodcastData;
 use Test\TestCase;
 
-class EpisodeActionTest extends TestCase {
+class PodcastDataTest extends TestCase {
 	public function testToArray(): void {
 		$podcastData = new PodcastData('title1', 'author1', 'http://example.com/', 'description1', 'http://example.com/image.jpg', 1337);
 		$expected = [
