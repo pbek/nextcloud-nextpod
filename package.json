@@ -50,6 +50,7 @@
     "@nextcloud/eslint-config": "^8.3.0",
     "@nextcloud/stylelint-config": "^2.4.0",
     "@nextcloud/webpack-vue-config": "6.2.0",
+    "terser-webpack-plugin": "^5.6.1",
     "vue-loader": "^15.9.8",
     "vue-template-compiler": "^2.7.16",
     "webpack": "^5.91.0",

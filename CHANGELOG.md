@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Localized the user interface and added German, French, Spanish, Simplified Chinese, Russian, and Italian translations (for [#8](https://github.com/pbek/nextcloud-nextpod/issues/8))
+- Updated dependencies
 
 ## 0.7.11
 
