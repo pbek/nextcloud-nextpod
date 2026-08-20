@@ -1,8 +1,10 @@
 # Changelog
 
-## Unreleased
+## 0.7.12
 
-- Localized the user interface and added German, French, Spanish, Simplified Chinese, Russian, and Italian translations (for [#8](https://github.com/pbek/nextcloud-nextpod/issues/8))
+- Localized the user interface and added German, French, Spanish, Simplified Chinese, Russian, and Italian translations
+  (for [#8](https://github.com/pbek/nextcloud-nextpod/issues/8))
+- Enabled and tested the app for Nextcloud 35 (for [#25](https://github.com/pbek/nextcloud-nextpod/issues/25))
 - Updated dependencies
 
 ## 0.7.11
