@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.13
+
+- Updated JavaScript and PHP dependencies
+
 ## 0.7.12
 
 - Localized the user interface and added German, French, Spanish, Simplified Chinese, Russian, and Italian translations
