@@ -3,6 +3,7 @@
 ## 0.7.13
 
 - Updated JavaScript and PHP dependencies
+- Automated Nextcloud app signing and GitHub/App Store publication, with release setup documentation
 
 ## 0.7.12
 
