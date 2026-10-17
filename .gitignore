@@ -5,6 +5,9 @@ js/
 /mydb.db*
 docker/nextcloud/certificates/*
 /*.gz
+/build/
+/release-notes.md
+__pycache__/
 .shared
 .php-cs-fixer.cache
 

@@ -56,3 +56,8 @@ your Nextcloud `apps/` directory.
 ## Development
 
 See [docker development](./docker/README.md) for development instructions.
+
+## Releasing
+
+See [signing and releasing](./docs/deployment.md) for GitHub Actions setup,
+release approvals, App Store publication and the local signing fallback.

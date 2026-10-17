@@ -1,0 +1,10 @@
+# Literal top-level runtime paths; shared by local and CI signing.
+appinfo
+lib
+templates
+js
+img
+l10n
+LICENSE
+README.md
+CHANGELOG.md

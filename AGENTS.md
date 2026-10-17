@@ -2,11 +2,11 @@
 
 ## Version Number Location
 
-The version number is located in `appinfo/info.xml` (line 12: `<version>0.7.10</version>`).
+The version number is located in `appinfo/info.xml`. Keep `package.json` and both root version fields in `package-lock.json` in sync.
 
 ## Signing Script
 
-The signing script is at `docker/nextcloud/sign-app.sh`. New paths can be excluded there.
+The signing script is at `docker/nextcloud/sign-app.sh`. Only runtime paths listed in `release-files.txt` are packaged; add new runtime paths there. Release setup and operation are documented in `docs/deployment.md`.
 
 ## Tooling
 

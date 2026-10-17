@@ -1,83 +1,137 @@
-name: "🗃️ Create empty release"
+name: "🗃️ Sign and publish release"
 
 on:
   push:
     branches:
       - release
-    tags-ignore:
-      - "*"
-  workflow_dispatch:
 
-env:
-  APP_NAME: nextpod
+permissions:
+  contents: read
+
+concurrency:
+  group: signed-release
+  cancel-in-progress: false
 
 jobs:
-  create_release:
-    name: "🗃️️ Prepare release"
-    permissions:
-      contents: write # for creating the release
+  validate:
+    name: "🔢 Validate versions and changelog"
     runs-on: ubuntu-latest
     outputs:
-      upload_url: ${{ steps.create_release.outputs.upload_url }}
-      release_id: ${{ steps.create_release.outputs.id }}
+      version: ${{ steps.metadata.outputs.version }}
     steps:
-      - uses: actions/checkout@v3
-      - name: Install libxml2-utils
-        run: |
-          sudo apt-get update
-          sudo apt-get install libxml2-utils
-      - name: Set Env
-        run: |
-          export VERSION=$(xmllint --xpath "string(/info/version)" appinfo/info.xml)
-          export TAG=v${VERSION}
-          export RELEASE_TEXT=$(grep -Pzo "## ${VERSION}\n(\n|.)+?\n##" CHANGELOG.md | sed '$ d')
-          echo "VERSION=${VERSION}" >> $GITHUB_ENV
-          echo "TAG=${TAG}" >> $GITHUB_ENV
-          # add multiline release text
-          echo "RELEASE_TEXT<<EOF" >> $GITHUB_ENV
-          echo "${RELEASE_TEXT}" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
-      - name: Printenv
-        run: |
-          echo "VERSION=${VERSION}"
-          echo "TAG=${TAG}"
-          echo "RELEASE_TEXT=${RELEASE_TEXT}"
-      - name: Create release
-        id: create_release
-        uses: softprops/action-gh-release@v3
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
-          tag_name: ${{ env.TAG }}
-          name: Release v${{ env.VERSION }}
-          body: ${{ env.RELEASE_TEXT }}
-          draft: true
-          prerelease: false
-#  build_and_publish:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v3
-#        with:
-#          path: ${{ env.APP_NAME }}
-#      - name: Install NPM packages
-#        run: cd ${{ env.APP_NAME }} && make npm-init
-#      - name: Build JS
-#        run: cd ${{ env.APP_NAME }} && make build-js-production
-#      - name: Create release tarball
-#        run: cd ${{ env.APP_NAME }} && make appstore
-#      - name: Upload app tarball to release
-#        uses: svenstaro/upload-release-action@v2
-#        id: attach_to_release
-#        with:
-#          repo_token: ${{ secrets.GITHUB_TOKEN }}
-#          file: ${{ env.APP_NAME }}/build/artifacts/${{ env.APP_NAME }}.tar.gz
-#          asset_name: ${{ env.APP_NAME }}.tar.gz
-#          tag: ${{ github.ref }}
-#          overwrite: true
-#      - name: Upload app to Nextcloud appstore
-#        uses: R0Wi/nextcloud-appstore-push-action@v1.0.3
-#        with:
-#          app_name: ${{ env.APP_NAME }}
-#          appstore_token: ${{ secrets.APPSTORE_TOKEN }}
-#          download_url: ${{ steps.attach_to_release.outputs.browser_download_url }}
-#          app_private_key: ${{ secrets.APP_PRIVATE_KEY }}
-#          nightly: false
+          persist-credentials: false
+      - name: Check release inputs
+        id: metadata
+        run: |
+          python3 -m unittest discover -s tests/release
+          VERSION=$(python3 scripts/check-release.py --notes-output release-notes.md)
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          cat release-notes.md
+
+  prepare:
+    name: "🔧 Build frontend"
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Build and check frontend
+        run: |
+          npm ci
+          npm run build
+          python3 scripts/check-release.py --built --notes-output release-notes.md
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: release-inputs-${{ github.sha }}
+          path: |
+            js/
+            release-notes.md
+          if-no-files-found: error
+          retention-days: 14
+
+  format:
+    name: "📄 Formatting checks"
+    needs: validate
+    uses: ./.github/workflows/format-check.yml
+
+  sign:
+    name: "🔐 Sign and verify exact archive"
+    needs: [validate, prepare, format]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: release-signing
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: release-inputs-${{ github.sha }}
+      - name: Sign, verify integrity and install
+        env:
+          APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
+          APP_PUBLIC_CRT: ${{ secrets.APP_PUBLIC_CRT }}
+        run: sh scripts/ci-sign-app.sh
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: signed-release-${{ github.sha }}
+          path: |
+            build/nextpod-${{ needs.validate.outputs.version }}.tar.gz
+            build/nextpod-${{ needs.validate.outputs.version }}.tar.gz.sig
+            build/nextpod-${{ needs.validate.outputs.version }}.tar.gz.sha256
+          if-no-files-found: error
+          retention-days: 14
+
+  github:
+    name: "🚀 Publish GitHub release"
+    needs: [validate, sign]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: release-publishing
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: signed-release-${{ github.sha }}
+          path: build
+      - name: Publish verified assets with changelog description
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: python3 scripts/publish-github-release.py --commit "$GITHUB_SHA"
+
+  appstore:
+    name: "☁️ Publish Nextcloud App Store release"
+    needs: [validate, github]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: release-publishing
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: signed-release-${{ github.sha }}
+          path: build
+      - name: Submit public download URL and existing signature
+        env:
+          APPSTORE_TOKEN: ${{ secrets.APPSTORE_TOKEN }}
+          RELEASE_VERSION: ${{ needs.validate.outputs.version }}
+          RELEASE_REPOSITORY: ${{ github.repository }}
+        run: |
+          python3 scripts/publish-appstore.py \
+            --download-url "https://github.com/$RELEASE_REPOSITORY/releases/download/v$RELEASE_VERSION/nextpod-$RELEASE_VERSION.tar.gz" \
+            --signature "build/nextpod-$RELEASE_VERSION.tar.gz.sig" \
+            --archive "build/nextpod-$RELEASE_VERSION.tar.gz"

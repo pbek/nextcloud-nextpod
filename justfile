@@ -49,6 +49,11 @@ create-tag:
 screenshots:
     cd playwright && npx playwright test tests/screenshots.spec.ts --project=chromium --headed
 
+# Validate release metadata without building or accessing credentials
+[group('dev')]
+release-check:
+    python3 scripts/check-release.py
+
 # Build the nextcloud-nextpod app
 [group('dev')]
 build-release:

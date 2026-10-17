@@ -1,50 +1,66 @@
 #!/bin/sh
-########################################################################
-# Creates the signature.json and the release archive for the Nextcloud application
-# This script runs in a Nextcloud Docker container.
-########################################################################
+# Creates the signed NextPod archive inside a Nextcloud container.
+set -eu
 
 APP_NAME=nextpod
 APP_SOURCE=/var/www/html/custom_apps/${APP_NAME}
-APP_DEST=/var/www/deploy/${APP_NAME}
-CERT_PATH=/var/www/.nextcloud/certificates
-DEPLOYMENT_FILE=${APP_SOURCE}/${APP_NAME}-nc.tar.gz
+CERT_DIR=/var/www/.nextcloud/certificates
+BUILD_DIR=${APP_SOURCE}/build
 
-rm -rf ${APP_DEST} &&
-  mkdir ${APP_DEST} &&
-  echo "📂 Deployment directory prepared." &&
-  rsync -a --exclude .git* --exclude .gitlab-ci* --exclude .github --exclude screenshot* \
-    --exclude docs --exclude tests --exclude vendor --exclude package.* --exclude composer.json --exclude composer.lock \
-    --exclude Makefile --exclude "*.db*" --exclude docker --exclude "*.phar" \
-    --exclude "*.gz" --exclude .idea --exclude .renovaterc.json --exclude .php-cs* --exclude eslint.config.js \
-    --exclude phpstan.* --exclude phpunit.* --exclude psalm.xml --exclude shell.nix \
-    --exclude .envrc --exclude .direnv --exclude term.kdl --exclude .phpunit.result.cache \
-    --exclude justfile --exclude treefmt.toml --exclude .devenv --exclude flake.* \
-    --exclude .devenv.* --exclude devenv.* --exclude .pre-commit-config.* --exclude .shared \
-    --exclude AGENTS.md --exclude node_modules --exclude .eslintrc.js --exclude .npmrc \
-    --exclude .php_cs.dist --exclude babel.config.js --exclude jsconfig.json --exclude package-lock.json \
-    --exclude playwright --exclude stylelint.config.js --exclude webpack.config.js --exclude src \
-    ${APP_SOURCE}/ ${APP_DEST} &&
-  echo "✅ Files copied to deployment directory." &&
-  if [ "$(find ${APP_DEST} -type l | wc -l)" -gt 0 ]; then
-    echo "❌ Error: The following symlinks were found in the deployment directory:"
-    find ${APP_DEST} -type l
-    echo "Aborting."
+for file in "${CERT_DIR}/${APP_NAME}.key" "${CERT_DIR}/${APP_NAME}.crt"; do
+  test -s "${file}" || {
+    echo "Missing signing certificate/key; see docs/deployment.md" >&2
     exit 1
-  fi &&
-  find ${APP_DEST} -type d -empty -delete &&
-  echo "🗑️ Empty directories removed." &&
-  su -m -c "./occ integrity:sign-app \
-  --privateKey=${CERT_PATH}/${APP_NAME}.key \
-  --certificate=${CERT_PATH}/${APP_NAME}.crt --path=${APP_DEST}" www-data &&
-  echo "🔐 App signed successfully." &&
-  cp ${APP_DEST}/appinfo/signature.json ${APP_SOURCE}/appinfo &&
-  printf "\n🔍 Reviewing files to be included in the archive:\n\n" &&
-  find ${APP_DEST} -type f | sort &&
-  printf "\n⏸️ Press Enter to continue with archiving.\n\n" &&
-  read -r _ &&
-  tar czf ${DEPLOYMENT_FILE} -C ${APP_DEST}/.. ${APP_NAME} &&
-  echo "📦 Archive created." &&
-  printf "\n🔐 Signature for your app archive:\n\n" &&
-  openssl dgst -sha512 -sign ${CERT_PATH}/${APP_NAME}.key ${DEPLOYMENT_FILE} | openssl base64 &&
-  echo
+  }
+done
+test -s "${APP_SOURCE}/js/nextpod-main.js" || {
+  echo "Run npm ci && npm run build first" >&2
+  exit 1
+}
+VERSION=$(sed -n 's:.*<version>\(.*\)</version>.*:\1:p' "${APP_SOURCE}/appinfo/info.xml" | head -n 1)
+WORK_DIR=$(mktemp -d)
+APP_DEST=${WORK_DIR}/${APP_NAME}
+ARCHIVE=${BUILD_DIR}/${APP_NAME}-${VERSION}.tar.gz
+trap 'rm -rf "${WORK_DIR}"' EXIT
+mkdir "${APP_DEST}"
+cd "${APP_SOURCE}"
+while IFS= read -r file; do
+  case "${file}" in
+  '' | '#'*) continue ;;
+  esac
+  # Only literal top-level paths, no options, globs, traversal or symlinks.
+  case "${file}" in
+  *[!a-zA-Z0-9_.-]* | .* | -*)
+    echo "Invalid release input: ${file}" >&2
+    exit 1
+    ;;
+  esac
+  test -e "${file}" || {
+    echo "Missing release input: ${file}" >&2
+    exit 1
+  }
+  rsync -a --exclude '.*' --exclude 'signature.json' "${file}" "${APP_DEST}/"
+done <release-files.txt
+if [ -n "$(find "${APP_DEST}" -type l)" ]; then
+  echo "Symlinks are not allowed in releases" >&2
+  exit 1
+fi
+find "${APP_DEST}" -type d -empty -delete
+mkdir "${WORK_DIR}/certificates"
+cp "${CERT_DIR}/${APP_NAME}.key" "${CERT_DIR}/${APP_NAME}.crt" "${WORK_DIR}/certificates/"
+chmod 600 "${WORK_DIR}/certificates/${APP_NAME}.key"
+chown -R www-data:www-data "${WORK_DIR}"
+su -s /bin/sh www-data -c "php /var/www/html/occ integrity:sign-app \
+  --privateKey=${WORK_DIR}/certificates/${APP_NAME}.key \
+  --certificate=${WORK_DIR}/certificates/${APP_NAME}.crt --path=${APP_DEST}"
+printf '\nFiles in the signed archive:\n'
+find "${APP_DEST}" -type f | sort
+mkdir -p "${BUILD_DIR}"
+tar czf "${ARCHIVE}" --owner=0 --group=0 --numeric-owner -C "${WORK_DIR}" "${APP_NAME}"
+openssl dgst -sha512 -sign "${WORK_DIR}/certificates/${APP_NAME}.key" -out "${WORK_DIR}/archive-signature" "${ARCHIVE}"
+openssl base64 -A -in "${WORK_DIR}/archive-signature" >"${ARCHIVE}.sig"
+(cd "${BUILD_DIR}" && sha256sum "$(basename "${ARCHIVE}")" >"${ARCHIVE}.sha256")
+chown -R "$(stat -c '%u:%g' "${APP_SOURCE}")" "${BUILD_DIR}"
+printf '\nArchive: %s\nApp Store signature:\n' "${ARCHIVE}"
+cat "${ARCHIVE}.sig"
+echo
