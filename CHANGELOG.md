@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.7.14
+
+- Refreshed the README and App Store screenshots to showcase listening progress, episode actions and descriptions, browser playback, download history, and subscriptions.
+- `just screenshots` now generates lossless WebP screenshots using fictional podcast data, without importing data or fetching live podcast feeds.
+
 ## 0.7.13
 
 - Updated JavaScript and PHP dependencies
