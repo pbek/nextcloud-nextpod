@@ -1,6 +1,7 @@
 
 install-playwright:
-	npm install && npm playwright:install
+	npm ci
+	npm run playwright:install -- chromium
 
 screenshots:
-	npx playwright test tests/screenshots.spec.ts --project=chromium --headed
+	CHROMIUM_PATH="$${CHROMIUM_PATH:-$$(command -v chromium || true)}" npx playwright test tests/screenshots.spec.ts --project=chromium

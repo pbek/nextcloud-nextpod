@@ -25,17 +25,28 @@ You need to have [GPodderSync](https://apps.nextcloud.com/apps/gpoddersync) inst
 
 ## Screenshots
 
-### Episode List
+### Listening History and Episode Actions
 
-![episodes](./img/screenshots/episodes.png)
+![Listening history with progress and the episode actions menu](./img/screenshots/episodes.webp)
 
 ### Episode Description
 
-![episodes](./img/screenshots/episode-description.png)
+![Episode description and chapter timestamps](./img/screenshots/episode-description.webp)
+
+### Browser Player
+
+![Episode player with the option to sync listening progress](./img/screenshots/player.webp)
+
+### Download History
+
+![Episode actions filtered to downloads](./img/screenshots/downloads.webp)
 
 ### Podcast Subscriptions
 
-![podcasts](./img/screenshots/podcasts.png)
+![Podcast subscriptions and total listening time](./img/screenshots/podcasts.webp)
+
+These screenshots use fictional podcast data. To regenerate them, see the
+[Playwright instructions](./playwright/README.md).
 
 ## Clients supporting sync of GPodderSync
 

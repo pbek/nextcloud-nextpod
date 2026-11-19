@@ -25,9 +25,11 @@ You need to have [GPodderSync](https://apps.nextcloud.com/apps/gpoddersync) inst
         <php min-version="7.4"/>
         <nextcloud min-version="29" max-version="35"/>
     </dependencies>
-    <screenshot>https://raw.githubusercontent.com/pbek/nextcloud-nextpod/main/img/screenshots/episodes.png</screenshot>
-    <screenshot>https://raw.githubusercontent.com/pbek/nextcloud-nextpod/main/img/screenshots/episode-description.png</screenshot>
-    <screenshot>https://raw.githubusercontent.com/pbek/nextcloud-nextpod/main/img/screenshots/podcasts.png</screenshot>
+    <screenshot>https://raw.githubusercontent.com/pbek/nextcloud-nextpod/main/img/screenshots/episodes.webp</screenshot>
+    <screenshot>https://raw.githubusercontent.com/pbek/nextcloud-nextpod/main/img/screenshots/episode-description.webp</screenshot>
+    <screenshot>https://raw.githubusercontent.com/pbek/nextcloud-nextpod/main/img/screenshots/player.webp</screenshot>
+    <screenshot>https://raw.githubusercontent.com/pbek/nextcloud-nextpod/main/img/screenshots/downloads.webp</screenshot>
+    <screenshot>https://raw.githubusercontent.com/pbek/nextcloud-nextpod/main/img/screenshots/podcasts.webp</screenshot>
     <navigations>
         <navigation>
             <name>NextPod</name>

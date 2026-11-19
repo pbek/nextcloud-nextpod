@@ -44,10 +44,10 @@ git-apply-patch:
 create-tag:
     git tag -a v{{ version }} -m "Tagging the {{ version }} release." && git push origin v{{ version }}
 
-# Create a screenshot of the nextcloud-nextpod app
+# Generate the README and App Store screenshots with demo data
 [group('doc')]
-screenshots:
-    cd playwright && npx playwright test tests/screenshots.spec.ts --project=chromium --headed
+screenshots args='':
+    cd playwright && npm ci && CHROMIUM_PATH="${CHROMIUM_PATH:-$(command -v chromium || true)}" npx playwright test tests/screenshots.spec.ts --project=chromium {{ args }}
 
 # Validate release metadata without building or accessing credentials
 [group('dev')]
