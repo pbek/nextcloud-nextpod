@@ -44,6 +44,13 @@ git-apply-patch:
 create-tag:
     git tag -a v{{ version }} -m "Tagging the {{ version }} release." && git push origin v{{ version }}
 
+# Show GitHub release package downloads (not unique Nextcloud installs)
+[group('dev')]
+@release-downloads:
+    printf 'Version\tPackage\tDownloads\n'
+    gh api --paginate 'repos/pbek/{{ projectName }}/releases?per_page=100' \
+        --jq '.[] | .tag_name as $tag | .assets[] | select(.name | endswith(".tar.gz")) | [$tag, .name, .download_count] | @tsv'
+
 # Generate the README and App Store screenshots with demo data
 [group('doc')]
 screenshots args='':
